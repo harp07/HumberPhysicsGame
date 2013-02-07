@@ -1,38 +1,22 @@
-﻿Build started 2/6/2013 10:00:56 PM.
-     1>Project "D:\cocos2d-2.1beta3-x-2.1.1\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" on node 2 (build target(s)).
+﻿Build started 06/02/2013 10:53:13 PM.
+     1>Project "C:\cocos2d-2.1beta3-x-2.1.1\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug.win32\HumberPhysicsGame.win32.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I. /I..\Classes /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx" /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\include" /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\kazmath\include" /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\win32" /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32" /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32\OGLES" /I"D:\cocos2d-2.1beta3-x-2.1.1\external" /I"D:\cocos2d-2.1beta3-x-2.1.1\CocosDenshion\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D STRICT /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS_DEBUG /D COCOS2D_DEBUG=1 /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc100.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\AppDelegate.cpp ..\Classes\HelloWorldScene.cpp main.cpp
-         main.cpp
-         HelloWorldScene.cpp
-         AppDelegate.cpp
-         Generating Code...
+         All outputs are up-to-date.
        ResourceCompile:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _DEBUG /D _UNICODE /D UNICODE /l"0x0409" /IDebug.win32\ /nologo /fo"Debug.win32\HumberPhysicsGame.res" HumberPhysicsGame.rc 
+         All outputs are up-to-date.
        ManifestResourceCompile:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug.win32\HumberPhysicsGame.win32.exe.embed.manifest.res" Debug.win32\HumberPhysicsGame.win32_manifest.rc 
+         All outputs are up-to-date.
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\\" libcocos2d.lib opengl32.lib glew32.lib libBox2d.lib libCocosDenshion.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug.win32\HumberPhysicsGame.win32.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.lib" /MACHINE:X86 Debug.win32\HumberPhysicsGame.res
-         Debug.win32\HumberPhysicsGame.win32.exe.embed.manifest.res
-         Debug.win32\AppDelegate.obj
-         Debug.win32\HelloWorldScene.obj
-         Debug.win32\main.obj
+         All outputs are up-to-date.
        Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug.win32\HumberPhysicsGame.win32.exe.embed.manifest" /manifest Debug.win32\HumberPhysicsGame.win32.exe.intermediate.manifest
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug.win32\HumberPhysicsGame.win32.exe.embed.manifest.res" Debug.win32\HumberPhysicsGame.win32_manifest.rc 
-       LinkEmbedManifest:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\\" libcocos2d.lib opengl32.lib glew32.lib libBox2d.lib libCocosDenshion.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug.win32\HumberPhysicsGame.win32.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.lib" /MACHINE:X86 Debug.win32\HumberPhysicsGame.res
-         Debug.win32\HumberPhysicsGame.win32.exe.embed.manifest.res
-         Debug.win32\AppDelegate.obj
-         Debug.win32\HelloWorldScene.obj
-         Debug.win32\main.obj
-         HumberPhysicsGame.win32.vcxproj -> D:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.exe
+         All outputs are up-to-date.
        FinalizeBuildStatus:
          Deleting file "Debug.win32\HumberPhysicsGame.win32.unsuccessfulbuild".
          Touching "Debug.win32\HumberPhysicsGame.win32.lastbuildstate".
-     1>Done Building Project "D:\cocos2d-2.1beta3-x-2.1.1\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" (build target(s)).
+     1>Done Building Project "C:\cocos2d-2.1beta3-x-2.1.1\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:08.86
+Time Elapsed 00:00:00.05
