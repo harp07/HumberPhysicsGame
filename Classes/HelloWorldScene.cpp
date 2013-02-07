@@ -1,5 +1,7 @@
 #include "HelloWorldScene.h"
 
+#define PTM_RATIO 32.0
+
 using namespace cocos2d;
 
 CCScene* HelloWorld::scene()
@@ -28,61 +30,24 @@ bool HelloWorld::init()
 {
     bool bRet = false;
     do 
-    {
-        //////////////////////////////////////////////////////////////////////////
-        // super init first
-        //////////////////////////////////////////////////////////////////////////
-
+	{
         CC_BREAK_IF(! CCLayer::init());
 
-        //////////////////////////////////////////////////////////////////////////
-        // add your codes below...
-        //////////////////////////////////////////////////////////////////////////
+		CCSize winSize = CCDirector::sharedDirector()->getWinSize();
 
-        // 1. Add a menu item with "X" image, which is clicked to quit the program.
+		gravity = b2Vec2(0.0f,-9.8f);
+		m_world = new b2World(gravity);
+		m_world->SetContinuousPhysics(true);
+		///////////////////////////////////////////////////////////////////////////////////
+		//For Box2d Debug Drawing//
+		m_DebugDraw = new b2DebugDraw(PTM_RATIO);
+		m_world->SetDebugDraw(m_DebugDraw);
+		uint32 flags = 0;
+		flags += b2Draw::e_shapeBit;
+		m_DebugDraw->SetFlags(flags);
 
-        // Create a "close" menu item with close icon, it's an auto release object.
-        CCMenuItemImage *pCloseItem = CCMenuItemImage::create(
-            "CloseNormal.png",
-            "CloseSelected.png",
-            this,
-            menu_selector(HelloWorld::menuCloseCallback));
-        CC_BREAK_IF(! pCloseItem);
 
-        // Place the menu item bottom-right conner.
-        pCloseItem->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width - 20, 20));
-
-        // Create a menu with the "close" menu item, it's an auto release object.
-        CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
-        pMenu->setPosition(CCPointZero);
-        CC_BREAK_IF(! pMenu);
-
-        // Add the menu to HelloWorld layer as a child layer.
-        this->addChild(pMenu, 1);
-
-        // 2. Add a label shows "Hello World".
-
-        // Create a label and initialize with string "Hello World".
-        CCLabelTTF* pLabel = CCLabelTTF::create("Hello World", "Arial", 24);
-        CC_BREAK_IF(! pLabel);
-
-        // Get window size and place the label upper. 
-        CCSize size = CCDirector::sharedDirector()->getWinSize();
-        pLabel->setPosition(ccp(size.width / 2, size.height - 50));
-
-        // Add the label to HelloWorld layer as a child layer.
-        this->addChild(pLabel, 1);
-
-        // 3. Add add a splash screen, show the cocos2d splash image.
-        CCSprite* pSprite = CCSprite::create("HelloWorld.png");
-        CC_BREAK_IF(! pSprite);
-
-        // Place the sprite on the center of the screen
-        pSprite->setPosition(ccp(size.width/2, size.height/2));
-
-        // Add the sprite to HelloWorld layer as a child layer.
-        this->addChild(pSprite, 0);
-
+		//////////////////////////////////////////////////////////////////////////////////
         bRet = true;
     } while (0);
 
