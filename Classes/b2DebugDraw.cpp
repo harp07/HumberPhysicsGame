@@ -11,8 +11,8 @@ b2DebugDraw::b2DebugDraw( float32 ratio ) : mRatio( ratio )
 void b2DebugDraw::DrawPolygon(const b2Vec2* old_vertices, int32 vertexCount, const b2Color& color)
 {
     mShaderProgram->use();
-    mShaderProgram->setUniformForModelViewProjectionMatrix();
-
+    //mShaderProgram->setUniformForModelViewProjectionMatrix();
+	mShaderProgram->setUniformsForBuiltins();
     ccVertex2F *vertices = new ccVertex2F[vertexCount];
 
     for( int i=0;i<vertexCount;i++) {
@@ -36,8 +36,8 @@ void b2DebugDraw::DrawPolygon(const b2Vec2* old_vertices, int32 vertexCount, con
 void b2DebugDraw::DrawSolidPolygon(const b2Vec2* old_vertices, int32 vertexCount, const b2Color& color)
 {
     mShaderProgram->use();
-    mShaderProgram->setUniformForModelViewProjectionMatrix();
-
+    //mShaderProgram->setUniformForModelViewProjectionMatrix();
+	mShaderProgram->setUniformsForBuiltins();
     ccVertex2F *vertices = new ccVertex2F[vertexCount];
 
     for( int i=0;i<vertexCount;i++) {
@@ -67,8 +67,8 @@ void b2DebugDraw::DrawSolidPolygon(const b2Vec2* old_vertices, int32 vertexCount
 void b2DebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color)
 {
     mShaderProgram->use();
-    mShaderProgram->setUniformForModelViewProjectionMatrix();
-
+    //mShaderProgram->setUniformForModelViewProjectionMatrix();
+	mShaderProgram->setUniformsForBuiltins();
     const float32 k_segments = 16.0f;
     const int vertexCount=16;
     const float32 k_increment = 2.0f * b2_pi / k_segments;
@@ -96,7 +96,8 @@ void b2DebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color
 void b2DebugDraw::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color)
 {
     mShaderProgram->use();
-    mShaderProgram->setUniformForModelViewProjectionMatrix();
+    //mShaderProgram->setUniformForModelViewProjectionMatrix();
+	mShaderProgram->setUniformsForBuiltins();
 
     const float32 k_segments = 16.0f;
     const int vertexCount=16;
@@ -129,7 +130,8 @@ void b2DebugDraw::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2
 void b2DebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color)
 {
     mShaderProgram->use();
-    mShaderProgram->setUniformForModelViewProjectionMatrix();
+   // mShaderProgram->setUniformForModelViewProjectionMatrix();
+	mShaderProgram->setUniformsForBuiltins();
 
     mShaderProgram->setUniformLocationWith4f(mColorLocation, color.r, color.g, color.b, 1);
 

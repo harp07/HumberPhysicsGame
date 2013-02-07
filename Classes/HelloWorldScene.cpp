@@ -4,6 +4,16 @@
 
 using namespace cocos2d;
 
+
+void HelloWorld::update(float dt)
+{
+
+	int32 velocityIterations = 10;
+	int32 positionIterations = 10;
+m_world->Step(dt,velocityIterations,positionIterations);
+
+m_world->ClearForces();
+}
 CCScene* HelloWorld::scene()
 {
     CCScene * scene = NULL;
@@ -33,11 +43,59 @@ bool HelloWorld::init()
 	{
         CC_BREAK_IF(! CCLayer::init());
 
-		CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+		CCSize screenSize = CCDirector::sharedDirector()->getWinSize();
 
 		gravity = b2Vec2(0.0f,-9.8f);
 		m_world = new b2World(gravity);
 		m_world->SetContinuousPhysics(true);
+
+		
+	    	b2Body *_box;
+	     b2BodyDef boxDef;
+
+		 //schedule(schedule_selector(HelloWorld::update),1/60);
+		 scheduleUpdate();
+		 boxDef.type = b2_dynamicBody;
+		 boxDef.position.Set(350.0f / PTM_RATIO,300.0f / PTM_RATIO);
+		 _box       = m_world->CreateBody(&boxDef);
+		 b2PolygonShape boxShape;
+
+		 boxShape.SetAsBox(10  / PTM_RATIO, 10 / PTM_RATIO);
+		 b2FixtureDef boxFix;
+		 boxFix.shape = &boxShape;
+		 boxFix.density = 10.0f;
+		 boxFix.restitution = 1.0f;
+		 _box->CreateFixture(&boxFix);
+
+
+
+		// Define the ground body.
+	b2BodyDef groundBodyDef;
+	groundBodyDef.position.Set(screenSize.width/2/PTM_RATIO, screenSize.height/2/PTM_RATIO); // bottom-left corner
+	
+	// Call the body factory which allocates memory for the ground body
+	// from a pool and creates the ground box shape (also from a pool).
+	// The body is also added to the world.
+	b2Body* groundBody = m_world->CreateBody(&groundBodyDef);
+
+	// Define the ground box shape.
+	b2PolygonShape groundBox;
+    // bottom
+    groundBox.SetAsBox(screenSize.width/2/PTM_RATIO, 0, b2Vec2(0, -screenSize.height/2/PTM_RATIO), 0);
+ 	groundBody->CreateFixture(&groundBox, 0);
+	
+    // top
+    groundBox.SetAsBox(screenSize.width/2/PTM_RATIO, 0, b2Vec2(0, screenSize.height/2/PTM_RATIO), 0);
+    groundBody->CreateFixture(&groundBox, 0);
+
+    // left
+    groundBox.SetAsBox(0, screenSize.height/2/PTM_RATIO, b2Vec2(-screenSize.width/2/PTM_RATIO, 0), 0);
+    groundBody->CreateFixture(&groundBox, 0);
+
+    // right
+    groundBox.SetAsBox(0, screenSize.height/2/PTM_RATIO, b2Vec2(screenSize.width/2/PTM_RATIO, 0), 0);
+    groundBody->CreateFixture(&groundBox, 0);
+
 		///////////////////////////////////////////////////////////////////////////////////
 		//For Box2d Debug Drawing//
 		m_DebugDraw = new b2DebugDraw(PTM_RATIO);
@@ -53,7 +111,19 @@ bool HelloWorld::init()
 
     return bRet;
 }
+void HelloWorld::draw(void)
+{
 
+    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
+
+    kmGLPushMatrix();
+
+    m_world->DrawDebugData();
+
+    kmGLPopMatrix();
+
+    
+}
 void HelloWorld::menuCloseCallback(CCObject* pSender)
 {
     // "close" menu item clicked

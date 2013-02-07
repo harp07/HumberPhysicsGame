@@ -20,6 +20,9 @@ public:
     // there's no 'id' in cpp, so we recommand to return the exactly class pointer
     static cocos2d::CCScene* scene();
     
+	void update(float dt);
+
+	virtual void draw(void);
     // a selector callback
     void menuCloseCallback(CCObject* pSender);
 
