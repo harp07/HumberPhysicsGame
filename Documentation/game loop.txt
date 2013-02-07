@@ -1,0 +1,15 @@
+boat game loop
+while game state = true{
+custimize
+overview
+player turn{
+move/shot
+select weapon
+aim
+}
+enemy turn{
+repeat player turn
+}
+
+rate
+}
