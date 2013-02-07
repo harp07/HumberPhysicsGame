@@ -49,7 +49,20 @@ bool HelloWorld::init()
 		m_world = new b2World(gravity);
 		m_world->SetContinuousPhysics(true);
 
-		
+		b2Body *_sphere;
+	b2BodyDef sphereDef;
+
+	sphereDef.type = b2_dynamicBody;
+	sphereDef.position.Set(90.0f/PTM_RATIO,200.0f/PTM_RATIO);
+	_sphere    = m_world->CreateBody(&sphereDef);
+	b2CircleShape sphereShape;
+
+	sphereShape.m_radius = 10.0f /PTM_RATIO;
+	b2FixtureDef sphereFix;
+	sphereFix.shape = &sphereShape;
+	sphereFix.restitution = 1.0f;
+	sphereFix.density = 20.0f;
+	_sphere->CreateFixture(&sphereFix);
 	    	b2Body *_box;
 	     b2BodyDef boxDef;
 

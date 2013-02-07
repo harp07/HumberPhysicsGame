@@ -1,4 +1,4 @@
-﻿Build started 2/7/2013 11:21:11 AM.
+﻿Build started 2/7/2013 11:33:37 AM.
      1>Project "C:\cocos2d-2.1beta3-x-2.1.1\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Release.win32\HumberPhysicsGame.win32.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -24,4 +24,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:08.70
+Time Elapsed 00:00:04.45
