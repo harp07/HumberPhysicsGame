@@ -22,9 +22,34 @@ public:
     
 	void update(float dt);
 
+	cocos2d::CCSprite* ball;
+	cocos2d::CCSprite* box;
+
+	
 	virtual void draw(void);
     // a selector callback
     void menuCloseCallback(CCObject* pSender);
+
+	void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
+
+	void kick();
+
+	void initPhysics();
+	   	
+	b2Body *_sphere;		
+	b2BodyDef sphereDef;
+
+	b2Body *_box;
+	b2BodyDef boxDef;
+	cocos2d::CCSize screenSize;
+
+	cocos2d::CCRect boxBB;
+
+	
+
+	//box2D functions
+	
+
 
     // implement the "static node()" method manually
     CREATE_FUNC(HelloWorld);

@@ -5,7 +5,7 @@
 USING_NS_CC;
 
 // uncomment below line, open debug console
-// #define USE_WIN32_CONSOLE
+//#define USE_WIN32_CONSOLE
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                        HINSTANCE hPrevInstance,
@@ -25,7 +25,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     // create the application instance
     AppDelegate app;
     CCEGLView* eglView = CCEGLView::sharedOpenGLView();
-    eglView->setFrameSize(480, 320);
+    eglView->setFrameSize(1080, 720);
 
     int ret = CCApplication::sharedApplication()->run();
 
