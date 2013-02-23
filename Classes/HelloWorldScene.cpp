@@ -4,16 +4,6 @@
 
 using namespace cocos2d;
 
-
-void HelloWorld::update(float dt)
-{
-
-	int32 velocityIterations = 10;
-	int32 positionIterations = 10;
-m_world->Step(dt,velocityIterations,positionIterations);
-
-m_world->ClearForces();
-}
 CCScene* HelloWorld::scene()
 {
     CCScene * scene = NULL;
@@ -41,6 +31,7 @@ bool HelloWorld::init()
     bool bRet = false;
     do 
 	{
+		
         CC_BREAK_IF(! CCLayer::init());
 
 		CCSize screenSize = CCDirector::sharedDirector()->getWinSize();
@@ -49,40 +40,90 @@ bool HelloWorld::init()
 		m_world = new b2World(gravity);
 		m_world->SetContinuousPhysics(true);
 
-		b2Body *_sphere;
-	b2BodyDef sphereDef;
+		///////////////////////////////////////////////////////////////////////////////////
+		//For Box2d Debug Drawing//
+		m_DebugDraw = new b2DebugDraw(PTM_RATIO);
+		m_world->SetDebugDraw(m_DebugDraw);
+		uint32 flags = 0;
+		flags += b2Draw::e_shapeBit;
+		m_DebugDraw->SetFlags(flags);
 
-	sphereDef.type = b2_dynamicBody;
-	sphereDef.position.Set(90.0f/PTM_RATIO,200.0f/PTM_RATIO);
-	_sphere    = m_world->CreateBody(&sphereDef);
-	b2CircleShape sphereShape;
+		//////////////////////////////////////////////////////////////////////////////////
 
-	sphereShape.m_radius = 10.0f /PTM_RATIO;
-	b2FixtureDef sphereFix;
-	sphereFix.shape = &sphereShape;
-	sphereFix.restitution = 1.0f;
-	sphereFix.density = 20.0f;
-	_sphere->CreateFixture(&sphereFix);
-	    	b2Body *_box;
-	     b2BodyDef boxDef;
+		this->ground();
+		
+		b2BodyDef sphereDef;
 
-		 //schedule(schedule_selector(HelloWorld::update),1/60);
-		 scheduleUpdate();
-		 boxDef.type = b2_dynamicBody;
-		 boxDef.position.Set(350.0f / PTM_RATIO,300.0f / PTM_RATIO);
-		 _box       = m_world->CreateBody(&boxDef);
-		 b2PolygonShape boxShape;
+		sphereDef.type = b2_dynamicBody;
+		sphereDef.position.Set(90.0f/PTM_RATIO,200.0f/PTM_RATIO);
+		_sphere    = m_world->CreateBody(&sphereDef);
+		b2CircleShape sphereShape;
 
-		 boxShape.SetAsBox(10  / PTM_RATIO, 10 / PTM_RATIO);
-		 b2FixtureDef boxFix;
-		 boxFix.shape = &boxShape;
-		 boxFix.density = 10.0f;
-		 boxFix.restitution = 1.0f;
-		 _box->CreateFixture(&boxFix);
+		sphereShape.m_radius = 10.0f /PTM_RATIO;
+		b2FixtureDef sphereFix;
+		sphereFix.shape = &sphereShape;
+		sphereFix.restitution = 1.0f;
+		sphereFix.density = 20.0f;
+		_sphere->CreateFixture(&sphereFix);
+	    b2Body *_box;
+	    b2BodyDef boxDef;
 
+		boxDef.type = b2_dynamicBody;
+		boxDef.position.Set(350.0f / PTM_RATIO,300.0f / PTM_RATIO);
+		_box       = m_world->CreateBody(&boxDef);
+		b2PolygonShape boxShape;
 
+		boxShape.SetAsBox(10  / PTM_RATIO, 10 / PTM_RATIO);
+		b2FixtureDef boxFix;
+		boxFix.shape = &boxShape;
+		boxFix.density = 10.0f;
+		boxFix.restitution = 1.0f;
+		_box->CreateFixture(&boxFix);
 
-		// Define the ground body.
+		//schedule(schedule_selector(HelloWorld::update),1/60);
+		scheduleUpdate();
+        bRet = true;
+		Camera::cameraInstance()->setLayer(this);
+		this->setTouchEnabled(true);
+    } while (0);
+
+    return bRet;
+}
+
+void HelloWorld::update(float dt)
+{
+	int32 velocityIterations = 10;
+	int32 positionIterations = 10;
+	m_world->Step(dt,velocityIterations,positionIterations);
+	m_world->ClearForces();
+}
+
+void HelloWorld::ccTouchesBegan(CCSet *touches, CCEvent* event){
+	Camera::cameraInstance()->setFocus(ccp(_sphere->GetPosition().x/PTM_RATIO,_sphere->GetPosition().y/PTM_RATIO));
+}
+
+void HelloWorld::ccTouchesMoved(CCSet *touches, CCEvent* event){
+	CCTouch* touch = (CCTouch*)(touches->anyObject());
+	CCPoint location = touch->getLocationInView();
+	location = CCDirector::sharedDirector()->convertToGL(location);
+	Camera::cameraInstance()->moveCamera(ccp(location.x/PTM_RATIO,0.0f));
+}
+
+void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event){
+	Camera::cameraInstance()->reset();
+}
+
+void HelloWorld::draw(void)
+{
+    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
+    kmGLPushMatrix();
+    m_world->DrawDebugData();
+    kmGLPopMatrix(); 
+}
+
+void HelloWorld::ground(){
+	CCSize screenSize = CCDirector::sharedDirector()->getWinSize();
+	// Define the ground body.
 	b2BodyDef groundBodyDef;
 	groundBodyDef.position.Set(screenSize.width/2/PTM_RATIO, screenSize.height/2/PTM_RATIO); // bottom-left corner
 	
@@ -93,53 +134,19 @@ bool HelloWorld::init()
 
 	// Define the ground box shape.
 	b2PolygonShape groundBox;
-    // bottom
-    groundBox.SetAsBox(screenSize.width/2/PTM_RATIO, 0, b2Vec2(0, -screenSize.height/2/PTM_RATIO), 0);
+	// bottom
+	groundBox.SetAsBox(screenSize.width/2/PTM_RATIO, 0, b2Vec2(0, -screenSize.height/2/PTM_RATIO), 0);
  	groundBody->CreateFixture(&groundBox, 0);
 	
-    // top
-    groundBox.SetAsBox(screenSize.width/2/PTM_RATIO, 0, b2Vec2(0, screenSize.height/2/PTM_RATIO), 0);
-    groundBody->CreateFixture(&groundBox, 0);
+	// top
+	groundBox.SetAsBox(screenSize.width/2/PTM_RATIO, 0, b2Vec2(0, screenSize.height/2/PTM_RATIO), 0);
+	groundBody->CreateFixture(&groundBox, 0);
 
-    // left
-    groundBox.SetAsBox(0, screenSize.height/2/PTM_RATIO, b2Vec2(-screenSize.width/2/PTM_RATIO, 0), 0);
-    groundBody->CreateFixture(&groundBox, 0);
+	// left
+	groundBox.SetAsBox(0, screenSize.height/2/PTM_RATIO, b2Vec2(-screenSize.width/2/PTM_RATIO, 0), 0);
+	groundBody->CreateFixture(&groundBox, 0);
 
-    // right
-    groundBox.SetAsBox(0, screenSize.height/2/PTM_RATIO, b2Vec2(screenSize.width/2/PTM_RATIO, 0), 0);
-    groundBody->CreateFixture(&groundBox, 0);
-
-		///////////////////////////////////////////////////////////////////////////////////
-		//For Box2d Debug Drawing//
-		m_DebugDraw = new b2DebugDraw(PTM_RATIO);
-		m_world->SetDebugDraw(m_DebugDraw);
-		uint32 flags = 0;
-		flags += b2Draw::e_shapeBit;
-		m_DebugDraw->SetFlags(flags);
-
-
-		//////////////////////////////////////////////////////////////////////////////////
-        bRet = true;
-    } while (0);
-
-    return bRet;
+	// right
+	groundBox.SetAsBox(0, screenSize.height/2/PTM_RATIO, b2Vec2(screenSize.width/2/PTM_RATIO, 0), 0);
+	groundBody->CreateFixture(&groundBox, 0);
 }
-void HelloWorld::draw(void)
-{
-
-    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
-
-    kmGLPushMatrix();
-
-    m_world->DrawDebugData();
-
-    kmGLPopMatrix();
-
-    
-}
-void HelloWorld::menuCloseCallback(CCObject* pSender)
-{
-    // "close" menu item clicked
-    CCDirector::sharedDirector()->end();
-}
-
