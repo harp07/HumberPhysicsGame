@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\b2DebugDraw.h" />
+    <ClInclude Include="..\Classes\GameWorld.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
@@ -140,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\b2DebugDraw.cpp" />
+    <ClCompile Include="..\Classes\GameWorld.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
