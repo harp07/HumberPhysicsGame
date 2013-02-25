@@ -1,21 +1,20 @@
-﻿Build started 2/13/2013 9:00:56 PM.
+﻿Build started 2/25/2013 3:13:03 PM.
      1>Project "C:\cocos2d-2.1beta3-x-2.1.1\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Touching "Release.win32\HumberPhysicsGame.win32.unsuccessfulbuild".
+         Creating "Release.win32\HumberPhysicsGame.win32.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I. /I..\Classes /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\include" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\kazmath\include" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\win32" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32\OGLES" /I"C:\cocos2d-2.1beta3-x-2.1.1\external" /I"C:\cocos2d-2.1beta3-x-2.1.1\CocosDenshion\include" /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D _WINDOWS /D STRICT /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGSNDEBUG /D _UNICODE /D UNICODE /Gm- /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release.win32\\" /Fd"Release.win32\vc100.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\AppDelegate.cpp ..\Classes\HelloWorldScene.cpp
-         AppDelegate.cpp
-     1>c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xlocale(323): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I. /I..\Classes /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\include" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\kazmath\include" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\win32" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32\OGLES" /I"C:\cocos2d-2.1beta3-x-2.1.1\external" /I"C:\cocos2d-2.1beta3-x-2.1.1\CocosDenshion\include" /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D _WINDOWS /D STRICT /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGSNDEBUG /D COCOS2D_DEBUG=1 /D _UNICODE /D UNICODE /Gm- /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release.win32\\" /Fd"Release.win32\vc100.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\HelloWorldScene.cpp
          HelloWorldScene.cpp
      1>c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xlocale(323): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
-     1>..\Classes\HelloWorldScene.cpp(58): warning C4305: 'argument' : truncation from 'double' to 'float'
-         Generating Code...
+     1>..\Classes\HelloWorldScene.cpp(157): warning C4018: '<' : signed/unsigned mismatch
+     1>..\Classes\HelloWorldScene.cpp(193): warning C4018: '<' : signed/unsigned mismatch
        ResourceCompile:
          All outputs are up-to-date.
        Link:
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\cocos2d-2.1beta3-x-2.1.1\Release.win32\HumberPhysicsGame.win32.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\cocos2d-2.1beta3-x-2.1.1\Release.win32\\" libcocos2d.lib opengl32.lib glew32.lib libBox2d.lib libCocosDenshion.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release.win32\HumberPhysicsGame.win32.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"C:\cocos2d-2.1beta3-x-2.1.1\Release.win32\HumberPhysicsGame.win32.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\cocos2d-2.1beta3-x-2.1.1\Release.win32\HumberPhysicsGame.win32.lib" /MACHINE:X86 Release.win32\HumberPhysicsGame.res
          Release.win32\AppDelegate.obj
          Release.win32\b2DebugDraw.obj
+         Release.win32\BouyancyContactListener.obj
          Release.win32\HelloWorldScene.obj
          Release.win32\main.obj
          HumberPhysicsGame.win32.vcxproj -> C:\cocos2d-2.1beta3-x-2.1.1\Release.win32\HumberPhysicsGame.win32.exe
@@ -28,4 +27,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:13.11
+Time Elapsed 00:00:06.71

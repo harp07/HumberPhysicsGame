@@ -1,10 +1,19 @@
+#pragma once
+
+
+
 #include <set>
 #include <vector>
 #include <math.h>
 #include "Box2D\Box2D.h"
-
+ 
 typedef std::pair<b2Fixture*, b2Fixture*> fixturePair;
 
+
+ float rnd_1()
+{
+    return rand() / (float)RAND_MAX;
+}
 static b2Vec2 ComputeCentroid(std::vector<b2Vec2> vs, float& area)
 {
     int count = (int)vs.size();
@@ -50,10 +59,7 @@ static b2Vec2 ComputeCentroid(std::vector<b2Vec2> vs, float& area)
     return (cp2.x-cp1.x)*(p.y-cp1.y) > (cp2.y-cp1.y)*(p.x-cp1.x);
 }
 
- float rnd_1()
-{
-    return rand() / (float)RAND_MAX;
-}
+
 
  b2Vec2 intersection(b2Vec2 cp1, b2Vec2 cp2, b2Vec2 s, b2Vec2 e) {
     b2Vec2 dc( cp1.x - cp2.x, cp1.y - cp2.y );
@@ -64,7 +70,7 @@ static b2Vec2 ComputeCentroid(std::vector<b2Vec2> vs, float& area)
     return b2Vec2( (n1*dp.x - n2*dc.x) * n3, (n1*dp.y - n2*dc.y) * n3);
 }
 
-//http://rosettacode.org/wiki/Sutherland-Hodgman_polygon_clipping#JavaScript
+
  bool findIntersectionOfFixtures(b2Fixture* fA, b2Fixture* fB, std::vector<b2Vec2>& outputVertices)
 {
     //currently this only handles polygon vs polygon

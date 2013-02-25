@@ -1,9 +1,11 @@
 #include "Box2D/Box2D.h" 
 #include "cocos2d.h"
 
+#pragma once
 class b2DebugDraw : public b2Draw
 {
 public:
+	
     b2DebugDraw( float32 ratio );
 
     void DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);

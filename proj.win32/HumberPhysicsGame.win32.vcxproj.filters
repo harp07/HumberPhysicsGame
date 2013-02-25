@@ -50,6 +50,9 @@
     <ClInclude Include="..\Classes\b2DebugDraw.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\BouyancyContactListener.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -62,6 +65,9 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\b2DebugDraw.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BouyancyContactListener.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

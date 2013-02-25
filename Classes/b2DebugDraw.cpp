@@ -92,7 +92,28 @@ void b2DebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color
 
     CHECK_GL_ERROR_DEBUG();
 }
+void b2DebugDraw::DrawPoint(const b2Vec2& p, float32 size, const b2Color& color)
+{
+    mShaderProgram->use();
+    mShaderProgram->setUniformsForBuiltins();
 
+    mShaderProgram->setUniformLocationWith4f(mColorLocation, color.r, color.g, color.b, 1);
+
+    //    glPointSize(size);
+
+    GLfloat                glVertices[] = {
+        p.x * mRatio, p.y * mRatio
+    };
+
+    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, glVertices);
+
+    glDrawArrays(GL_POINTS, 0, 1);
+    //    glPointSize(1.0f);
+
+    CC_INCREMENT_GL_DRAWS(1);
+
+    CHECK_GL_ERROR_DEBUG();
+}
 void b2DebugDraw::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color)
 {
     mShaderProgram->use();
