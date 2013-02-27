@@ -31,9 +31,13 @@ public:
     
 	void update(float dt);
 
+	void CreateWater(b2Vec2 pos,b2Vec2 size,float density,float friction);
 	cocos2d::CCSprite* ball;
 	cocos2d::CCSprite* box;
+	
+	cocos2d::CCSprite* pirateShip;
 
+	
 	
 	virtual void draw(void);
     // a selector callback

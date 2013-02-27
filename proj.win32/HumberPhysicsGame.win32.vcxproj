@@ -122,9 +122,14 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="..\Resources\ball.png" />
     <None Include="..\Resources\CloseNormal.png" />
     <None Include="..\Resources\CloseSelected.png" />
     <None Include="..\Resources\HelloWorld.png" />
+    <None Include="..\Resources\PirateShip.png" />
+    <None Include="..\Resources\PirateShipFlip.png" />
+    <None Include="..\Resources\Rock-01.png" />
+    <None Include="..\Resources\wooden_box.jpg" />
     <None Include="ClassDiagram1.cd" />
     <None Include="res\HumberPhysicsGame.ico" />
   </ItemGroup>

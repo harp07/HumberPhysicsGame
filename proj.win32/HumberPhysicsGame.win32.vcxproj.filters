@@ -28,6 +28,21 @@
       <Filter>resource</Filter>
     </None>
     <None Include="ClassDiagram1.cd" />
+    <None Include="..\Resources\ball.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\PirateShip.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\PirateShipFlip.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\Rock-01.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\wooden_box.jpg">
+      <Filter>resource</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="HumberPhysicsGame.rc">

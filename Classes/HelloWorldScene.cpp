@@ -48,15 +48,20 @@ bool HelloWorld::init()
 		m_world->SetContinuousPhysics(true);
 		m_world->SetContactListener(&myListener);
 		 this->setTouchEnabled(true);
-
+		 
 		
-		initPhysics();
+		
 		//scheduleUpdate();
 
 		this->schedule(schedule_selector(HelloWorld::update));
 		
+		pirateShip = CCSprite::create("PirateShipFlip.png");
+		CC_BREAK_IF(! pirateShip);
+
+		pirateShip->setScale(0.5);
+		addChild(pirateShip);
 		
-		/*box = CCSprite::create("wooden_box.jpg");
+		box = CCSprite::create("wooden_box.jpg");
 		 CC_BREAK_IF(! box);
 
 		 ball = CCSprite::create("Rock-01.png");
@@ -66,7 +71,10 @@ bool HelloWorld::init()
 		ball->setScale(1.0);
 
 		addChild(box);
-		addChild(ball);*/
+		addChild(ball);
+
+
+		initPhysics();
 		
 		///////////////////////////////////////////////////////////////////////////////////
 		//For Box2d Debug Drawing//
@@ -79,7 +87,8 @@ bool HelloWorld::init()
 		m_DebugDraw->SetFlags(flags);
 		
 		
-		//////////////////////////////////////////////////////////////////////////////////
+		
+		/////////////////////////////////////////////////////////////////////////////////
 		//myListener = new BouyancyContactListener();
 		
         bRet = true;
@@ -210,98 +219,13 @@ void HelloWorld::update(float dt)
 
 	
 }
-void HelloWorld::initPhysics()
+void HelloWorld::CreateWater(b2Vec2 pos,b2Vec2 size, float density,float friction)
 {
 
-	
-
-	//sphereDef.type = b2_dynamicBody;
-	//sphereDef.userData = ball;
-	//sphereDef.position.Set(90.0f/PTM_RATIO,200.0f/PTM_RATIO);
-	//_sphere    = m_world->CreateBody(&sphereDef);
-	//b2CircleShape sphereShape;
-
-	//sphereShape.m_radius = 10.0f /PTM_RATIO;
-	//b2FixtureDef sphereFix;
-	//sphereFix.shape = &sphereShape;
-	//sphereFix.restitution = 1.0f;
-	//sphereFix.density = 20.0f;
-	//sphereFix.isSensor = false;
-
-	//_sphere->CreateFixture(&sphereFix);
-	// 
-
-	//boxBB = box->boundingBox();
-	//	 boxDef.userData = box;
-	//	 boxDef.type = b2_dynamicBody;
-	//	 boxDef.linearVelocity.Set(0.0f,0.0f);
-	//	 boxDef.angularVelocity = 0.0f;
-	//	 boxDef.linearDamping = 0.0f;
-	//	 boxDef.angularDamping = 0.0f;
-	//	 boxDef.allowSleep = bool(4);
-	//	 boxDef.awake = bool(2);
-	//	 boxDef.fixedRotation = bool(0);
-	//	 boxDef.bullet = bool(0);
-	//	 boxDef.active = bool(32);
-	//	 boxDef.gravityScale = 1.0f;
-	//	 boxDef.position.Set(350.0f / PTM_RATIO,300.0f / PTM_RATIO);
-	//	 _box       = m_world->CreateBody(&boxDef);
-	//	 b2PolygonShape boxShape;
-
-	//	 boxShape.SetAsBox(30  / PTM_RATIO, 30 / PTM_RATIO);
-	//	// boxShape.SetAsBox(boxBB.size.width /PTM_RATIO,boxBB.size.height /PTM_RATIO,b2Vec2(0.0f,0.0f),0.0f);
-	//	 b2FixtureDef boxFix;
-	//	 boxFix.shape = &boxShape;
-	//	 boxFix.density = 1.0f;
-	//	 boxFix.friction = 2.0f;
-	//	 boxFix.isSensor = false;
-	//	 boxFix.filter.categoryBits = uint16(1);
-	//	 boxFix.filter.maskBits = uint16(65535);
-	//	 boxFix.filter.groupIndex = int16(0);
-
-	//	 boxFix.restitution = 0.0f;
-	//	 _box->CreateFixture(&boxFix);
-
-		 
-
-		// Define the ground body.
-	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(screenSize.width/2/PTM_RATIO, screenSize.height/2/PTM_RATIO); // bottom-left corner
-	
-	// Call the body factory which allocates memory for the ground body
-	// from a pool and creates the ground box shape (also from a pool).
-	// The body is also added to the world.
-	b2Body* groundBody = m_world->CreateBody(&groundBodyDef);
-
-	// Define the ground box shape.
-	b2PolygonShape groundBox;
-    // bottom
-    groundBox.SetAsBox(screenSize.width/2/PTM_RATIO, 0, b2Vec2(0, -screenSize.height/2/PTM_RATIO), 0);
- 	groundBody->CreateFixture(&groundBox, 0);
-	
-    // top
-    groundBox.SetAsBox(screenSize.width/2/PTM_RATIO, 0, b2Vec2(0, screenSize.height/2/PTM_RATIO), 0);
-    groundBody->CreateFixture(&groundBox, 0);
-
-    // left
-    groundBox.SetAsBox(0, screenSize.height/2/PTM_RATIO, b2Vec2(-screenSize.width/2/PTM_RATIO, 0), 0);
-    groundBody->CreateFixture(&groundBox, 0);
-
-    // right
-    groundBox.SetAsBox(0, screenSize.height/2/PTM_RATIO, b2Vec2(screenSize.width/2/PTM_RATIO, 0), 0);
-    groundBody->CreateFixture(&groundBox, 0);
-
-
-
-
-
-
-
-
- 
-  waterDef.type = b2_staticBody;
-  waterDef.position.Set(200.0f / PTM_RATIO,3.0f / PTM_RATIO);
+	waterDef.type = b2_staticBody;
+  waterDef.position.Set(pos.x / PTM_RATIO,pos.y/ PTM_RATIO);
   waterDef.angle = 0.0f;
+  
   waterDef.linearVelocity.Set(0.0f, 0.0f);
   waterDef.angularVelocity = 0.0;
   waterDef.linearDamping = 0.0f;
@@ -319,18 +243,161 @@ void HelloWorld::initPhysics()
   
     waterFix.restitution = 0.0f;
     
-    waterFix.isSensor = true;
+    waterFix.isSensor =  bool(1);
     waterFix.filter.categoryBits = uint16(1);
     waterFix.filter.maskBits = uint16(65535);
     waterFix.filter.groupIndex = int16(0);
+	waterFix.density = density;
+	waterFix.friction = friction;
     b2PolygonShape waterShape;
     
 
-	waterShape.SetAsBox(screenSize.width / PTM_RATIO,400.0f / PTM_RATIO,b2Vec2(0.0f,0.0f),0.0f);
+	waterShape.SetAsBox(size.x,size.y,b2Vec2(0.0f,0.0f),0.0f);
 
     waterFix.shape = &waterShape;
 
     _water->CreateFixture(&waterFix);
+   
+
+
+
+}
+void HelloWorld::initPhysics()
+{
+
+	
+
+	sphereDef.type = b2_dynamicBody;
+	sphereDef.userData = ball;
+	sphereDef.position.Set(120.0f/PTM_RATIO,500.0f/PTM_RATIO);
+	sphereDef.linearVelocity.Set(0.0f,0.0f);
+	sphereDef.linearDamping = 0.0f;
+
+	 
+		 sphereDef.angularVelocity = 0.0f;
+		 sphereDef.linearDamping = 0.0f;
+		 sphereDef.angularDamping = 0.0f;
+		 sphereDef.allowSleep = bool(4);
+		 sphereDef.awake = bool(2);
+		 sphereDef.fixedRotation = bool(0);
+		 sphereDef.bullet = bool(0);
+		 sphereDef.active = bool(32);
+		 sphereDef.gravityScale = 1.0f;
+	
+	_sphere    = m_world->CreateBody(&sphereDef);
+	b2CircleShape sphereShape;
+
+	sphereShape.m_radius = 10.0f /PTM_RATIO;
+	b2FixtureDef sphereFix;
+	sphereFix.shape = &sphereShape;
+
+	sphereFix.restitution = 0.0f;
+	sphereFix.density = 2.0f;
+	sphereFix.isSensor = false;
+
+	 sphereFix.filter.categoryBits = uint16(1);
+		 sphereFix.filter.maskBits = uint16(65535);
+		 sphereFix.filter.groupIndex = int16(0);
+
+	_sphere->CreateFixture(&sphereFix);
+	 
+
+	boxBB = box->boundingBox();
+		 boxDef.userData = box;
+		 boxDef.type = b2_dynamicBody;
+		 boxDef.linearVelocity.Set(0.0f,0.0f);
+		 boxDef.angularVelocity = 0.0f;
+		 boxDef.linearDamping = 0.0f;
+		 boxDef.angularDamping = 0.0f;
+		 boxDef.allowSleep = bool(4);
+		 boxDef.awake = bool(2);
+		 boxDef.fixedRotation = bool(0);
+		 boxDef.bullet = bool(0);
+		 boxDef.active = bool(32);
+		 boxDef.gravityScale = 1.0f;
+		 boxDef.position.Set(350.0f / PTM_RATIO,300.0f / PTM_RATIO);
+		 _box       = m_world->CreateBody(&boxDef);
+		 b2PolygonShape boxShape;
+
+		 boxShape.SetAsBox(10  / PTM_RATIO, 10 / PTM_RATIO);
+		// boxShape.SetAsBox(boxBB.size.width /PTM_RATIO,boxBB.size.height /PTM_RATIO,b2Vec2(0.0f,0.0f),0.0f);
+		 b2FixtureDef boxFix;
+		 boxFix.shape = &boxShape;
+		 boxFix.density = 1.0f;
+		 boxFix.friction = 2.0f;
+		 boxFix.isSensor = false;
+		 boxFix.filter.categoryBits = uint16(1);
+		 boxFix.filter.maskBits = uint16(65535);
+		 boxFix.filter.groupIndex = int16(0);
+
+		 boxFix.restitution = 0.0f;
+		 _box->CreateFixture(&boxFix);
+
+		 
+
+		// Define the ground body.
+	//b2BodyDef groundBodyDef;
+	//groundBodyDef.position.Set(screenSize.width/2/PTM_RATIO, screenSize.height/2/PTM_RATIO); // bottom-left corner
+	//
+	//// Call the body factory which allocates memory for the ground body
+	//// from a pool and creates the ground box shape (also from a pool).
+	//// The body is also added to the world.
+	//b2Body* groundBody = m_world->CreateBody(&groundBodyDef);
+
+	//// Define the ground box shape.
+	//b2PolygonShape groundBox;
+ //   // bottom
+ //   groundBox.SetAsBox(screenSize.width/2/PTM_RATIO, 0, b2Vec2(0, -screenSize.height/2/PTM_RATIO), 0);
+ //	groundBody->CreateFixture(&groundBox, 0);
+	//
+ //   // top
+ //   groundBox.SetAsBox(screenSize.width/2/PTM_RATIO, 0, b2Vec2(0, screenSize.height/2/PTM_RATIO), 0);
+ //   groundBody->CreateFixture(&groundBox, 0);
+
+ //   // left
+ //   groundBox.SetAsBox(0, screenSize.height/2/PTM_RATIO, b2Vec2(-screenSize.width/2/PTM_RATIO, 0), 0);
+ //   groundBody->CreateFixture(&groundBox, 0);
+
+ //   // right
+ //   groundBox.SetAsBox(0, screenSize.height/2/PTM_RATIO, b2Vec2(screenSize.width/2/PTM_RATIO, 0), 0);
+ //   groundBody->CreateFixture(&groundBox, 0);
+
+
+
+		float widthInMeters = screenSize.width / PTM_RATIO; 
+		float heightInMeters = screenSize.height / PTM_RATIO; 
+		b2Vec2 lowerLeftCorner = b2Vec2(0, 0); 
+		b2Vec2 lowerRightCorner = b2Vec2(widthInMeters, 0); 
+		b2Vec2 upperLeftCorner = b2Vec2(0, heightInMeters); 
+		b2Vec2 upperRightCorner = b2Vec2(widthInMeters, heightInMeters); 
+		
+		// Define the static container body, which will provide the collisions at screen borders. 
+		b2BodyDef screenBorderDef; 
+		b2Body* groundBody = m_world->CreateBody(&screenBorderDef);
+		screenBorderDef.position.Set(0, 0); 
+		groundBody = m_world->CreateBody(&screenBorderDef); 
+		b2EdgeShape screenBorderShape; 
+
+		// Create fixtures for the four borders (the border shape is re-used) 
+		screenBorderShape.Set(lowerLeftCorner, lowerRightCorner); 
+		groundBody->CreateFixture(&screenBorderShape, 0); 
+		screenBorderShape.Set(lowerRightCorner, upperRightCorner); 
+		groundBody->CreateFixture(&screenBorderShape, 0); 
+		screenBorderShape.Set(upperRightCorner, upperLeftCorner); 
+		groundBody->CreateFixture(&screenBorderShape, 0); 
+		screenBorderShape.Set(upperLeftCorner, lowerLeftCorner); 
+		groundBody->CreateFixture(&screenBorderShape, 0); 
+
+
+		b2Vec2 _waterPos(90.0f,200.0f);
+		b2Vec2 _waterSize(screenSize.width / PTM_RATIO,200.0f /PTM_RATIO);
+
+		CreateWater(_waterPos,_waterSize,2.0f,2.0f);
+		
+
+
+
+ 
   
  
 
@@ -338,7 +405,9 @@ void HelloWorld::initPhysics()
 //boat?
 
  // b2BodyDef boatDef;
+		  boatDef.userData = pirateShip;
   boatDef.type = b2_dynamicBody;
+
   boatDef.position.Set(420.0f /  PTM_RATIO, 410.0f  /  PTM_RATIO);
   boatDef.angle = 3.824857473373413e-01f;
   boatDef.linearVelocity.Set(0.0f, 0.0f);
@@ -380,11 +449,49 @@ void HelloWorld::initPhysics()
 
 
 
+	/*b2Body* sphere;
+	b2BodyDef td;
+	td.type = b2_dynamicBody;
+	td.position.Set(90.0f/PTM_RATIO,410.0f / PTM_RATIO);
+	td.awake = true;
+	td.active = true;
+	td.gravityScale = 1.0f;
+
+	
+	sphere = m_world->CreateBody(&td);
+
+	b2CircleShape shpe;
+	shpe.m_radius = 20.0f / PTM_RATIO;
+	b2FixtureDef fix;
+
+	fix.filter.categoryBits = uint16(1);
+    fix.filter.maskBits = uint16(65535);
+    fix.filter.groupIndex = int16(0);
+	fix.shape = &shpe;
+	fix.restitution = 0.0f;
+	fix.density = 1.0f;
+	fix.isSensor = false;
+	sphere->CreateFixture(&fix);*/
+	/*b2Body *_sphere[10];
+  for(int i = 0; i < 10; i ++){
+   b2BodyDef sphereDef;
+   
+   sphereDef.type = b2_dynamicBody;
+   sphereDef.position.Set((90.0f + (i*5))/PTM_RATIO,410.0f/PTM_RATIO);
+   _sphere[i] = m_world->CreateBody(&sphereDef);
+   b2CircleShape sphereShape;
+
+   sphereShape.m_radius = 10.0f /PTM_RATIO;
+   b2FixtureDef sphereFix;
+   sphereFix.shape = &sphereShape;
+   sphereFix.restitution = 0.0f;
+   sphereFix.density = 2.0f;
+   sphereFix.isSensor = false;
+   _sphere[i]->CreateFixture(&sphereFix);
 
 
-
-
-
+ 
+  }*/
 
 
 }
