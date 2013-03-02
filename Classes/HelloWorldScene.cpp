@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 
+#include "GB2ShapeCache-x.h"
 #include <stdio.h>
 #define PTM_RATIO 32.0
 
@@ -7,31 +8,8 @@ using namespace cocos2d;
 
 
 
-CCScene* HelloWorld::scene()
-{
-    CCScene * scene = NULL;
-    do 
-    {
-        // 'scene' is an autorelease object
-        scene = CCScene::create();
-        CC_BREAK_IF(! scene);
 
-        // 'layer' is an autorelease object
-        HelloWorld *layer = HelloWorld::create();
-        CC_BREAK_IF(! layer);
 
-        // add layer as a child to scene
-        scene->addChild(layer);
-    } while (0);
-
-    // return the scene
-    return scene;
-}
-
-void HelloWorld::ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event)
-{
-	kick();
-}
 
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
@@ -42,23 +20,39 @@ bool HelloWorld::init()
         CC_BREAK_IF(! CCLayer::init());
 
 		 screenSize = CCDirector::sharedDirector()->getWinSize();
-
-		 b2Vec2 gravity( 0, -10 );
-		 m_world = new b2World(gravity);
-		m_world->SetContinuousPhysics(true);
-		m_world->SetContactListener(&myListener);
+		 GB2ShapeCache::sharedGB2ShapeCache()->addShapesWithFile("boat.plist");
+		
 		 this->setTouchEnabled(true);
 		 
 		
 		
-		//scheduleUpdate();
+        // Create a "close" menu item with close icon, it's an auto release object.
+        CCMenuItemImage *pCloseItem = CCMenuItemImage::create(
+            "CloseNormal.png",
+            "CloseSelected.png",
+            this,
+            menu_selector(HelloWorld::menuCloseCallback));
+        CC_BREAK_IF(! pCloseItem);
 
-		this->schedule(schedule_selector(HelloWorld::update));
+        // Place the menu item bottom-right conner.
+        pCloseItem->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width - 20, 20));
+
+        // Create a menu with the "close" menu item, it's an auto release object.
+        CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
+        pMenu->setPosition(CCPointZero);
+        CC_BREAK_IF(! pMenu);
+
+        // Add the menu to HelloWorld layer as a child layer.
+        this->addChild(pMenu, 1);
 		
-		pirateShip = CCSprite::create("PirateShipFlip.png");
+
+		this->schedule(schedule_selector(HelloWorld::updateGame));
+		
+		/*pirateShip = CCSprite::create("PirateShipFlip.png");
 		CC_BREAK_IF(! pirateShip);
 
 		pirateShip->setScale(0.5);
+		pirateShip->setRotation(45);
 		addChild(pirateShip);
 		
 		box = CCSprite::create("wooden_box.jpg");
@@ -71,25 +65,15 @@ bool HelloWorld::init()
 		ball->setScale(1.0);
 
 		addChild(box);
-		addChild(ball);
+		addChild(ball);*/
 
+		b2Vec2 gravity(0.0f,-9.8f);
 
-		initPhysics();
-		
-		///////////////////////////////////////////////////////////////////////////////////
-		//For Box2d Debug Drawing//
-		m_DebugDraw = new b2DebugDraw(PTM_RATIO);
-		
-		m_world->SetDebugDraw(m_DebugDraw);
-		uint32 flags = 0;
-		flags += b2Draw::e_shapeBit;
-		
-		m_DebugDraw->SetFlags(flags);
+		initPhysics(gravity,true);
 		
 		
 		
-		/////////////////////////////////////////////////////////////////////////////////
-		//myListener = new BouyancyContactListener();
+		
 		
         bRet = true;
     } while (0);
@@ -97,13 +81,36 @@ bool HelloWorld::init()
     return bRet;
 }
 
-void HelloWorld::kick()
+
+
+void HelloWorld::ccTouchesEnded(CCSet* touches,CCEvent* event)
 {
-	b2Vec2 force = b2Vec2(30,30);
-	_boat->ApplyLinearImpulse(force,_boat->GetPosition());
+
+	CCSetIterator it;
+	CCTouch* touch;
+
+	for(it = touches->begin(); it != touches->end(); it++)
+	{
+	
+		touch = (CCTouch*)(*it);
+	
+		if(!touch)
+			break;
+
+		CCPoint location = touch->getLocation();
+		//location = CCDirector::sharedDirector()->convertToGL(location);
+
+		addNewSpriteWithCoords(location);
+	}
 
 }
-void HelloWorld::update(float dt)
+//void HelloWorld::kick()
+//{
+//	b2Vec2 force = b2Vec2(30,30);
+//	_boat->ApplyLinearImpulse(force,_boat->GetPosition());
+//
+//}
+void HelloWorld::updateGame(float dt)
 {
 	m_world->Step(dt,10,10);
 	for(b2Body *b = m_world->GetBodyList(); b; b = b->GetNext())
@@ -196,13 +203,13 @@ void HelloWorld::update(float dt)
                 }
 
              //draw debug info
-                glColor3f(0,1,1);
+            /*    glColor3f(0,1,1);
                 glLineWidth(2);
                 glBegin(GL_LINE_LOOP);
                 for (int i = 0; i < intersectionPoints.size(); i++)
                     glVertex2f( intersectionPoints[i].x, intersectionPoints[i].y );
                 glEnd();
-                glLineWidth(1);
+                glLineWidth(1);*/
                 
                 //line showing buoyancy force
                 /*if ( area > 0 ) {
@@ -262,12 +269,24 @@ void HelloWorld::CreateWater(b2Vec2 pos,b2Vec2 size, float density,float frictio
 
 
 }
-void HelloWorld::initPhysics()
+void HelloWorld::initPhysics(b2Vec2 grav,bool contiousPhysics)
 {
+	m_world = new b2World(grav);
 
+		m_world->SetContinuousPhysics(contiousPhysics);
+		m_world->SetContactListener(&myListener);
+
+		m_DebugDraw = new b2DebugDraw(PTM_RATIO );
+		
+		m_world->SetDebugDraw(m_DebugDraw);
+		uint32 flags = 0;
+		flags += b2Draw::e_shapeBit;
+		
+		m_DebugDraw->SetFlags(flags);
+		
 	
 
-	sphereDef.type = b2_dynamicBody;
+	/*sphereDef.type = b2_dynamicBody;
 	sphereDef.userData = ball;
 	sphereDef.position.Set(120.0f/PTM_RATIO,500.0f/PTM_RATIO);
 	sphereDef.linearVelocity.Set(0.0f,0.0f);
@@ -300,38 +319,38 @@ void HelloWorld::initPhysics()
 		 sphereFix.filter.groupIndex = int16(0);
 
 	_sphere->CreateFixture(&sphereFix);
-	 
+	 */
 
-	boxBB = box->boundingBox();
-		 boxDef.userData = box;
-		 boxDef.type = b2_dynamicBody;
-		 boxDef.linearVelocity.Set(0.0f,0.0f);
-		 boxDef.angularVelocity = 0.0f;
-		 boxDef.linearDamping = 0.0f;
-		 boxDef.angularDamping = 0.0f;
-		 boxDef.allowSleep = bool(4);
-		 boxDef.awake = bool(2);
-		 boxDef.fixedRotation = bool(0);
-		 boxDef.bullet = bool(0);
-		 boxDef.active = bool(32);
-		 boxDef.gravityScale = 1.0f;
-		 boxDef.position.Set(350.0f / PTM_RATIO,300.0f / PTM_RATIO);
-		 _box       = m_world->CreateBody(&boxDef);
-		 b2PolygonShape boxShape;
+	
+		// boxDef.userData = box;
+		// boxDef.type = b2_dynamicBody;
+		// boxDef.linearVelocity.Set(0.0f,0.0f);
+		// boxDef.angularVelocity = 0.0f;
+		// boxDef.linearDamping = 0.0f;
+		// boxDef.angularDamping = 0.0f;
+		// boxDef.allowSleep = bool(4);
+		// boxDef.awake = bool(2);
+		// boxDef.fixedRotation = bool(0);
+		// boxDef.bullet = bool(0);
+		// boxDef.active = bool(32);
+		// boxDef.gravityScale = 1.0f;
+		// boxDef.position.Set(350.0f / PTM_RATIO,300.0f / PTM_RATIO);
+		// _box       = m_world->CreateBody(&boxDef);
+		// b2PolygonShape boxShape;
 
-		 boxShape.SetAsBox(10  / PTM_RATIO, 10 / PTM_RATIO);
-		// boxShape.SetAsBox(boxBB.size.width /PTM_RATIO,boxBB.size.height /PTM_RATIO,b2Vec2(0.0f,0.0f),0.0f);
-		 b2FixtureDef boxFix;
-		 boxFix.shape = &boxShape;
-		 boxFix.density = 1.0f;
-		 boxFix.friction = 2.0f;
-		 boxFix.isSensor = false;
-		 boxFix.filter.categoryBits = uint16(1);
-		 boxFix.filter.maskBits = uint16(65535);
-		 boxFix.filter.groupIndex = int16(0);
+		// boxShape.SetAsBox(10  / PTM_RATIO, 10 / PTM_RATIO);
+		//// boxShape.SetAsBox(boxBB.size.width /PTM_RATIO,boxBB.size.height /PTM_RATIO,b2Vec2(0.0f,0.0f),0.0f);
+		// b2FixtureDef boxFix;
+		// boxFix.shape = &boxShape;
+		// boxFix.density = 1.0f;
+		// boxFix.friction = 2.0f;
+		// boxFix.isSensor = false;
+		// boxFix.filter.categoryBits = uint16(1);
+		// boxFix.filter.maskBits = uint16(65535);
+		// boxFix.filter.groupIndex = int16(0);
 
-		 boxFix.restitution = 0.0f;
-		 _box->CreateFixture(&boxFix);
+		// boxFix.restitution = 0.0f;
+		// _box->CreateFixture(&boxFix);
 
 		 
 
@@ -402,101 +421,81 @@ void HelloWorld::initPhysics()
  
 
 
-//boat?
-
- // b2BodyDef boatDef;
-		  boatDef.userData = pirateShip;
-  boatDef.type = b2_dynamicBody;
-
-  boatDef.position.Set(420.0f /  PTM_RATIO, 410.0f  /  PTM_RATIO);
-  boatDef.angle = 3.824857473373413e-01f;
-  boatDef.linearVelocity.Set(0.0f, 0.0f);
-  boatDef.angularVelocity = 0.0f;
-  boatDef.linearDamping = 0.0f;
-  boatDef.angularDamping = 0.0f;
-  boatDef.allowSleep = false;
-  boatDef.awake = true;
-  boatDef.fixedRotation = false;
-  boatDef.bullet = false;
-  boatDef.active = true;
-  boatDef.gravityScale = 1.0f;
-   _boat = m_world->CreateBody(&boatDef);
-
-  
-    b2FixtureDef boatFix;
-    boatFix.friction = 2.0f;
-    boatFix.restitution = 0.0f;
-    boatFix.density = 1.0f;
-    boatFix.isSensor = false;
-    boatFix.filter.categoryBits = uint16(1);
-    boatFix.filter.maskBits = uint16(65535);
-    boatFix.filter.groupIndex = int16(0);
-    b2PolygonShape boatShape;
-    b2Vec2 vs[8];
-    vs[0].Set(2.595919609069824e+00f, -1.319291234016418e+00f);
-    vs[1].Set(-2.777174711227417e+00f, 9.063234329223633e-01f);
-    vs[2].Set(-1.861940383911133e+00f, -4.768543243408203e-01f);
-    vs[3].Set(-1.460509777069092e+00f, -1.000003814697266e+00f);
-    vs[4].Set(-9.373636245727539e-01f, -1.401435852050781e+00f);
-    vs[5].Set(-3.281402587890625e-01f, -1.653779983520508e+00f);
-    vs[6].Set(3.256297111511230e-01f, -1.739847183227539e+00f);
-    vs[7].Set(9.794044494628906e-01f, -1.653779983520508e+00f);
-    boatShape.Set(vs, 8);
-
-    boatFix.shape = &boatShape;
-
-    _boat->CreateFixture(&boatFix);
-
-
-
-	/*b2Body* sphere;
-	b2BodyDef td;
-	td.type = b2_dynamicBody;
-	td.position.Set(90.0f/PTM_RATIO,410.0f / PTM_RATIO);
-	td.awake = true;
-	td.active = true;
-	td.gravityScale = 1.0f;
-
-	
-	sphere = m_world->CreateBody(&td);
-
-	b2CircleShape shpe;
-	shpe.m_radius = 20.0f / PTM_RATIO;
-	b2FixtureDef fix;
-
-	fix.filter.categoryBits = uint16(1);
-    fix.filter.maskBits = uint16(65535);
-    fix.filter.groupIndex = int16(0);
-	fix.shape = &shpe;
-	fix.restitution = 0.0f;
-	fix.density = 1.0f;
-	fix.isSensor = false;
-	sphere->CreateFixture(&fix);*/
-	/*b2Body *_sphere[10];
-  for(int i = 0; i < 10; i ++){
-   b2BodyDef sphereDef;
-   
-   sphereDef.type = b2_dynamicBody;
-   sphereDef.position.Set((90.0f + (i*5))/PTM_RATIO,410.0f/PTM_RATIO);
-   _sphere[i] = m_world->CreateBody(&sphereDef);
-   b2CircleShape sphereShape;
-
-   sphereShape.m_radius = 10.0f /PTM_RATIO;
-   b2FixtureDef sphereFix;
-   sphereFix.shape = &sphereShape;
-   sphereFix.restitution = 0.0f;
-   sphereFix.density = 2.0f;
-   sphereFix.isSensor = false;
-   _sphere[i]->CreateFixture(&sphereFix);
+//boat: This creates a boat shape, got from the RUBE.
+//
+//  b2BodyDef boatDef;
+//		  boatDef.userData = pirateShip;
+//  boatDef.type = b2_dynamicBody;
+//
+//  boatDef.position.Set(420.0f /  PTM_RATIO, 410.0f  /  PTM_RATIO);
+//  boatDef.angle = 3.824857473373413e-01f;
+//  boatDef.linearVelocity.Set(0.0f, 0.0f);
+//  boatDef.angularVelocity = 0.0f;
+//  boatDef.linearDamping = 0.0f;
+//  boatDef.angularDamping = 0.0f;
+//  boatDef.allowSleep = false;
+//  boatDef.awake = true;
+//  boatDef.fixedRotation = false;
+//  boatDef.bullet = false;
+//  boatDef.active = true;
+//  boatDef.gravityScale = 1.0f;
+//   _boat = m_world->CreateBody(&boatDef);
+//
+//  
+//    b2FixtureDef boatFix;
+//    boatFix.friction = 2.0f;
+//    boatFix.restitution = 0.0f;
+//    boatFix.density = 1.0f;
+//    boatFix.isSensor = false;
+//    boatFix.filter.categoryBits = uint16(1);
+//    boatFix.filter.maskBits = uint16(65535);
+//    boatFix.filter.groupIndex = int16(0);
+//    b2PolygonShape boatShape;
+//    b2Vec2 vs[8];
+//    vs[0].Set(2.595919609069824e+00f , -1.319291234016418e+00f);
+//    vs[1].Set(-2.777174711227417e+00f, 9.063234329223633e-01f);
+//    vs[2].Set(-1.861940383911133e+00f, -4.768543243408203e-01f);
+//    vs[3].Set(-1.460509777069092e+00f, -1.000003814697266e+00f);
+//    vs[4].Set(-9.373636245727539e-01f, -1.401435852050781e+00f);
+//    vs[5].Set(-3.281402587890625e-01f, -1.653779983520508e+00f);
+//    vs[6].Set(3.256297111511230e-01f, -1.739847183227539e+00f);
+//    vs[7].Set(9.794044494628906e-01f, -1.653779983520508e+00f);
+//    boatShape.Set(vs, 8);
+//
+//    boatFix.shape = &boatShape;
+//
+//    _boat->CreateFixture(&boatFix);
 
 
- 
-  }*/
+
+
 
 
 }
 
+void HelloWorld::addNewSpriteWithCoords(CCPoint p)
+{
+	string _name = "PirateShip";
 
+	CCSprite *sprite = CCSprite::create((_name+".png").c_str());
+
+	sprite->setPosition(p);
+	//sprite->setScale(0.8);
+
+	addChild(sprite);
+
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	
+	bodyDef.position.Set(p.x/PTM_RATIO,p.y/PTM_RATIO);
+	bodyDef.userData = sprite;
+	b2Body *body = m_world->CreateBody(&bodyDef);
+
+	GB2ShapeCache  *_shapeCache = GB2ShapeCache::sharedGB2ShapeCache();
+	_shapeCache->addFixturesToBody(body,_name.c_str());
+	sprite->setAnchorPoint(_shapeCache->anchorPointForShape(_name.c_str()));
+
+}
 
 void HelloWorld::draw(void)
 {
@@ -506,6 +505,7 @@ void HelloWorld::draw(void)
 
     kmGLPushMatrix();
 
+	
     m_world->DrawDebugData();
 
     kmGLPopMatrix();
@@ -521,3 +521,31 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
     CCDirector::sharedDirector()->end();
 }
 
+CCScene* HelloWorld::scene()
+{
+    CCScene * scene = NULL;
+    do 
+    {
+        // 'scene' is an autorelease object
+        scene = CCScene::create();
+        CC_BREAK_IF(! scene);
+
+        // 'layer' is an autorelease object
+        HelloWorld *layer = HelloWorld::create();
+        CC_BREAK_IF(! layer);
+
+        // add layer as a child to scene
+        scene->addChild(layer);
+    } while (0);
+
+    // return the scene
+    return scene;
+}
+
+
+HelloWorld::~HelloWorld()
+{
+	delete m_world;
+	m_world = NULL;
+
+}
