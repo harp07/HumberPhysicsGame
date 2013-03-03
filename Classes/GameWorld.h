@@ -25,7 +25,9 @@ public:
 	void createWorld();
 	void draw();
 	//Sets the background for the scene
-	void setBackground(const char* _location);
+	void setBackground(const char* _img1, const char* _img2);
+	//Set the parallax background
+	void setParallax();
 };
 
 #endif  // __GAME_WORLD__

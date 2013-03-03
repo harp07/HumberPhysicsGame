@@ -124,6 +124,7 @@
   <ItemGroup>
     <None Include="..\Resources\CloseNormal.png" />
     <None Include="..\Resources\CloseSelected.png" />
+    <None Include="..\Resources\clouds.png" />
     <None Include="..\Resources\HelloWorld.png" />
     <None Include="res\HumberPhysicsGame.ico" />
   </ItemGroup>

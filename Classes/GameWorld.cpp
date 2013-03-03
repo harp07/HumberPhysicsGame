@@ -16,11 +16,26 @@ GameWorld* GameWorld::worldInstance(){
 	return m_singleton;
 }
 
-void GameWorld::setBackground(const char* _location)
+void GameWorld::setBackground(const char* _img1, const char* _img2)
 {
-	CCSprite* bkgrd = CCSprite::create(_location);
+	CCSprite* bkgrd = CCSprite::create(_img1);
 	bkgrd->setPosition(ccp(screenSize.width/2, screenSize.height/2));
-	mainLayer->addChild(bkgrd);
+	//mainLayer->addChild(bkgrd);
+	bkgrd->setAnchorPoint( ccp(0,0));
+
+	CCSprite* bkgrd2 = CCSprite::create(_img2);
+	bkgrd2->setAnchorPoint( ccp(0,0));
+
+	//Parallax not working yet
+	//CCParallaxNode* bkgrdNode = CCParallaxNode::create();
+	//bkgrdNode->addChild(bkgrd, -1, 1);
+	//bkgrdNode->addChild(bkgrd2, -1, 2);
+	//mainLayer->addChild(bkgrdNode);	
+}
+
+void GameWorld::setParallax()
+{
+
 }
 
 void GameWorld::createWorld(){

@@ -43,13 +43,12 @@ bool HelloWorld::init()
 		flags += b2Draw::e_shapeBit;
 		m_DebugDraw->SetFlags(flags);
 
-		
 		GameWorld::worldInstance()->setLayer(this,screenSize);
+		//Setting the background also draws over the debug draw
+		GameWorld::worldInstance()->setBackground("HelloWorld.png", "CloseNormal.png");
 		GameWorld::worldInstance()->getWorld()->SetGravity(gravity);
-		//GameWorld::worldInstance()->setBackground("HelloWorld.png",screenSize);
 		GameWorld::worldInstance()->createWorld();
 		scheduleUpdate();
-
 		
         bRet = true;
     } while (0);
