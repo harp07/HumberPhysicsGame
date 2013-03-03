@@ -1,5 +1,5 @@
-﻿Build started 06/02/2013 10:53:13 PM.
-     1>Project "C:\cocos2d-2.1beta3-x-2.1.1\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" on node 2 (build target(s)).
+﻿Build started 3/3/2013 11:13:15 AM.
+     1>Project "D:\cocos2d-2.1beta3-x-2.1.1\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug.win32\HumberPhysicsGame.win32.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
@@ -15,8 +15,8 @@
        FinalizeBuildStatus:
          Deleting file "Debug.win32\HumberPhysicsGame.win32.unsuccessfulbuild".
          Touching "Debug.win32\HumberPhysicsGame.win32.lastbuildstate".
-     1>Done Building Project "C:\cocos2d-2.1beta3-x-2.1.1\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" (build target(s)).
+     1>Done Building Project "D:\cocos2d-2.1beta3-x-2.1.1\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.05
+Time Elapsed 00:00:00.04

@@ -71,6 +71,9 @@
     <ClInclude Include="..\Classes\GB2ShapeCache-x.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -89,6 +92,9 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GB2ShapeCache-x.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Globals.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

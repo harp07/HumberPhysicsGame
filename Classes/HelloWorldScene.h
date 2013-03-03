@@ -6,6 +6,7 @@
 #include "Box2D/Box2D.h"
 #include "BouyancyContactListener.h"
 #include "SimpleAudioEngine.h"
+#include "Globals.h"
 
 class HelloWorld : public cocos2d::CCLayer
 {
@@ -31,7 +32,7 @@ public:
 	
 	void initPhysics(b2Vec2 grav,bool contiousPhysics);
 
-	void CreateWater(b2Vec2 pos,b2Vec2 size, float density,float friction);
+	//void CreateWater(b2Vec2 pos,b2Vec2 size, float density,float friction);
 
 	virtual void draw(void);
 
@@ -45,14 +46,14 @@ private:
 	b2World* m_world;
 
 	
-	b2Body* _water;
-	b2BodyDef waterDef;
+	//b2Body* _water;
+	//b2BodyDef waterDef;
 
 
 
-	cocos2d::CCSize screenSize;
+	//cocos2d::CCSize screenSize;
 	//old way of setting body with sprites //
-	/* 
+	 
 	b2Body* _boat;
 	b2BodyDef boatDef;
 	cocos2d::CCSprite* pirateShip;
@@ -65,7 +66,7 @@ private:
 	b2BodyDef sphereDef;
 	cocos2d::CCSprite* ball;
 	
-	*/
+	
 	
 	
 	
