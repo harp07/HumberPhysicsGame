@@ -5,14 +5,20 @@
 
 #include "Box2D/Box2D.h"
 #include "b2DebugDraw.h"
+#include  "AudioManager.h"
 
-#include "SimpleAudioEngine.h"
+
 
 class HelloWorld : public cocos2d::CCLayer
 {
 public:
 	b2World *m_world;
 	b2DebugDraw *m_DebugDraw;
+
+
+	AudioManager* m_audioManager;
+
+
 	b2Vec2 gravity;
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();  
@@ -21,7 +27,7 @@ public:
     static cocos2d::CCScene* scene();
     
 	void update(float dt);
-
+	
 	virtual void draw(void);
     // a selector callback
     void menuCloseCallback(CCObject* pSender);

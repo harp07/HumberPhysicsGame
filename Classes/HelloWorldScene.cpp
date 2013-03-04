@@ -119,6 +119,13 @@ bool HelloWorld::init()
 
 
 		//////////////////////////////////////////////////////////////////////////////////
+
+			
+		m_audioManager = new AudioManager();
+
+		m_audioManager->playMusic(titleSong,true);
+		m_audioManager->setMusicVolume(1.0);
+
         bRet = true;
     } while (0);
 
