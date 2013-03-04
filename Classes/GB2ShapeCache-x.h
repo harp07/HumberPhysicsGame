@@ -33,7 +33,7 @@
 #ifndef GB2ShapeCache_x_h
 #define GB2ShapeCache_x_h
 
-//#include "GB2Config.h"
+
 #include "cocos2d.h"
 
 class BodyDef;

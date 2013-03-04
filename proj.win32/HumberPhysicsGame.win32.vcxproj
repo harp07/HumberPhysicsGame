@@ -141,8 +141,8 @@
     <ClInclude Include="..\Classes\b2DebugDraw.h" />
     <ClInclude Include="..\Classes\BouyancyContactListener.h" />
     <ClInclude Include="..\Classes\GB2ShapeCache-x.h" />
+    <ClInclude Include="..\Classes\Globals.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
-    <ClInclude Include="Globals.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -151,8 +151,8 @@
     <ClCompile Include="..\Classes\b2DebugDraw.cpp" />
     <ClCompile Include="..\Classes\BouyancyContactListener.cpp" />
     <ClCompile Include="..\Classes\GB2ShapeCache-x.cpp" />
+    <ClCompile Include="..\Classes\Globals.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
-    <ClCompile Include="Globals.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
