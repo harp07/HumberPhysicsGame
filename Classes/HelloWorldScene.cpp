@@ -126,6 +126,8 @@ bool HelloWorld::init()
 		m_audioManager->playMusic(titleSong,true);
 		m_audioManager->setMusicVolume(1.0);
 
+
+
         bRet = true;
     } while (0);
 
@@ -148,5 +150,7 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 {
     // "close" menu item clicked
     CCDirector::sharedDirector()->end();
+
+
 }
 
