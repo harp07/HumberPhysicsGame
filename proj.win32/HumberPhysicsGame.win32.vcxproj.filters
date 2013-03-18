@@ -27,6 +27,15 @@
     <None Include="..\Resources\HelloWorld.png">
       <Filter>resource</Filter>
     </None>
+    <None Include="C:\Users\KARL\Downloads\SpawnToClick\Resources\ball.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\wooden_box.jpg">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\fireball2.png">
+      <Filter>resource</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="HumberPhysicsGame.rc">
@@ -49,6 +58,9 @@
     <ClInclude Include="..\Classes\b2DebugDraw.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\particle.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -61,6 +73,9 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\b2DebugDraw.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\particle.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

@@ -124,7 +124,10 @@
   <ItemGroup>
     <None Include="..\Resources\CloseNormal.png" />
     <None Include="..\Resources\CloseSelected.png" />
+    <None Include="..\Resources\fireball2.png" />
     <None Include="..\Resources\HelloWorld.png" />
+    <None Include="..\Resources\wooden_box.jpg" />
+    <None Include="C:\Users\KARL\Downloads\SpawnToClick\Resources\ball.png" />
     <None Include="res\HumberPhysicsGame.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +137,7 @@
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\b2DebugDraw.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\particle.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -141,6 +145,7 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\b2DebugDraw.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\particle.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
