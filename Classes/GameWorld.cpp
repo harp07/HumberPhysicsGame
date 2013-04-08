@@ -10,15 +10,14 @@ GameWorld::GameWorld(){
 
 	m_world->SetContactListener(&myListener);
 
-	m_DebugDraw = new b2DebugDraw(PTM_RATIO );
+	m_DebugDraw = new b2DebugDraw(PTM_RATIO);
 		m_world->SetDebugDraw(m_DebugDraw);
 		uint32 flags = 0;
-		flags += b2Draw::e_shapeBit;
+		//flags += b2Draw::e_shapeBit;
 	m_DebugDraw->SetFlags(flags);
-	GB2ShapeCache::sharedGB2ShapeCache()->addShapesWithFile("boatTest.plist");
-	myListener.setWorld(m_world);
-	b2Vec2 _waterPos(90.0f,WATERHEIGHT);
-	b2Vec2 _waterSize(Globals::globalsInstance()->screenSize().width / PTM_RATIO,200.0f /PTM_RATIO);
+	myListener.setWorld(m_world,mainLayer);
+	_waterPos = b2Vec2((Globals::globalsInstance()->screenSize().width / 2),WATERHEIGHT);
+	_waterSize = b2Vec2(Globals::globalsInstance()->screenSize().width / PTM_RATIO,(Globals::globalsInstance()->screenSize().height/3)/PTM_RATIO);
 	myListener.CreateWater(_waterPos,_waterSize,2.0f,2.0f);
 }
 
@@ -98,26 +97,50 @@ void GameWorld::draw(void)
 }
 
 b2Body* GameWorld::getPlayer(){
-	return playerBody;
+	return player->objBody;
 }
 
 void GameWorld::addObjects(){
-	string _name = "PirateShip";
+	CCSprite* backgroundSprite = CCSprite::create("icebergback.png");
+	backgroundSprite->setPosition(ccp(1024/2,768/1.51));
+	//backgroundSprite->setScaleY(0.9f);
+	backgroundSprite->setScaleX(2.0f);
+	mainLayer->addChild(backgroundSprite);
 
-	playerSprite = CCSprite::create((_name+".png").c_str());
+	CCSprite* waterSprite2 = CCSprite::create("water.png");
+	waterSprite2->setPosition(ccp(_waterPos.x,WATERHEIGHT/15));
+	waterSprite2->setScaleY(0.9f);
+	waterSprite2->setScaleX(2.0f);
+	mainLayer->addChild(waterSprite2);
 
-	playerSprite->setPosition(ccp(screenSize.width/2,WATERHEIGHT + playerSprite->getContentSize().height/4));
+	player = new GameObject("PirateShip", screenSize.width/2,WATERHEIGHT + 100,1.0f);
+	player->setObjScale(0.70,0.70);
+	player->spriteInit(mainLayer);
+	player->setObjPos(screenSize.width/2,WATERHEIGHT + player->objSprite->getContentSize().height/4);
+	player->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"boat2.plist");
 
-	mainLayer->addChild(playerSprite);
+	enemy = new GameObject("PirateShip", screenSize.width/1.2,WATERHEIGHT + 110,1.0f);
+	enemy->spriteInit(mainLayer);
+	enemy->setObjPos(screenSize.width/2,WATERHEIGHT + enemy->objSprite->getContentSize().height/4);
+	enemy->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"boat2.plist");
 
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
+	submarine= new GameObject("PirateShip", screenSize.width/4,WATERHEIGHT + 100,1.0f);
+	submarine->spriteInit(mainLayer);
+	submarine->setObjPos(screenSize.width/2,WATERHEIGHT + submarine->objSprite->getContentSize().height/4);
+	submarine->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"boat2.plist");
+
+	CCSprite* waterSprite = CCSprite::create("water2.png");
+	waterSprite->setPosition(ccp(_waterPos.x,WATERHEIGHT/15));
+	waterSprite->setScaleY(0.9f);
+	waterSprite->setScaleX(2.0f);
+	mainLayer->addChild(waterSprite);
+}
+
+void GameWorld::shoot(){
+	GameObject* projectile;
+	projectile = new GameObject("ball",submarine->objSprite->getPosition().x+50,submarine->objSprite->getPosition().y+50,1.0f);
+	projectile->spriteInit(mainLayer);
+	projectile->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"ball.plist");
+	projectile->objBody->ApplyLinearImpulse(b2Vec2(1.0f/PTM_RATIO,1.0f/PTM_RATIO),b2Vec2(submarine->objSprite->getPosition().x + 50,submarine->objSprite->getPosition().y + 50));
 	
-	bodyDef.position.Set(playerSprite->getPositionX()/PTM_RATIO,playerSprite->getPositionY()/PTM_RATIO);
-	bodyDef.userData = playerSprite;
-	playerBody = m_world->CreateBody(&bodyDef);
-
-	GB2ShapeCache  *_shapeCache = GB2ShapeCache::sharedGB2ShapeCache();
-	_shapeCache->addFixturesToBody(playerBody,_name.c_str());
-	playerSprite->setAnchorPoint(_shapeCache->anchorPointForShape(_name.c_str()));
 }

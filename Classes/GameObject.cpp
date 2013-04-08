@@ -11,7 +11,7 @@ GameObject::GameObject(const char *imageName, float x, float y, float scale){
 
 void GameObject::spriteInit(cocos2d::CCLayer *layer){
 
-	objSprite = cocos2d::CCSprite::create(image);
+	objSprite = cocos2d::CCSprite::create((image+".png").c_str());
 	objSprite->setScaleX(scaleX);
 	objSprite->setScaleY(scaleY);
 	objSprite->setPosition(ccp(posX, posY));
@@ -19,7 +19,7 @@ void GameObject::spriteInit(cocos2d::CCLayer *layer){
 
 }
 
-void GameObject::physicsInit(b2World *world, shapeType sType, bodyType bType){
+void GameObject::physicsInit(b2World *world, shapeType sType, bodyType bType, char* pList){
 
 	objBodyDef.userData = objSprite;
 
@@ -54,6 +54,8 @@ void GameObject::physicsInit(b2World *world, shapeType sType, bodyType bType){
 			(scaleX * (objSprite->getContentSize().width/2))/PTM_RATIO, 
 			(scaleY * (objSprite->getContentSize().height/2))/PTM_RATIO);
 		objShapeDef.shape = &objBox;
+		objBody = world->CreateBody(&objBodyDef);
+		objBody->CreateFixture(&objShapeDef);
 		break;
 	
 	case SHAPE_CIRCLE:
@@ -61,24 +63,35 @@ void GameObject::physicsInit(b2World *world, shapeType sType, bodyType bType){
 		objCircle.m_radius = 
 			(scaleX * (objSprite->getContentSize().width/2))/PTM_RATIO;
 		objShapeDef.shape = &objCircle;
+		objBody = world->CreateBody(&objBodyDef);
+		objBody->CreateFixture(&objShapeDef);
 		break;
+		
+	case SHAPE_PLIST:
+
+		GB2ShapeCache::sharedGB2ShapeCache()->addShapesWithFile(pList);
+	
+		objBodyDef.position.Set(objSprite->getPositionX()/PTM_RATIO,objSprite->getPositionY()/PTM_RATIO);
+		objBody = world->CreateBody(&objBodyDef);
+
+		GB2ShapeCache *_shapeCache = GB2ShapeCache::sharedGB2ShapeCache();
+		_shapeCache->addFixturesToBody(objBody,image.c_str());
+		objSprite->setAnchorPoint(_shapeCache->anchorPointForShape(image.c_str()));
+		break;
+	
 	}//end switch
 
-	
-	objBody = world->CreateBody(&objBodyDef);
-	objBody->CreateFixture(&objShapeDef);
-
 }
 
-void GameObject::updateSprite(b2World *world){
-	
-	if(objBody->GetUserData() != NULL){
-
-		cocos2d::CCSprite *spriteData = (cocos2d::CCSprite *)objBody->GetUserData();
-		spriteData->setPosition(ccp(objBody->GetPosition().x * PTM_RATIO,
-                                    objBody->GetPosition().y * PTM_RATIO));
-		spriteData->setRotation(-1 * CC_RADIANS_TO_DEGREES(objBody->GetAngle()));
-
-	}
-	
-}
+//void GameObject::updateSprite(b2World *world){
+//	
+//	if(objBody->GetUserData() != NULL){
+//
+//		cocos2d::CCSprite *spriteData = (cocos2d::CCSprite *)objBody->GetUserData();
+//		spriteData->setPosition(ccp(objBody->GetPosition().x * PTM_RATIO,
+//                                    objBody->GetPosition().y * PTM_RATIO));
+//		spriteData->setRotation(-1 * CC_RADIANS_TO_DEGREES(objBody->GetAngle()));
+//
+//	}
+//	
+//}

@@ -8,6 +8,7 @@
 #include "BouyancyContactListener.h"
 #include "GB2ShapeCache-x.h"
 #include "Globals.h"
+#include "GameObject.h"
 
 using namespace cocos2d;
 class GameWorld
@@ -27,12 +28,18 @@ public:
 	void draw();
 	void setBackground(const char* _location);
 	void updateWorld(float dt);
+	void shoot();
 	b2Body* getPlayer();
 	void addObjects();
 	BouyancyContactListener myListener;
 	CCSprite* playerSprite;
 	b2Body* playerBody;
 	CCSprite* defaultSprite;
+	GameObject *player;
+	GameObject *enemy;
+	GameObject *submarine;
+	b2Vec2 _waterPos;
+	b2Vec2 _waterSize;
 };
 
 #endif  // __GAME_WORLD__
