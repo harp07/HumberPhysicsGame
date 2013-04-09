@@ -16,8 +16,11 @@
 
 #include "cocos2d.h"
 #include "Box2D\Box2D.h"
+#include "GB2ShapeCache-x.h"
 
 #define PTM_RATIO 32.0
+
+using namespace cocos2d;
 
 class GameObject{
 
@@ -28,7 +31,7 @@ private:
 	b2CircleShape objCircle;
 	b2PolygonShape objBox;
 
-	const char *image;
+	string image;
 
 public:
 
@@ -42,7 +45,7 @@ public:
 	** Enums are used to differentiate what box2d method or property to use
 	*/
 
-	enum shapeType {SHAPE_NULL = 0, SHAPE_BOX, SHAPE_CIRCLE};
+	enum shapeType {SHAPE_NULL = 0, SHAPE_BOX, SHAPE_CIRCLE, SHAPE_PLIST};
 	enum bodyType {BODY_NULL = 0, BODY_STATIC, BODY_KINIMATIC, BODY_DYNAMIC};
 
 	/*
@@ -70,7 +73,7 @@ public:
 	** as we need them)
 	*/
 
-	void physicsInit(b2World *world, shapeType sType, bodyType bType);
+	void physicsInit(b2World *world, shapeType sType, bodyType bType, char* pList);
 
 	void updateSprite(b2World *world);
 

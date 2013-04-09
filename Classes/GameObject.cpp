@@ -68,7 +68,6 @@ void GameObject::physicsInit(b2World *world, shapeType sType, bodyType bType, ch
 		break;
 		
 	case SHAPE_PLIST:
-
 		GB2ShapeCache::sharedGB2ShapeCache()->addShapesWithFile(pList);
 	
 		objBodyDef.position.Set(objSprite->getPositionX()/PTM_RATIO,objSprite->getPositionY()/PTM_RATIO);

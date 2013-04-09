@@ -6,7 +6,6 @@
 #include "Box2D/Box2D.h"
 #include "b2DebugDraw.h"
 #include "BouyancyContactListener.h"
-#include "GB2ShapeCache-x.h"
 #include "Globals.h"
 #include "GameObject.h"
 
@@ -20,6 +19,7 @@ private:
 	b2DebugDraw *m_DebugDraw;
 	CCLayer* mainLayer;
 	CCSize screenSize;
+	bool debugDrawBool;
 public:
 	static GameWorld* worldInstance();
 	void setLayer(CCLayer* layer);
@@ -29,6 +29,7 @@ public:
 	void setBackground(const char* _location);
 	void updateWorld(float dt);
 	void shoot();
+	void debugVisuals();
 	b2Body* getPlayer();
 	void addObjects();
 	BouyancyContactListener myListener;
@@ -40,6 +41,7 @@ public:
 	GameObject *submarine;
 	b2Vec2 _waterPos;
 	b2Vec2 _waterSize;
+	GameObject* projectile;
 };
 
 #endif  // __GAME_WORLD__

@@ -81,12 +81,6 @@
     <ClCompile Include="..\Classes\b2DebugDraw.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameScene.h">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameScene.cpp">
-      <Filter>include</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Globals.cpp">
       <Filter>source</Filter>
     </ClCompile>
@@ -103,6 +97,9 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GB2ShapeCache-x.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameScene.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

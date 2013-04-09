@@ -21,7 +21,7 @@ void Camera::setLayer(CCLayer* layer){
 
 void Camera::moveCamera(CCPoint location){
 	float touchLocation = location.x - currentTouchLocation.x;
-	Globals::globalsInstance()->Output(touchLocation);
+	//Globals::globalsInstance()->Output(touchLocation);
 	if(touchLocation < 0){
 		mainLayer->setPosition(mainLayer->getPosition().x-(location.x/(PTM_RATIO/3)),0.0f);
 	} else if (touchLocation > 0){
@@ -34,8 +34,8 @@ void Camera::setFocus(CCPoint location){
 
 	mainLayer->setScale(1.5f);
 	mainLayer->setAnchorPoint(location);
-	Globals::globalsInstance()->Output(location.x);
-	Globals::globalsInstance()->Output(location.y);
+	//Globals::globalsInstance()->Output(location.x);
+	//Globals::globalsInstance()->Output(location.y);
 	
 }
 

@@ -5,6 +5,7 @@
 GameWorld* GameWorld::m_singleton = NULL;
 
 GameWorld::GameWorld(){
+	debugDrawBool = false;
 	m_world = new b2World(b2Vec2(NULL,NULL));
 	m_world->SetContinuousPhysics(true);
 
@@ -13,12 +14,14 @@ GameWorld::GameWorld(){
 	m_DebugDraw = new b2DebugDraw(PTM_RATIO);
 		m_world->SetDebugDraw(m_DebugDraw);
 		uint32 flags = 0;
-		//flags += b2Draw::e_shapeBit;
+		if(debugDrawBool){
+			flags += b2Draw::e_shapeBit;
+		}
 	m_DebugDraw->SetFlags(flags);
-	myListener.setWorld(m_world,mainLayer);
+	myListener.setWorld(m_world);
 	_waterPos = b2Vec2((Globals::globalsInstance()->screenSize().width / 2),WATERHEIGHT);
 	_waterSize = b2Vec2(Globals::globalsInstance()->screenSize().width / PTM_RATIO,(Globals::globalsInstance()->screenSize().height/3)/PTM_RATIO);
-	myListener.CreateWater(_waterPos,_waterSize,2.0f,2.0f);
+	myListener.CreateWater(_waterPos,_waterSize,1.0f,2.0f);
 }
 
 GameWorld* GameWorld::worldInstance(){
@@ -104,32 +107,35 @@ void GameWorld::addObjects(){
 	CCSprite* backgroundSprite = CCSprite::create("icebergback.png");
 	backgroundSprite->setPosition(ccp(1024/2,768/1.51));
 	//backgroundSprite->setScaleY(0.9f);
-	backgroundSprite->setScaleX(2.0f);
-	mainLayer->addChild(backgroundSprite);
+	backgroundSprite->setScaleX(1.0f);
+	if(!debugDrawBool){
+		mainLayer->addChild(backgroundSprite);
+	}
 
 	CCSprite* waterSprite2 = CCSprite::create("water.png");
 	waterSprite2->setPosition(ccp(_waterPos.x,WATERHEIGHT/15));
 	waterSprite2->setScaleY(0.9f);
 	waterSprite2->setScaleX(2.0f);
-	mainLayer->addChild(waterSprite2);
+	if(!debugDrawBool){
+		mainLayer->addChild(waterSprite2);
+	}
 
-	player = new GameObject("PirateShip", screenSize.width/2,WATERHEIGHT + 100,1.0f);
-	player->setObjScale(0.70,0.70);
+	player = new GameObject("Ship", screenSize.width/2,WATERHEIGHT + 10,1.0f);
 	player->spriteInit(mainLayer);
 	player->setObjPos(screenSize.width/2,WATERHEIGHT + player->objSprite->getContentSize().height/4);
-	player->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"boat2.plist");
+	player->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Ship.plist");
 
-	enemy = new GameObject("PirateShip", screenSize.width/1.2,WATERHEIGHT + 110,1.0f);
+	enemy = new GameObject("Ship", screenSize.width/1.2,WATERHEIGHT + 10,1.0f);
 	enemy->spriteInit(mainLayer);
 	enemy->setObjPos(screenSize.width/2,WATERHEIGHT + enemy->objSprite->getContentSize().height/4);
-	enemy->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"boat2.plist");
+	enemy->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Ship.plist");
 
-	submarine= new GameObject("PirateShip", screenSize.width/4,WATERHEIGHT + 100,1.0f);
+	submarine = new GameObject("Ship", screenSize.width/4,WATERHEIGHT + 10,1.0f);
 	submarine->spriteInit(mainLayer);
 	submarine->setObjPos(screenSize.width/2,WATERHEIGHT + submarine->objSprite->getContentSize().height/4);
-	submarine->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"boat2.plist");
+	submarine->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Ship.plist");
 
-	CCSprite* waterSprite = CCSprite::create("water2.png");
+	CCSprite* waterSprite = CCSprite::create("waterAlpha.png");
 	waterSprite->setPosition(ccp(_waterPos.x,WATERHEIGHT/15));
 	waterSprite->setScaleY(0.9f);
 	waterSprite->setScaleX(2.0f);
@@ -137,10 +143,17 @@ void GameWorld::addObjects(){
 }
 
 void GameWorld::shoot(){
-	GameObject* projectile;
 	projectile = new GameObject("ball",submarine->objSprite->getPosition().x+50,submarine->objSprite->getPosition().y+50,1.0f);
 	projectile->spriteInit(mainLayer);
-	projectile->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"ball.plist");
-	projectile->objBody->ApplyLinearImpulse(b2Vec2(1.0f/PTM_RATIO,1.0f/PTM_RATIO),b2Vec2(submarine->objSprite->getPosition().x + 50,submarine->objSprite->getPosition().y + 50));
+	projectile->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Ship.plist");
+	projectile->objBody->ApplyLinearImpulse(b2Vec2(85.0f/PTM_RATIO,135.0f/PTM_RATIO),b2Vec2(submarine->objSprite->getPosition().x + 50,submarine->objSprite->getPosition().y + 50));
 	
+}
+
+void GameWorld::debugVisuals(){
+	if(debugDrawBool){
+		debugDrawBool = false;
+	} else {
+		debugDrawBool = true;
+	}
 }
