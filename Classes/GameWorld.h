@@ -20,6 +20,8 @@ private:
 	CCLayer* mainLayer;
 	CCSize screenSize;
 	bool debugDrawBool;
+	bool projectileFired;
+	float shots;
 public:
 	static GameWorld* worldInstance();
 	void setLayer(CCLayer* layer);

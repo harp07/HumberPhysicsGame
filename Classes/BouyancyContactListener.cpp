@@ -252,7 +252,6 @@ void BouyancyContactListener::update(float dt){
 
 void BouyancyContactListener::CreateWater(b2Vec2 pos,b2Vec2 size, float density,float friction)
 {
-	
 	//if(getWorld() == NULL){
 	waterDef.type = b2_staticBody;
   waterDef.position.Set(pos.x / PTM_RATIO,pos.y/ PTM_RATIO);
