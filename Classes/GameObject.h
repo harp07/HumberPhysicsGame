@@ -47,6 +47,7 @@ public:
 
 	enum shapeType {SHAPE_NULL = 0, SHAPE_BOX, SHAPE_CIRCLE, SHAPE_PLIST};
 	enum bodyType {BODY_NULL = 0, BODY_STATIC, BODY_KINIMATIC, BODY_DYNAMIC};
+	enum zOrder {GROUND_NULL = 0, BACKGROUND, MIDDLEGROUND, FOREGROUND, HUD};
 
 	/*
 	** Default Constructor for GameObject
@@ -63,7 +64,7 @@ public:
 	** CCLayer *layer is the layer you want the sprite to appear on
 	*/
 
-	void spriteInit(cocos2d::CCLayer *layer);
+	void spriteInit(cocos2d::CCLayer *layer, zOrder order);
 	
 	/*
 	** physicsInit is used to initialize the physics portion of a game object

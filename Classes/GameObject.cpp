@@ -9,12 +9,13 @@ GameObject::GameObject(const char *imageName, float x, float y, float scale){
 
 }
 
-void GameObject::spriteInit(cocos2d::CCLayer *layer){
+void GameObject::spriteInit(cocos2d::CCLayer *layer, zOrder order){
 
 	objSprite = cocos2d::CCSprite::create((image+".png").c_str());
 	objSprite->setScaleX(scaleX);
 	objSprite->setScaleY(scaleY);
 	objSprite->setPosition(ccp(posX, posY));
+	objSprite->_setZOrder(order);
 	layer->addChild(objSprite);
 
 }

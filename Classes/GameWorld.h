@@ -44,6 +44,11 @@ public:
 	b2Vec2 _waterPos;
 	b2Vec2 _waterSize;
 	GameObject* projectile;
+	CCSprite* waterAlphaSprite;
+	CCSprite* waterSprite;
+	CCSprite* backgroundSprite;
+	CCSprite* hudBottom;
+	CCSprite* hudTop;
 };
 
 #endif  // __GAME_WORLD__

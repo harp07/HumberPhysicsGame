@@ -24,6 +24,7 @@ GameWorld::GameWorld(){
 	_waterPos = b2Vec2((Globals::globalsInstance()->screenSize().width / 2),WATERHEIGHT);
 	_waterSize = b2Vec2(Globals::globalsInstance()->screenSize().width / PTM_RATIO,(Globals::globalsInstance()->screenSize().height/3)/PTM_RATIO);
 	myListener.CreateWater(_waterPos,_waterSize,1.0f,2.0f);
+	srand(time(0));
 }
 
 GameWorld* GameWorld::worldInstance(){
@@ -46,8 +47,8 @@ void GameWorld::createWorld(){
 	// Define the ground body.
 	float widthInMeters = Globals::globalsInstance()->screenSize().width / PTM_RATIO; 
 	float heightInMeters = Globals::globalsInstance()->screenSize().height / PTM_RATIO; 
-	b2Vec2 lowerLeftCorner = b2Vec2(0, 0); 
-	b2Vec2 lowerRightCorner = b2Vec2(widthInMeters, 0); 
+	b2Vec2 lowerLeftCorner = b2Vec2(0, + hudBottom->getContentSize().height / PTM_RATIO); 
+	b2Vec2 lowerRightCorner = b2Vec2(widthInMeters, + hudBottom->getContentSize().height / PTM_RATIO); 
 	b2Vec2 upperLeftCorner = b2Vec2(0, heightInMeters); 
 	b2Vec2 upperRightCorner = b2Vec2(widthInMeters, heightInMeters); 
 		
@@ -86,7 +87,7 @@ void GameWorld::updateWorld(float dt){
 		    objectData->setRotation( -1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));	
 	    }
 		if(projectileFired){
-			b->ApplyForceToCenter(b2Vec2(-10.0f/PTM_RATIO,0.0f));
+			//b->ApplyForceToCenter(b2Vec2(-10.0f/PTM_RATIO,0.0f));
 		}
 	}
 	myListener.update(dt);
@@ -110,47 +111,60 @@ b2Body* GameWorld::getPlayer(){
 }
 
 void GameWorld::addObjects(){
-	CCSprite* backgroundSprite = CCSprite::create("icebergback.png");
-	backgroundSprite->setPosition(ccp(1024/2,768/1.51));
-	//backgroundSprite->setScaleY(0.9f);
+	backgroundSprite = CCSprite::create("icebergback.png");
+	backgroundSprite->setPosition(ccp(Globals::globalsInstance()->screenSize().width/2,Globals::globalsInstance()->screenSize().height/1.51));
 	backgroundSprite->setScaleX(1.0f);
+	backgroundSprite->_setZOrder(GameObject::BACKGROUND);
 	if(!debugDrawBool){
 		mainLayer->addChild(backgroundSprite);
 	}
 
-	CCSprite* waterSprite2 = CCSprite::create("water.png",CCRect(0,0,_waterSize.x*(PTM_RATIO*2),_waterSize.y*(PTM_RATIO)));
-	waterSprite2->setPosition(ccp(_waterPos.x,WATERHEIGHT/2));
+	waterSprite = CCSprite::create("water2.png",CCRect(0,0,_waterSize.x*(PTM_RATIO*2),_waterSize.y*(PTM_RATIO)));
+	waterSprite->setPosition(ccp(_waterPos.x,WATERHEIGHT/2));
+	waterSprite->_setZOrder(GameObject::BACKGROUND);
 	if(!debugDrawBool){
-		mainLayer->addChild(waterSprite2);
+		mainLayer->addChild(waterSprite);
 	}
 
 	player = new GameObject("Ship", screenSize.width/2,WATERHEIGHT + 10,1.0f);
-	player->spriteInit(mainLayer);
+	player->spriteInit(mainLayer,GameObject::MIDDLEGROUND);
 	player->setObjPos(screenSize.width/2,WATERHEIGHT + player->objSprite->getContentSize().height/4);
 	player->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Ship.plist");
 
 	enemy = new GameObject("Ship", screenSize.width/1.2,WATERHEIGHT + 10,1.0f);
-	enemy->spriteInit(mainLayer);
+	enemy->spriteInit(mainLayer, GameObject::MIDDLEGROUND);
 	enemy->setObjPos(screenSize.width/2,WATERHEIGHT + enemy->objSprite->getContentSize().height/4);
 	enemy->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Ship.plist");
 
 	submarine = new GameObject("Ship", screenSize.width/4,WATERHEIGHT + 10,1.0f);
-	submarine->spriteInit(mainLayer);
+	submarine->spriteInit(mainLayer, GameObject::MIDDLEGROUND);
 	submarine->setObjPos(screenSize.width/2,WATERHEIGHT + submarine->objSprite->getContentSize().height/4);
 	submarine->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Ship.plist");
 
-	CCSprite* waterSprite = CCSprite::create("waterAlpha.png",CCRect(0,0,_waterSize.x*(PTM_RATIO*2),_waterSize.y*(PTM_RATIO)));
-	waterSprite->setPosition(ccp(_waterPos.x,WATERHEIGHT/2));
-	mainLayer->addChild(waterSprite);
+	waterAlphaSprite = CCSprite::create("waterAlpha3.png",CCRect(0,0,_waterSize.x*(PTM_RATIO*2),_waterSize.y*(PTM_RATIO)));
+	waterAlphaSprite->setPosition(ccp(_waterPos.x,WATERHEIGHT/2));
+	waterAlphaSprite->_setZOrder(GameObject::FOREGROUND);
+	mainLayer->addChild(waterAlphaSprite);
+
+	hudBottom = CCSprite::create("hud.png");
+	hudBottom->setPosition(ccp(Globals::globalsInstance()->screenSize().width/2,hudBottom->getContentSize().height/2));
+	hudBottom->_setZOrder(GameObject::HUD);
+	mainLayer->addChild(hudBottom);
+
+	hudTop = CCSprite::create("hud.png");
+	hudTop->setPosition(ccp(Globals::globalsInstance()->screenSize().width/2,Globals::globalsInstance()->screenSize().height - hudTop->getContentSize().height/2));
+	hudTop->_setZOrder(GameObject::HUD);
+	hudTop->setFlipY(true);
+	mainLayer->addChild(hudTop);
 }
 
 void GameWorld::shoot(){
 	shots += 1;
 			
 	projectile = new GameObject("ball",submarine->objSprite->getPosition().x+50,submarine->objSprite->getPosition().y+50,1.0f);
-	projectile->spriteInit(mainLayer);
+	projectile->spriteInit(mainLayer, GameObject::MIDDLEGROUND);
 	projectile->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Ship.plist");
-	projectile->objBody->ApplyLinearImpulse(b2Vec2(85.0f/PTM_RATIO,135.0f/PTM_RATIO),b2Vec2(submarine->objSprite->getPosition().x + 50,submarine->objSprite->getPosition().y + 50));
+	projectile->objBody->ApplyLinearImpulse(b2Vec2((90.0f + rand() % 10)/PTM_RATIO,(135.0f + rand() % 10)/PTM_RATIO),b2Vec2(submarine->objSprite->getPosition().x + 50,submarine->objSprite->getPosition().y + 50));
 	projectileFired = true;
 }
 
