@@ -8,6 +8,7 @@
 #include "BouyancyContactListener.h"
 #include "Globals.h"
 #include "GameObject.h"
+#include "Ship.h"
 
 using namespace cocos2d;
 class GameWorld
@@ -38,9 +39,6 @@ public:
 	CCSprite* playerSprite;
 	b2Body* playerBody;
 	CCSprite* defaultSprite;
-	GameObject *player;
-	GameObject *enemy;
-	GameObject *submarine;
 	b2Vec2 _waterPos;
 	b2Vec2 _waterSize;
 	GameObject* projectile;
@@ -49,6 +47,9 @@ public:
 	CCSprite* backgroundSprite;
 	CCSprite* hudBottom;
 	CCSprite* hudTop;
+
+	Ship* player;
+	Ship* enemy;
 };
 
 #endif  // __GAME_WORLD__

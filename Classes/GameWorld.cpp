@@ -107,7 +107,7 @@ void GameWorld::draw(void)
 }
 
 b2Body* GameWorld::getPlayer(){
-	return player->objBody;
+	return player->body;
 }
 
 void GameWorld::addObjects(){
@@ -119,27 +119,12 @@ void GameWorld::addObjects(){
 		mainLayer->addChild(backgroundSprite);
 	}
 
-	waterSprite = CCSprite::create("water2.png",CCRect(0,0,_waterSize.x*(PTM_RATIO*2),_waterSize.y*(PTM_RATIO)));
+	waterSprite = CCSprite::create("water4.png",CCRect(0,0,_waterSize.x*(PTM_RATIO*2),_waterSize.y*(PTM_RATIO)));
 	waterSprite->setPosition(ccp(_waterPos.x,WATERHEIGHT/2));
 	waterSprite->_setZOrder(GameObject::BACKGROUND);
 	if(!debugDrawBool){
 		mainLayer->addChild(waterSprite);
 	}
-
-	player = new GameObject("Ship", screenSize.width/2,WATERHEIGHT + 10,1.0f);
-	player->spriteInit(mainLayer,GameObject::MIDDLEGROUND);
-	player->setObjPos(screenSize.width/2,WATERHEIGHT + player->objSprite->getContentSize().height/4);
-	player->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Ship.plist");
-
-	enemy = new GameObject("Ship", screenSize.width/1.2,WATERHEIGHT + 10,1.0f);
-	enemy->spriteInit(mainLayer, GameObject::MIDDLEGROUND);
-	enemy->setObjPos(screenSize.width/2,WATERHEIGHT + enemy->objSprite->getContentSize().height/4);
-	enemy->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Ship.plist");
-
-	submarine = new GameObject("Ship", screenSize.width/4,WATERHEIGHT + 10,1.0f);
-	submarine->spriteInit(mainLayer, GameObject::MIDDLEGROUND);
-	submarine->setObjPos(screenSize.width/2,WATERHEIGHT + submarine->objSprite->getContentSize().height/4);
-	submarine->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Ship.plist");
 
 	waterAlphaSprite = CCSprite::create("waterAlpha3.png",CCRect(0,0,_waterSize.x*(PTM_RATIO*2),_waterSize.y*(PTM_RATIO)));
 	waterAlphaSprite->setPosition(ccp(_waterPos.x,WATERHEIGHT/2));
@@ -156,15 +141,18 @@ void GameWorld::addObjects(){
 	hudTop->_setZOrder(GameObject::HUD);
 	hudTop->setFlipY(true);
 	mainLayer->addChild(hudTop);
+
+	player = new Ship(Ship::SHIP, Ship::PLAYER, WATERHEIGHT, mainLayer, m_world);
+	enemy = new Ship(Ship::SUBMARINE, Ship::ENEMY, WATERHEIGHT, mainLayer, m_world);
 }
 
 void GameWorld::shoot(){
 	shots += 1;
 			
-	projectile = new GameObject("ball",submarine->objSprite->getPosition().x+50,submarine->objSprite->getPosition().y+50,1.0f);
+	projectile = new GameObject("ball",player->sprite->getPosition().x+100,player->sprite->getPosition().y,1.0f);
 	projectile->spriteInit(mainLayer, GameObject::MIDDLEGROUND);
 	projectile->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Ship.plist");
-	projectile->objBody->ApplyLinearImpulse(b2Vec2((90.0f + rand() % 10)/PTM_RATIO,(135.0f + rand() % 10)/PTM_RATIO),b2Vec2(submarine->objSprite->getPosition().x + 50,submarine->objSprite->getPosition().y + 50));
+	projectile->objBody->ApplyLinearImpulse(b2Vec2((900.0f + rand() % 10)/PTM_RATIO,(500.0f + rand() % 1)/PTM_RATIO),b2Vec2(player->sprite->getPosition().x,player->sprite->getPosition().y));
 	projectileFired = true;
 }
 

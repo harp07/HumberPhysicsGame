@@ -144,6 +144,7 @@
     <ClInclude Include="..\Classes\Globals.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Ship.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="..\Classes\GB2ShapeCache-x.cpp" />
     <ClCompile Include="..\Classes\Globals.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Ship.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
