@@ -11,10 +11,16 @@ class Globals {
 private:
 	Globals();
 	static Globals* m_Globals;
+	CCLayer *mainLayer;
 public:
+	enum bodyType {BODY_NULL = 0x0000, BODY_GROUND = 0x0001, BODY_WATER = 0x0002, BODY_SHIP = 0x0003, BODY_PROJECTILE = 0x0004, BODY_MISC = 0x0005};
 	static Globals* globalsInstance();
 	CCSize screenSize();
 	void Output(float szFormat);
+	void setLayer(CCLayer* layer);
+	CCLayer* getLayer();
+	
+
 };
 
 #endif

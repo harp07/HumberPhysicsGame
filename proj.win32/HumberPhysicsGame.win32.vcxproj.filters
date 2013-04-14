@@ -73,6 +73,9 @@
     <ClInclude Include="Ship.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -106,6 +109,9 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="Ship.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

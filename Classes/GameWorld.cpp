@@ -10,7 +10,6 @@ GameWorld::GameWorld(){
 	shots = 0;
 	m_world = new b2World(b2Vec2(NULL,NULL));
 	m_world->SetContinuousPhysics(true);
-
 	m_world->SetContactListener(&myListener);
 
 	m_DebugDraw = new b2DebugDraw(PTM_RATIO);
@@ -47,8 +46,8 @@ void GameWorld::createWorld(){
 	// Define the ground body.
 	float widthInMeters = Globals::globalsInstance()->screenSize().width / PTM_RATIO; 
 	float heightInMeters = Globals::globalsInstance()->screenSize().height / PTM_RATIO; 
-	b2Vec2 lowerLeftCorner = b2Vec2(0, + hudBottom->getContentSize().height / PTM_RATIO); 
-	b2Vec2 lowerRightCorner = b2Vec2(widthInMeters, + hudBottom->getContentSize().height / PTM_RATIO); 
+	b2Vec2 lowerLeftCorner = b2Vec2(-widthInMeters, + hudBottom->getContentSize().height / PTM_RATIO); 
+	b2Vec2 lowerRightCorner = b2Vec2(widthInMeters*2, + hudBottom->getContentSize().height / PTM_RATIO); 
 	b2Vec2 upperLeftCorner = b2Vec2(0, heightInMeters); 
 	b2Vec2 upperRightCorner = b2Vec2(widthInMeters, heightInMeters); 
 		
@@ -82,7 +81,7 @@ void GameWorld::updateWorld(float dt){
 	{
 		if(b->GetUserData() != NULL)
 		{
-			CCSprite *objectData = (CCSprite *)b->GetUserData();
+			CCSprite *objectData = (CCSprite*)b->GetUserData();
 			objectData->setPosition(ccp(b->GetPosition().x * PTM_RATIO,b->GetPosition().y * PTM_RATIO));
 		    objectData->setRotation( -1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));	
 	    }
@@ -107,10 +106,33 @@ void GameWorld::draw(void)
 }
 
 b2Body* GameWorld::getPlayer(){
-	return player->body;
+	return player->playerBody;
 }
 
 void GameWorld::addObjects(){
+	addArt();
+	player = new Ship(Ship::SUBMARINE, Ship::PLAYER, WATERHEIGHT, mainLayer, m_world);
+	enemy = new Ship(Ship::SHIP, Ship::ENEMY, WATERHEIGHT, mainLayer, m_world);
+}
+
+void GameWorld::shoot(){
+	//shots += 1;
+	if(player->getPlayerType() == Ship::SHIP){
+		proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(player->playerSprite->getPositionX(),player->playerSprite->getPositionY()),mainLayer,m_world);
+	} else if (player->getPlayerType() == Ship::SUBMARINE){
+		proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(player->playerSprite->getPositionX(),player->playerSprite->getPositionY()),mainLayer,m_world);
+	}
+}
+
+void GameWorld::debugVisuals(){
+	if(debugDrawBool){
+		debugDrawBool = false;
+	} else {
+		debugDrawBool = true;
+	}
+}
+
+void GameWorld::addArt(){
 	backgroundSprite = CCSprite::create("icebergback.png");
 	backgroundSprite->setPosition(ccp(Globals::globalsInstance()->screenSize().width/2,Globals::globalsInstance()->screenSize().height/1.51));
 	backgroundSprite->setScaleX(1.0f);
@@ -141,25 +163,4 @@ void GameWorld::addObjects(){
 	hudTop->_setZOrder(GameObject::HUD);
 	hudTop->setFlipY(true);
 	mainLayer->addChild(hudTop);
-
-	player = new Ship(Ship::SHIP, Ship::PLAYER, WATERHEIGHT, mainLayer, m_world);
-	enemy = new Ship(Ship::SUBMARINE, Ship::ENEMY, WATERHEIGHT, mainLayer, m_world);
-}
-
-void GameWorld::shoot(){
-	shots += 1;
-			
-	projectile = new GameObject("ball",player->sprite->getPosition().x+100,player->sprite->getPosition().y,1.0f);
-	projectile->spriteInit(mainLayer, GameObject::MIDDLEGROUND);
-	projectile->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Ship.plist");
-	projectile->objBody->ApplyLinearImpulse(b2Vec2((900.0f + rand() % 10)/PTM_RATIO,(500.0f + rand() % 1)/PTM_RATIO),b2Vec2(player->sprite->getPosition().x,player->sprite->getPosition().y));
-	projectileFired = true;
-}
-
-void GameWorld::debugVisuals(){
-	if(debugDrawBool){
-		debugDrawBool = false;
-	} else {
-		debugDrawBool = true;
-	}
 }

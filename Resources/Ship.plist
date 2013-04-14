@@ -169,7 +169,7 @@
 				<array>
 
 					<dict>
-                        <key>density</key> <real>30.0</real>
+                        <key>density</key> <real>1.0</real>
                         <key>friction</key> <real>1.0</real>
                         <key>restitution</key> <real>0</real>
                         <key>filter_categoryBits</key> <integer>1</integer>

@@ -38,6 +38,7 @@ public:
 	b2Body *objBody;
 	cocos2d::CCSprite *objSprite;
 	b2BodyDef objBodyDef;
+	b2Fixture *fixture;
 	
 	b2FixtureDef objShapeDef;
 	

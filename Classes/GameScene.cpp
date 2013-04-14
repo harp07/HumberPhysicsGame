@@ -36,6 +36,7 @@ bool GameScene::init()
 		GameWorld::worldInstance()->createWorld();
 		schedule(schedule_selector(GameScene::update),1/60);
 		Camera::cameraInstance()->setLayer(this);
+		Globals::globalsInstance()->setLayer(this);
 		this->setTouchEnabled(true);
         bRet = true;
     } while (0);

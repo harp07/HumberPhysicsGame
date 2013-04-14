@@ -143,6 +143,7 @@
     <ClInclude Include="..\Classes\GB2ShapeCache-x.h" />
     <ClInclude Include="..\Classes\Globals.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Ship.h" />
   </ItemGroup>
@@ -157,6 +158,7 @@
     <ClCompile Include="..\Classes\GB2ShapeCache-x.cpp" />
     <ClCompile Include="..\Classes\Globals.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Ship.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

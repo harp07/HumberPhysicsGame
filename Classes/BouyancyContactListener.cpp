@@ -9,11 +9,8 @@ BouyancyContactListener::BouyancyContactListener()
 BouyancyContactListener::~BouyancyContactListener()
 {}
 
-
-
 void BouyancyContactListener::BeginContact(b2Contact* contact)
 {
-
 		b2Fixture* fixtureA = contact->GetFixtureA();
         b2Fixture* fixtureB = contact->GetFixtureB();
 
@@ -25,8 +22,34 @@ void BouyancyContactListener::BeginContact(b2Contact* contact)
         else if ( fixtureB->IsSensor() &&
                   fixtureA->GetBody()->GetType() == b2_dynamicBody )
             m_fixturePairs.insert( make_pair(fixtureB, fixtureA) );
-}
 
+		/*if(contact->GetFixtureA()->GetBody()->GetUserData() == (void*)Globals::globalsInstance()->BODY_SHIP && contact->GetFixtureB()->GetBody()->GetUserData() == (void*)Globals::globalsInstance()->BODY_WATER){
+			Globals::globalsInstance()->Output(1);
+		} 
+
+		if(contact->GetFixtureA()->GetBody()->GetUserData() == (void*)Globals::globalsInstance()->BODY_WATER && contact->GetFixtureB()->GetBody()->GetUserData() == (void*)Globals::globalsInstance()->BODY_SHIP){
+			Globals::globalsInstance()->Output(2);
+		}
+
+		if(contact->GetFixtureA()->GetBody()->GetUserData() == (void*)Globals::globalsInstance()->BODY_WATER && contact->GetFixtureB()->GetBody()->GetUserData() == (void*)Globals::globalsInstance()->BODY_GROUND){
+			Globals::globalsInstance()->Output(3);
+		} 
+
+		if(contact->GetFixtureA()->GetBody()->GetUserData() == (void*)Globals::globalsInstance()->BODY_GROUND && contact->GetFixtureB()->GetBody()->GetUserData() == (void*)Globals::globalsInstance()->BODY_WATER){
+			Globals::globalsInstance()->Output(4);
+		}
+		*/
+
+		void* bodyUserData = contact->GetFixtureA()->GetUserData();
+      if ( bodyUserData )
+		  static_cast<Projectile*>( bodyUserData )->startContact(contact->GetFixtureB()->GetBody()->GetPosition());
+  
+      //check if fixture B was a ball
+      /*bodyUserData = contact->GetFixtureB()->GetUserData();
+
+      if ( bodyUserData )
+		  static_cast<Projectile*>( bodyUserData )->startContact(contact->GetFixtureB()->GetBody()->GetPosition());*/
+}
 
 void BouyancyContactListener::EndContact(b2Contact* contact)
 {
@@ -43,8 +66,17 @@ void BouyancyContactListener::EndContact(b2Contact* contact)
                   fixtureA->GetBody()->GetType() == b2_dynamicBody )
             m_fixturePairs.erase( make_pair(fixtureB, fixtureA) );
 
-}
+		//check if fixture A was a ball
+      void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
+      if ( bodyUserData )
+          static_cast<Projectile*>( bodyUserData )->endContact();
+  
+      //check if fixture B was a ball
+      bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
+      if ( bodyUserData )
+          static_cast<Projectile*>( bodyUserData )->endContact();
 
+}
 
 float BouyancyContactListener::rnd_1()
 {
@@ -275,7 +307,7 @@ void BouyancyContactListener::CreateWater(b2Vec2 pos,b2Vec2 size, float density,
     waterFix.restitution = 0.0f;
     
     waterFix.isSensor =  bool(1);
-    waterFix.filter.categoryBits = uint16(1);
+    waterFix.filter.categoryBits = uint16(2);
     waterFix.filter.maskBits = uint16(65535);
     waterFix.filter.groupIndex = int16(0);
 	waterFix.density = density;
@@ -288,9 +320,7 @@ void BouyancyContactListener::CreateWater(b2Vec2 pos,b2Vec2 size, float density,
     waterFix.shape = &waterShape;
 
     _water->CreateFixture(&waterFix);
-	//} else {
-	//	OutputDebugStringA("Uh oh!");
-	//}
+	//_water->SetUserData((void*)Globals::globalsInstance()->BODY_WATER);
 }
 
 void BouyancyContactListener::setWorld(b2World* world){

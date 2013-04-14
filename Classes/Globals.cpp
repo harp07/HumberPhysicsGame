@@ -27,3 +27,11 @@ void Globals::Output(float szFormat){
 	_vsnprintf(szBuff, sizeof(szBuff),szFormat,arg);
 	OutputDebugStringW((LPCWSTR)szBuff);*/
 }
+
+void Globals::setLayer(CCLayer* layer){
+	mainLayer = layer;
+}
+
+CCLayer* Globals::getLayer(){
+	return mainLayer;
+}

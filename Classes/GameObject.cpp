@@ -56,7 +56,7 @@ void GameObject::physicsInit(b2World *world, shapeType sType, bodyType bType, ch
 			(scaleY * (objSprite->getContentSize().height/2))/PTM_RATIO);
 		objShapeDef.shape = &objBox;
 		objBody = world->CreateBody(&objBodyDef);
-		objBody->CreateFixture(&objShapeDef);
+		fixture = objBody->CreateFixture(&objShapeDef);
 		break;
 	
 	case SHAPE_CIRCLE:
@@ -65,7 +65,7 @@ void GameObject::physicsInit(b2World *world, shapeType sType, bodyType bType, ch
 			(scaleX * (objSprite->getContentSize().width/2))/PTM_RATIO;
 		objShapeDef.shape = &objCircle;
 		objBody = world->CreateBody(&objBodyDef);
-		objBody->CreateFixture(&objShapeDef);
+		fixture = objBody->CreateFixture(&objShapeDef);
 		break;
 		
 	case SHAPE_PLIST:

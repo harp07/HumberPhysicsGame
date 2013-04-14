@@ -9,6 +9,7 @@
 #include "Globals.h"
 #include "GameObject.h"
 #include "Ship.h"
+#include "Projectile.h"
 
 using namespace cocos2d;
 class GameWorld
@@ -33,12 +34,10 @@ public:
 	void updateWorld(float dt);
 	void shoot();
 	void debugVisuals();
+	void addArt();
 	b2Body* getPlayer();
 	void addObjects();
 	BouyancyContactListener myListener;
-	CCSprite* playerSprite;
-	b2Body* playerBody;
-	CCSprite* defaultSprite;
 	b2Vec2 _waterPos;
 	b2Vec2 _waterSize;
 	GameObject* projectile;
@@ -50,6 +49,7 @@ public:
 
 	Ship* player;
 	Ship* enemy;
+	Projectile* proj;
 };
 
 #endif  // __GAME_WORLD__

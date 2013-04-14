@@ -1,7 +1,7 @@
-﻿Build started 4/13/2013 4:30:08 PM.
+﻿Build started 4/14/2013 1:11:19 AM.
      1>Project "D:\cocos2d-2.1beta3-x-2.1.1\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Touching "Debug.win32\HumberPhysicsGame.win32.unsuccessfulbuild".
+         Creating "Debug.win32\HumberPhysicsGame.win32.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I. /I..\Classes /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx" /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\include" /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\kazmath\include" /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\win32" /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32" /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32\OGLES" /I"D:\cocos2d-2.1beta3-x-2.1.1\external" /I"D:\cocos2d-2.1beta3-x-2.1.1\CocosDenshion\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D STRICT /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS_DEBUG /D COCOS2D_DEBUG=1 /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc100.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\GameWorld.cpp
          GameWorld.cpp
@@ -23,6 +23,7 @@
          "Debug.win32\GB2ShapeCache-x.obj"
          Debug.win32\Globals.obj
          Debug.win32\main.obj
+         Debug.win32\Projectile.obj
          Debug.win32\Ship.obj
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug.win32\HumberPhysicsGame.win32.exe.embed.manifest" /manifest Debug.win32\HumberPhysicsGame.win32.exe.intermediate.manifest
@@ -37,4 +38,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.96
+Time Elapsed 00:00:02.06
