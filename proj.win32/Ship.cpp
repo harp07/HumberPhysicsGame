@@ -28,11 +28,11 @@ Ship::Ship(shipType sType, userType uType,float waterHeight, CCLayer* layer, b2W
 			playerSprite = obj->objSprite;
 			setPlayerType(sType);
 		} else if (uType == ENEMY){
-			obj = new GameObject("SubmarineFlipped",Globals::globalsInstance()->screenSize().width/1.1,waterHeight-30,1.0f);
+			obj = new GameObject("SubmarineFlipped",Globals::globalsInstance()->screenSize().width/1.5,waterHeight-30,1.0f);
 			obj->spriteInit(layer,GameObject::MIDDLEGROUND);
 			obj->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Ships.plist");
-			playerBody = obj->objBody;
-			playerSprite = obj->objSprite;
+			enemyBody = obj->objBody;
+			enemySprite = obj->objSprite;
 			setEnemyType(sType);
 		}
 	}

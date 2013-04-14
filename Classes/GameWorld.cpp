@@ -116,11 +116,21 @@ void GameWorld::addObjects(){
 }
 
 void GameWorld::shoot(){
-	//shots += 1;
-	if(player->getPlayerType() == Ship::SHIP){
-		proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(player->playerSprite->getPositionX(),player->playerSprite->getPositionY()),mainLayer,m_world);
-	} else if (player->getPlayerType() == Ship::SUBMARINE){
-		proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(player->playerSprite->getPositionX(),player->playerSprite->getPositionY()),mainLayer,m_world);
+	if(shots == 0){
+		if(player->getPlayerType() == Ship::SHIP){
+			proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(player->playerSprite->getPositionX(),player->playerSprite->getPositionY()),mainLayer,m_world, 1);
+		} else if (player->getPlayerType() == Ship::SUBMARINE){
+			proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(player->playerSprite->getPositionX(),player->playerSprite->getPositionY()),mainLayer,m_world, 1);
+		}
+		shots = 1;
+	}
+	else if (shots == 1){
+		if(enemy->getEnemyType() == Ship::SHIP){
+			proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(enemy->enemySprite->getPositionX(),enemy->enemySprite->getPositionY()),mainLayer,m_world, -1);
+		} else if (enemy->getEnemyType() == Ship::SUBMARINE){
+			proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(enemy->enemySprite->getPositionX(),enemy->enemySprite->getPositionY()),mainLayer,m_world, -1);
+		}
+		shots = 0;
 	}
 }
 

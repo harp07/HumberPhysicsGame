@@ -9,7 +9,7 @@ public:
 	GameObject *obj;
 	enum projectileType {PROJ_NULL = 0, PROJ_TORPEDO, PROJ_CANNONBALL};
 
-	Projectile(projectileType projType,b2Vec2 position, CCLayer *layer, b2World *m_world);
+	Projectile(projectileType projType,b2Vec2 position, CCLayer *layer, b2World *m_world, float sign);
 	~Projectile();
 
 	void startContact(b2Vec2 location);

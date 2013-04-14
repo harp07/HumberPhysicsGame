@@ -2,17 +2,22 @@
 
 using namespace cocos2d;
 
-Projectile::Projectile(projectileType projType,b2Vec2 position, CCLayer *layer, b2World *m_world){
+Projectile::Projectile(projectileType projType,b2Vec2 position, CCLayer *layer, b2World *m_world, float sign){
 	if(projType == PROJ_CANNONBALL){
-		obj = new GameObject("CannonBall",position.x+50,position.y+20,1.0f);
+		obj = new GameObject("CannonBall",position.x+(50*sign),position.y+20,1.0f);
 		obj->spriteInit(layer, GameObject::MIDDLEGROUND);
 		obj->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Projectiles.plist");
-		obj->objBody->ApplyForceToCenter(b2Vec2((1000.0f)/PTM_RATIO,(2000.0f)/PTM_RATIO));
-	} else if (projType == PROJ_TORPEDO){
-		obj = new GameObject("Torpedo",position.x+70,position.y,1.0f);
+		obj->objBody->ApplyForceToCenter(b2Vec2((1000.0f*(sign))/PTM_RATIO,(2000.0f)/PTM_RATIO));
+	} else if (projType == PROJ_TORPEDO && sign == 1){
+		obj = new GameObject("TorpedoFlipped",position.x+(70*sign),position.y,1.0f);
 		obj->spriteInit(layer, GameObject::MIDDLEGROUND);
 		obj->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Projectiles.plist");
-		obj->objBody->ApplyForceToCenter(b2Vec2((250000.0f + rand() % 1)/PTM_RATIO,(2000.0f)/PTM_RATIO));
+		obj->objBody->ApplyForceToCenter(b2Vec2((250000.0f*(sign))/PTM_RATIO,(20000.0f)/PTM_RATIO));
+	} else if (projType == PROJ_TORPEDO && sign == -1){
+		obj = new GameObject("Torpedo",position.x+(70*sign),position.y,1.0f);
+		obj->spriteInit(layer, GameObject::MIDDLEGROUND);
+		obj->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Projectiles.plist");
+		obj->objBody->ApplyForceToCenter(b2Vec2((250000.0f*(sign))/PTM_RATIO,(20000.0f)/PTM_RATIO));
 	}
 }
 
