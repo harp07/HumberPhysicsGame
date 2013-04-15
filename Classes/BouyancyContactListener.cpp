@@ -16,12 +16,24 @@ void BouyancyContactListener::BeginContact(b2Contact* contact)
 
         //This assumes every sensor fixture is fluid, and will interact
         //with every dynamic body.
+		if(fixtureA->IsSensor() || fixtureB->IsSensor()){
         if ( fixtureA->IsSensor() &&
              fixtureB->GetBody()->GetType() == b2_dynamicBody )
-            m_fixturePairs.insert( make_pair(fixtureA, fixtureB) );
+            m_fixturePairs.insert(make_pair(fixtureA, fixtureB));
         else if ( fixtureB->IsSensor() &&
                   fixtureA->GetBody()->GetType() == b2_dynamicBody )
-            m_fixturePairs.insert( make_pair(fixtureB, fixtureA) );
+            m_fixturePairs.insert(make_pair(fixtureB, fixtureA));
+		} else {
+			if ( fixtureA->GetUserData()){
+				static_cast<Projectile*>(fixtureA->GetUserData())->startContact(fixtureA->GetBody(),fixtureB->GetBody()->GetPosition());
+				//static_cast<Ship*>(fixtureB->GetUserData())->startContact(fixtureA->GetBody()->GetPosition());
+			}
+
+			if ( fixtureB->GetUserData()){
+				//static_cast<Projectile*>(fixtureB->GetUserData())->startContact(fixtureB->GetBody(),fixtureA->GetBody()->GetPosition());
+				static_cast<Ship*>(fixtureA->GetUserData())->startContact(fixtureB->GetBody()->GetPosition());
+			}
+		}
 
 		/*if(contact->GetFixtureA()->GetBody()->GetUserData() == (void*)Globals::globalsInstance()->BODY_SHIP && contact->GetFixtureB()->GetBody()->GetUserData() == (void*)Globals::globalsInstance()->BODY_WATER){
 			Globals::globalsInstance()->Output(1);
@@ -40,15 +52,7 @@ void BouyancyContactListener::BeginContact(b2Contact* contact)
 		}
 		*/
 
-		void* bodyUserData = contact->GetFixtureA()->GetUserData();
-      if ( bodyUserData )
-		  static_cast<Projectile*>( bodyUserData )->startContact(contact->GetFixtureB()->GetBody()->GetPosition());
-  
-      //check if fixture B was a ball
-      /*bodyUserData = contact->GetFixtureB()->GetUserData();
-
-      if ( bodyUserData )
-		  static_cast<Projectile*>( bodyUserData )->startContact(contact->GetFixtureB()->GetBody()->GetPosition());*/
+		
 }
 
 void BouyancyContactListener::EndContact(b2Contact* contact)

@@ -35,3 +35,42 @@ void Globals::setLayer(CCLayer* layer){
 CCLayer* Globals::getLayer(){
 	return mainLayer;
 }
+
+void Globals::setWorld(b2World* world){
+	m_world = world;
+}
+
+b2World* Globals::getWorld(){
+	return m_world;
+}
+
+void Globals::setWaterheight(float height){
+	waterHeight = height;
+}
+
+float Globals::getWaterheight(){
+	return waterHeight;
+}
+
+void Globals::setPlayerHealth(float health){
+	playerHealth = health;
+}
+
+float Globals::getPlayerHealth(){
+	return playerHealth;
+}
+
+void Globals::setEnemyHealth(float health){
+	enemyHealth = health;
+}
+
+float Globals::getEnemyHealth(){
+	return enemyHealth;
+}
+
+void Globals::setUnitTurn(bool turn){
+	unitTurn = turn;
+}
+bool Globals::getUnitTurn(){
+	return unitTurn;
+}

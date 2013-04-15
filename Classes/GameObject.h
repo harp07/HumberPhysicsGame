@@ -75,7 +75,7 @@ public:
 	** as we need them)
 	*/
 
-	void physicsInit(b2World *world, shapeType sType, bodyType bType, char* pList);
+	void physicsInit(b2World *world, shapeType sType, bodyType bType, char* pList = 0);
 
 	void updateSprite(b2World *world);
 
@@ -86,8 +86,6 @@ public:
 	**
 	**getObjPosX and getObjPosY return the X and Y of the object
 	*/
-
-
 
 	void setObjPos(float x, float y){
 		posX = x;

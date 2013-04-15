@@ -24,7 +24,7 @@
 
 					<dict>
                         <key>density</key> <real>2</real>
-                        <key>friction</key> <real>0</real>
+                        <key>friction</key> <real>1</real>
                         <key>restitution</key> <real>0</real>
                         <key>filter_categoryBits</key> <integer>1</integer>
                         <key>filter_groupIndex</key> <integer>0</integer>
@@ -54,7 +54,7 @@
 
 					<dict>
                         <key>density</key> <real>2</real>
-                        <key>friction</key> <real>0</real>
+                        <key>friction</key> <real>1</real>
                         <key>restitution</key> <real>0</real>
                         <key>filter_categoryBits</key> <integer>1</integer>
                         <key>filter_groupIndex</key> <integer>0</integer>
@@ -84,7 +84,7 @@
 
 					<dict>
                         <key>density</key> <real>2</real>
-                        <key>friction</key> <real>0</real>
+                        <key>friction</key> <real>1</real>
                         <key>restitution</key> <real>0</real>
                         <key>filter_categoryBits</key> <integer>1</integer>
                         <key>filter_groupIndex</key> <integer>0</integer>

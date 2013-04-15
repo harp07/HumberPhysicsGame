@@ -6,7 +6,9 @@ GameWorld* GameWorld::m_singleton = NULL;
 
 GameWorld::GameWorld(){
 	debugDrawBool = false;
+	Globals::globalsInstance()->setUnitTurn(true);
 	projectileFired = false;
+	moving = false;
 	shots = 0;
 	m_world = new b2World(b2Vec2(NULL,NULL));
 	m_world->SetContinuousPhysics(true);
@@ -24,6 +26,8 @@ GameWorld::GameWorld(){
 	_waterSize = b2Vec2(Globals::globalsInstance()->screenSize().width / PTM_RATIO,(Globals::globalsInstance()->screenSize().height/3)/PTM_RATIO);
 	myListener.CreateWater(_waterPos,_waterSize,1.0f,2.0f);
 	srand(time(0));
+	Globals::globalsInstance()->setWorld(m_world);
+	Globals::globalsInstance()->setWaterheight(Globals::globalsInstance()->screenSize().height/3);
 }
 
 GameWorld* GameWorld::worldInstance(){
@@ -85,11 +89,13 @@ void GameWorld::updateWorld(float dt){
 			objectData->setPosition(ccp(b->GetPosition().x * PTM_RATIO,b->GetPosition().y * PTM_RATIO));
 		    objectData->setRotation( -1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));	
 	    }
-		if(projectileFired){
-			//b->ApplyForceToCenter(b2Vec2(-10.0f/PTM_RATIO,0.0f));
-		}
 	}
+	player->getWeaponBody(Ship::PLAYER)->SetTransform(b2Vec2(player->playerBody->GetPosition().x+player->playerSprite->getContentSize().width/player->getFactorX()/PTM_RATIO
+		,player->playerBody->GetPosition().y+player->playerSprite->getContentSize().height/player->getFactorY()/PTM_RATIO),player->playerBody->GetAngle());
+	enemy->getWeaponBody(Ship::ENEMY)->SetTransform(b2Vec2(enemy->enemyBody->GetPosition().x-enemy->enemySprite->getContentSize().width/enemy->getFactorX()/PTM_RATIO
+		,enemy->enemyBody->GetPosition().y+enemy->enemySprite->getContentSize().height/enemy->getFactorY()/PTM_RATIO),enemy->enemyBody->GetAngle());
 	myListener.update(dt);
+	moving = false;
 }
 
 void GameWorld::setLayer(CCLayer* layer){
@@ -111,27 +117,65 @@ b2Body* GameWorld::getPlayer(){
 
 void GameWorld::addObjects(){
 	addArt();
-	player = new Ship(Ship::SUBMARINE, Ship::PLAYER, WATERHEIGHT, mainLayer, m_world);
+	player = new Ship(Ship::SHIP, Ship::PLAYER, WATERHEIGHT, mainLayer, m_world);
 	enemy = new Ship(Ship::SHIP, Ship::ENEMY, WATERHEIGHT, mainLayer, m_world);
 }
 
 void GameWorld::shoot(){
-	if(shots == 0){
+	moving = false;
+	if(Globals::globalsInstance()->getUnitTurn()){
 		if(player->getPlayerType() == Ship::SHIP){
-			proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(player->playerSprite->getPositionX(),player->playerSprite->getPositionY()),mainLayer,m_world, 1);
+			//proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(player->playerSprite->getPositionX(),player->playerSprite->getPositionY()),mainLayer,m_world, 1,player->playerBody->GetAngle());
+			proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(player->getWeaponBody(Ship::PLAYER)->GetPosition().x*32,player->getWeaponBody(Ship::PLAYER)->GetPosition().y*32)
+				,mainLayer,m_world, 1,player->getWeaponBody(Ship::PLAYER)->GetAngle());
+			player->playerBody->ApplyForceToCenter(b2Vec2(-5,-25));
 		} else if (player->getPlayerType() == Ship::SUBMARINE){
-			proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(player->playerSprite->getPositionX(),player->playerSprite->getPositionY()),mainLayer,m_world, 1);
+			//proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(player->playerSprite->getPositionX(),player->playerSprite->getPositionY()),mainLayer,m_world, 1,player->playerBody->GetAngle());
+			proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(player->getWeaponBody(Ship::PLAYER)->GetPosition().x*32,player->getWeaponBody(Ship::PLAYER)->GetPosition().y*32)
+				,mainLayer,m_world, 1,player->getWeaponBody(Ship::PLAYER)->GetAngle());
+			player->playerBody->ApplyForceToCenter(b2Vec2(-15,0));
 		}
-		shots = 1;
+		//player->getWeaponBody(Ship::PLAYER)->SetTransform(player->playerBody->GetPosition(),player->playerBody->GetAngle());
+		Globals::globalsInstance()->setUnitTurn(false);
 	}
-	else if (shots == 1){
+	else if (!Globals::globalsInstance()->getUnitTurn()){
 		if(enemy->getEnemyType() == Ship::SHIP){
-			proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(enemy->enemySprite->getPositionX(),enemy->enemySprite->getPositionY()),mainLayer,m_world, -1);
+			//proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(enemy->enemySprite->getPositionX(),enemy->enemySprite->getPositionY()),mainLayer,m_world, -1,enemy->enemyBody->GetAngle());
+			proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(enemy->getWeaponBody(Ship::ENEMY)->GetPosition().x*32,enemy->getWeaponBody(Ship::ENEMY)->GetPosition().y*32)
+				,mainLayer,m_world, -1,enemy->getWeaponBody(Ship::ENEMY)->GetAngle());
+			enemy->enemyBody->ApplyForceToCenter(b2Vec2(5,-25));
 		} else if (enemy->getEnemyType() == Ship::SUBMARINE){
-			proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(enemy->enemySprite->getPositionX(),enemy->enemySprite->getPositionY()),mainLayer,m_world, -1);
+			//proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(enemy->enemySprite->getPositionX(),enemy->enemySprite->getPositionY()),mainLayer,m_world, -1,enemy->enemyBody->GetAngle());
+			proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(enemy->getWeaponBody(Ship::ENEMY)->GetPosition().x*32,enemy->getWeaponBody(Ship::ENEMY)->GetPosition().y*32)
+				,mainLayer,m_world, -1,enemy->getWeaponBody(Ship::ENEMY)->GetAngle());
+			enemy->enemyBody->ApplyForceToCenter(b2Vec2(15,0));
 		}
-		shots = 0;
+		//enemy->getWeaponBody(Ship::ENEMY)->SetTransform(enemy->enemyBody->GetPosition(),enemy->enemyBody->GetAngle());
+		Globals::globalsInstance()->setUnitTurn(true);
 	}
+}
+
+void GameWorld::moveShip(){
+	moving = true;
+	if(Globals::globalsInstance()->getUnitTurn()){
+		if(player->getPlayerType() == Ship::SHIP){
+			player->playerBody->ApplyForceToCenter(b2Vec2(25.0,0.0));
+		} else if (player->getPlayerType() == Ship::SUBMARINE){
+			player->playerBody->ApplyForceToCenter(b2Vec2(50.0,0.0));
+			player->playerBody->SetFixedRotation(moving);
+		}
+		Globals::globalsInstance()->setUnitTurn(false);
+	} else if (!Globals::globalsInstance()->getUnitTurn()){
+		if(enemy->getEnemyType() == Ship::SHIP){
+			enemy->enemyBody->ApplyForceToCenter(b2Vec2(-25.0,0.0));
+		} else if (enemy->getEnemyType() == Ship::SUBMARINE){
+			enemy->enemyBody->ApplyForceToCenter(b2Vec2(-50.0,0.0));
+			player->playerBody->SetFixedRotation(moving);
+		}
+		Globals::globalsInstance()->setUnitTurn(true);
+	}
+	//Globals::globalsInstance()->Output(Globals::globalsInstance()->getPlayerHealth());
+	//Globals::globalsInstance()->Output(Globals::globalsInstance()->getEnemyHealth());
 }
 
 void GameWorld::debugVisuals(){

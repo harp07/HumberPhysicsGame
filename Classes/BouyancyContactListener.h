@@ -4,7 +4,7 @@
 #include "Box2D\Box2D.h"
 
 #include "Globals.h"
-//#include "Ship.h"
+#include "Ship.h"
 #include "Projectile.h"
 #include <set>
 #include <vector>

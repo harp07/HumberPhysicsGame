@@ -21,16 +21,24 @@ public:
 	Ship(shipType sType, userType uType, float waterHeight, CCLayer* layer, b2World* m_world);
 	void startContact(b2Vec2 location);
 	void endContact();
-	void initShip();
+	void initWeapon(CCLayer* layer, userType uType, shipType sType);
+	CCSprite* getWeaponSprite(userType uType);
+	b2Body* getWeaponBody(userType uType);
 	void explosion(CCPoint location);
 	void setPlayerType(shipType sType);
 	void setEnemyType(shipType sType);
 	shipType getPlayerType();
 	shipType getEnemyType();
 	cocos2d::CCParticleSystem *m_emitter;
+	float getFactorX();
+	float getFactorY();
+	
 private:
 	shipType playerS;
 	shipType enemyS;
+	GameObject *playerWeapon;
+	GameObject *enemyWeapon;
+	float factorX, factorY;
 };
 
 #endif

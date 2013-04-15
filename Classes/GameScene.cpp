@@ -55,6 +55,7 @@ void GameScene::ccTouchesBegan(CCSet *touches, CCEvent* event){
 	CCPoint targetPosition = ccp(GameWorld::worldInstance()->getPlayer()->GetPosition().x,GameWorld::worldInstance()->getPlayer()->GetPosition().y);
 	//Camera::cameraInstance()->setFocus(ccp(targetPosition.x/PTM_RATIO,targetPosition.y/PTM_RATIO));
 	GameWorld::worldInstance()->shoot();
+	//GameWorld::worldInstance()->moveShip();
 	CCTouch* touch = (CCTouch*)(touches->anyObject());
 	CCPoint location = touch->getLocationInView();
 	location = CCDirector::sharedDirector()->convertToGL(location);

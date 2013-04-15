@@ -24,6 +24,7 @@ private:
 	bool debugDrawBool;
 	bool projectileFired;
 	float shots;
+	bool moving;
 public:
 	static GameWorld* worldInstance();
 	void setLayer(CCLayer* layer);
@@ -35,6 +36,7 @@ public:
 	void shoot();
 	void debugVisuals();
 	void addArt();
+	void moveShip();
 	b2Body* getPlayer();
 	void addObjects();
 	BouyancyContactListener myListener;
