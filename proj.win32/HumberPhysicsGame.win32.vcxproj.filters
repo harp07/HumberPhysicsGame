@@ -61,6 +61,12 @@
     <ClInclude Include="..\Classes\particle.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="propulsion.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Springs.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -76,6 +82,9 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\particle.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="propulsion.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

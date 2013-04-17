@@ -6,6 +6,7 @@
 #include "Box2D/Box2D.h"
 #include "b2DebugDraw.h"
 #include "particle.h"
+#include "propulsion.h"
 
 #include "SimpleAudioEngine.h"
 using namespace cocos2d;
@@ -20,8 +21,20 @@ public:
 	b2Body *_sphere[10];
 
 	b2Body *_box;
+	b2Body *_box2;
+	b2Body *_cananbox1;
 	b2BodyDef boxDef;
+	b2BodyDef boxDef2;
+	b2BodyDef cananboxDef1;
 	particle* p;
+
+	b2Body *body;
+	b2BodyDef bodyDef;
+
+	b2RevoluteJointDef revJointDef;
+	b2PolygonShape shapeDef;
+	b2Vec2 initVel;
+	propulsion *pr;
 
 		int i;
 		int j;

@@ -138,7 +138,9 @@
     <ClInclude Include="..\Classes\b2DebugDraw.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\particle.h" />
+    <ClInclude Include="..\Classes\Springs.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="propulsion.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +149,7 @@
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\particle.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="propulsion.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

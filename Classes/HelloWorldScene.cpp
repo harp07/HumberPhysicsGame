@@ -38,6 +38,7 @@ void HelloWorld::update(float dt)
 				sphereFix.restitution = 1.0f;
 				sphereFix.density = 20.0f;
 				_sphere[i]->CreateFixture(&sphereFix);
+
   
 				//_sphere[i]->ApplyAngularImpulse(10.0f);
 				//_sphere[i]->ApplyLinearImpulse(b2Vec2(5.0f,5.0f),b2Vec2(0.0f,0.0f));
@@ -141,12 +142,14 @@ bool HelloWorld::init()
 	     b2BodyDef boxDef;*/
 
 		 this->setTouchEnabled(true);
-		 this->setKeypadEnabled(true);
+		 //this->setKeypadEnabled(true);
 
 		 //schedule(schedule_selector(HelloWorld::update),1/60);
 		 scheduleUpdate();
 		 boxDef.type = b2_dynamicBody;
 		 boxDef.userData = box;
+		 /*boxDef.userData = new b2PolygonShape(box);
+		 boxDef.userData = box;*/
 		 //_sphere[i]->SetUserData(ball);
 		 boxDef.position.Set(350.0f / PTM_RATIO,300.0f / PTM_RATIO);
 		 boxDef.gravityScale = 0.0f;
@@ -158,7 +161,24 @@ bool HelloWorld::init()
 		 boxFix.shape = &boxShape;
 		 boxFix.density = 10.0f;
 		 boxFix.restitution = 1.0f;
+
 		 _box->CreateFixture(&boxFix);
+
+		 boxDef2.type = b2_dynamicBody;
+		 boxDef2.userData = box;
+		 boxDef2.position.Set(250.0f / PTM_RATIO,300.0f / PTM_RATIO);
+		 boxDef2.gravityScale = 0.0f;
+		 _box2       = m_world->CreateBody(&boxDef2);
+		 b2PolygonShape boxShape2;
+
+		 boxShape2.SetAsBox(10  / PTM_RATIO, 10 / PTM_RATIO);
+		 b2FixtureDef boxFix2;
+		 boxFix2.shape = &boxShape2;
+		 boxFix2.density = 10.0f;
+		 boxFix2.restitution = 1.0f;
+
+		 _box2->CreateFixture(&boxFix2);
+		 //::b2RevoluteJointDef
 
 		 //ball = CCSprite::create("ball.png");
 		 //CC_BREAK_IF(! ball);
@@ -166,6 +186,48 @@ bool HelloWorld::init()
 		 //ball->setScale(0.5f);
 		 ////ball->setPosition(ccp(50,50));
 		 //addChild(ball,0);
+
+
+		/*bodyDef = new b2BodyDef();
+
+		body = m_world->CreateBody(bodyDef);
+
+		boxDef = new b2PolygonShape();
+		boxDef.SetAsBox(5,1);
+
+		body.CreateShape(boxDef);
+
+		boxDef.SetAsBox( 1, 5, b2Vec2( -5,5), 0 );
+
+		body.CreateShape(boxDef);
+
+		boxDef.SetAsBox( 1, 5, b2Vec2( 5,-5), 0 );
+
+		body.CreateShape(boxDef);*/
+
+
+		 //shapeDef.m_vertexCount = 5;
+		//bodyDef.position.Set(24.713464f, 33.500765f);
+		//bodyDef.angle = 0.0f;
+		//b2Body* compound0 = m_world->CreateBody(&bodyDef);
+		//initVel.Set(0.0f, 0.0f);
+		//compound0->SetLinearVelocity(initVel);
+		//compound0->SetAngularVelocity(0.0f);
+		////polygon1
+		////Partition 0
+		//shapeDef.m_vertexCount = 5;
+		//shapeDef.m_vertices[0].Set(-5.048006f, -6.841606f);
+		//shapeDef.m_vertices[1].Set(5.130945f, -1.025062f);
+		//shapeDef.m_vertices[2].Set(4.023032f, 4.029791f);
+		//shapeDef.m_vertices[3].Set(-4.978762f, 0.567563f);
+		//shapeDef.m_vertices[4].Set(-9.756637f, -2.686932f);
+		///*shapeDef.density = 0.015000f;
+		//shapeDef.friction = 0.300000f;
+		//shapeDef.restitution = 0.600000f;
+		//shapeDef.filter.groupIndex = int16(0);
+		//shapeDef.filter.categoryBits = uint16(65535);
+		//shapeDef.filter.maskBits = uint16(65535);*/
+		//compound0->CreateShape(&shapeDef);
 
 		 box = CCSprite::create("wooden_box.jpg");
 		 CC_BREAK_IF(! box);
@@ -225,6 +287,8 @@ bool HelloWorld::init()
 
 		//this->modeA.gravity = ccp(0,-90);
 
+		pr = new propulsion(_box2->GetWorldCenter());
+
         bRet = true;
     } while (0);
 
@@ -277,6 +341,8 @@ void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)
 		y = location.y;
 		f = true;
         //addNewSpriteAtPosition( location );
+		pr->addForce(_box2,b2Vec2(-200,0));
+		
     }
 
 }

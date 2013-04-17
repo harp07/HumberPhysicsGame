@@ -1,14 +1,12 @@
-﻿Build started 18/03/2013 1:58:38 PM.
+﻿Build started 17/04/2013 11:41:25 AM.
      1>Project "G:\cocos2d-2.1beta3-x-2.1.1\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug.win32\HumberPhysicsGame.win32.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         G:\Microsoft  Visual Studio 10.0\VC\bin\CL.exe /c /I. /I..\Classes /I"G:\cocos2d-2.1beta3-x-2.1.1\cocos2dx" /I"G:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\include" /I"G:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\kazmath\include" /I"G:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\win32" /I"G:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32" /I"G:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32\OGLES" /I"G:\cocos2d-2.1beta3-x-2.1.1\external" /I"G:\cocos2d-2.1beta3-x-2.1.1\CocosDenshion\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D STRICT /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS_DEBUG /D COCOS2D_DEBUG=1 /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc100.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\HelloWorldScene.cpp ..\Classes\particle.cpp
-         particle.cpp
+         G:\Microsoft  Visual Studio 10.0\VC\bin\CL.exe /c /I. /I..\Classes /I"G:\cocos2d-2.1beta3-x-2.1.1\cocos2dx" /I"G:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\include" /I"G:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\kazmath\include" /I"G:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\win32" /I"G:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32" /I"G:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32\OGLES" /I"G:\cocos2d-2.1beta3-x-2.1.1\external" /I"G:\cocos2d-2.1beta3-x-2.1.1\CocosDenshion\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D STRICT /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS_DEBUG /D COCOS2D_DEBUG=1 /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc100.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\HelloWorldScene.cpp
          HelloWorldScene.cpp
-     1>g:\cocos2d-2.1beta3-x-2.1.1\humberphysicsgame\classes\helloworldscene.cpp(288): warning C4101: 'vx' : unreferenced local variable
-     1>g:\cocos2d-2.1beta3-x-2.1.1\humberphysicsgame\classes\helloworldscene.cpp(289): warning C4101: 'vy' : unreferenced local variable
-         Generating Code...
+     1>g:\cocos2d-2.1beta3-x-2.1.1\humberphysicsgame\classes\helloworldscene.cpp(354): warning C4101: 'vx' : unreferenced local variable
+     1>g:\cocos2d-2.1beta3-x-2.1.1\humberphysicsgame\classes\helloworldscene.cpp(355): warning C4101: 'vy' : unreferenced local variable
        ResourceCompile:
          All outputs are up-to-date.
        ManifestResourceCompile:
@@ -21,6 +19,7 @@
          Debug.win32\HelloWorldScene.obj
          Debug.win32\particle.obj
          Debug.win32\main.obj
+         Debug.win32\propulsion.obj
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug.win32\HumberPhysicsGame.win32.exe.embed.manifest" /manifest Debug.win32\HumberPhysicsGame.win32.exe.intermediate.manifest
          All outputs are up-to-date.
@@ -34,4 +33,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:18.93
+Time Elapsed 00:00:11.86

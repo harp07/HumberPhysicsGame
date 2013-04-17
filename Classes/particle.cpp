@@ -68,7 +68,7 @@ void particle::update(float dt)
 
 		Layer->addChild(m_emitter, 1);
 		if(image){
-		m_emitter->setTexture( CCTextureCache::sharedTextureCache()->addImage("fireball2.png"));//imageImage go's here, fix later
+		m_emitter->setTexture( CCTextureCache::sharedTextureCache()->addImage(imageImage.c_str()));//imageImage go's here, fix later
 		}
 
 		m_emitter->setAutoRemoveOnFinish(true);
@@ -108,7 +108,7 @@ void particle::update(float dt)
 
 		Layer->addChild(m_emitter, 1);
 		if(image){
-		m_emitter->setTexture( CCTextureCache::sharedTextureCache()->addImage("fireball2.png"));//imageImage go's here, fix later
+		m_emitter->setTexture( CCTextureCache::sharedTextureCache()->addImage(imageImage.c_str()));//imageImage go's here, fix later
 		}
 
 		m_emitter->setAutoRemoveOnFinish(true);
