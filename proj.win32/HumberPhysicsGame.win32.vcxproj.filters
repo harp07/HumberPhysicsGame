@@ -91,6 +91,9 @@
     <ClInclude Include="..\Classes\Ship.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\GlassBox.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -130,6 +133,9 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Ship.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GlassBox.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

@@ -34,6 +34,7 @@ public:
 	void setBackground(const char* _location);
 	void updateWorld(float dt);
 	void shoot();
+	void shootAI();
 	void debugVisuals();
 	void addArt();
 	void moveShip();

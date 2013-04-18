@@ -1,4 +1,5 @@
 #include "GameWorld.h"
+#include "GlassBox.h"
 
 #define WATERHEIGHT screenSize.height/3
 
@@ -96,6 +97,9 @@ void GameWorld::updateWorld(float dt){
 		,enemy->enemyBody->GetPosition().y+enemy->enemySprite->getContentSize().height/enemy->getFactorY()/PTM_RATIO),enemy->enemyBody->GetAngle());
 	myListener.update(dt);
 	moving = false;
+
+	//AI
+	GlassBox::getGlassBox()->setAIOnBody(player->playerBody, enemy->enemyBody);
 }
 
 void GameWorld::setLayer(CCLayer* layer){
@@ -121,6 +125,27 @@ void GameWorld::addObjects(){
 	enemy = new Ship(Ship::SHIP, Ship::ENEMY, WATERHEIGHT, mainLayer, m_world);
 }
 
+void GameWorld::shootAI()
+{
+	moving = false;
+
+	if (!Globals::globalsInstance()->getUnitTurn()){
+		if(enemy->getEnemyType() == Ship::SHIP){
+			//proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(enemy->enemySprite->getPositionX(),enemy->enemySprite->getPositionY()),mainLayer,m_world, -1,enemy->enemyBody->GetAngle());
+			proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(enemy->getWeaponBody(Ship::ENEMY)->GetPosition().x*32,enemy->getWeaponBody(Ship::ENEMY)->GetPosition().y*32)
+				,mainLayer,m_world, -1,enemy->getWeaponBody(Ship::ENEMY)->GetAngle() * rand());
+			enemy->enemyBody->ApplyForceToCenter(b2Vec2(5,-25));
+		} else if (enemy->getEnemyType() == Ship::SUBMARINE){
+			//proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(enemy->enemySprite->getPositionX(),enemy->enemySprite->getPositionY()),mainLayer,m_world, -1,enemy->enemyBody->GetAngle());
+			proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(enemy->getWeaponBody(Ship::ENEMY)->GetPosition().x*32,enemy->getWeaponBody(Ship::ENEMY)->GetPosition().y*32)
+				,mainLayer,m_world, -1,enemy->getWeaponBody(Ship::ENEMY)->GetAngle() * rand());
+			enemy->enemyBody->ApplyForceToCenter(b2Vec2(15,0));
+		}
+		//enemy->getWeaponBody(Ship::ENEMY)->SetTransform(enemy->enemyBody->GetPosition(),enemy->enemyBody->GetAngle());
+		Globals::globalsInstance()->setUnitTurn(true);
+	}
+}
+
 void GameWorld::shoot(){
 	moving = false;
 	if(Globals::globalsInstance()->getUnitTurn()){
@@ -137,21 +162,6 @@ void GameWorld::shoot(){
 		}
 		//player->getWeaponBody(Ship::PLAYER)->SetTransform(player->playerBody->GetPosition(),player->playerBody->GetAngle());
 		Globals::globalsInstance()->setUnitTurn(false);
-	}
-	else if (!Globals::globalsInstance()->getUnitTurn()){
-		if(enemy->getEnemyType() == Ship::SHIP){
-			//proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(enemy->enemySprite->getPositionX(),enemy->enemySprite->getPositionY()),mainLayer,m_world, -1,enemy->enemyBody->GetAngle());
-			proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(enemy->getWeaponBody(Ship::ENEMY)->GetPosition().x*32,enemy->getWeaponBody(Ship::ENEMY)->GetPosition().y*32)
-				,mainLayer,m_world, -1,enemy->getWeaponBody(Ship::ENEMY)->GetAngle());
-			enemy->enemyBody->ApplyForceToCenter(b2Vec2(5,-25));
-		} else if (enemy->getEnemyType() == Ship::SUBMARINE){
-			//proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(enemy->enemySprite->getPositionX(),enemy->enemySprite->getPositionY()),mainLayer,m_world, -1,enemy->enemyBody->GetAngle());
-			proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(enemy->getWeaponBody(Ship::ENEMY)->GetPosition().x*32,enemy->getWeaponBody(Ship::ENEMY)->GetPosition().y*32)
-				,mainLayer,m_world, -1,enemy->getWeaponBody(Ship::ENEMY)->GetAngle());
-			enemy->enemyBody->ApplyForceToCenter(b2Vec2(15,0));
-		}
-		//enemy->getWeaponBody(Ship::ENEMY)->SetTransform(enemy->enemyBody->GetPosition(),enemy->enemyBody->GetAngle());
-		Globals::globalsInstance()->setUnitTurn(true);
 	}
 }
 
