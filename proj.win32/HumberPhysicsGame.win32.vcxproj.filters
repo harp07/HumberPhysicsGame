@@ -30,6 +30,15 @@
     <None Include="C:\Users\Devon\Desktop\bg.png">
       <Filter>resource</Filter>
     </None>
+    <None Include="..\Resources\DissonantWaltz.ogg">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\Cannon.wav">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\Wind.wav">
+      <Filter>resource</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="HumberPhysicsGame.rc">

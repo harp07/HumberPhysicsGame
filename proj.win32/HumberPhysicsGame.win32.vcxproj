@@ -125,7 +125,10 @@
   <ItemGroup>
     <None Include="..\Resources\CloseNormal.png" />
     <None Include="..\Resources\CloseSelected.png" />
+    <None Include="..\Resources\DissonantWaltz.ogg" />
+    <None Include="..\Resources\Cannon.wav" />
     <None Include="..\Resources\HelloWorld.png" />
+    <None Include="..\Resources\Wind.wav" />
     <None Include="C:\Users\Devon\Desktop\bg.png" />
     <None Include="res\HumberPhysicsGame.ico" />
   </ItemGroup>
