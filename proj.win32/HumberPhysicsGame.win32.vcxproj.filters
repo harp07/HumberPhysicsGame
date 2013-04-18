@@ -27,9 +27,6 @@
     <None Include="..\Resources\HelloWorld.png">
       <Filter>resource</Filter>
     </None>
-    <None Include="..\Resources\clouds.png">
-      <Filter>resource</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="HumberPhysicsGame.rc">
@@ -46,13 +43,40 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\b2DebugDraw.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Globals.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BouyancyContactListener.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BouyancyFunctions.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Camera.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject.h">
+      <Filter>include</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\GameWorld.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GB2ShapeCache-x.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameScene.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GlassBox.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -63,13 +87,37 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\b2DebugDraw.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Globals.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BouyancyContactListener.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Camera.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\GameWorld.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GB2ShapeCache-x.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameScene.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Ship.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GlassBox.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __B2_DEBUG_DRAW_H__
+#define __B2_DEBUG_DRAW_H__
 
 #include "Box2D/Box2D.h" 
 #include "cocos2d.h"
@@ -23,3 +24,5 @@ private:
     GLint mColorLocation;
     float mRatio;
 };
+
+#endif
