@@ -148,21 +148,21 @@
     <ResourceCompile Include="HumberPhysicsGame.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\Bar.h" />
-    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatButton.h" />
-    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatLabel.h" />
-    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\HUD.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\b2DebugDraw.h" />
+    <ClInclude Include="..\Classes\Bar.h" />
     <ClInclude Include="..\Classes\BouyancyContactListener.h" />
     <ClInclude Include="..\Classes\BouyancyFunctions.h" />
     <ClInclude Include="..\Classes\Camera.h" />
+    <ClInclude Include="..\Classes\DatButton.h" />
+    <ClInclude Include="..\Classes\DatLabel.h" />
     <ClInclude Include="..\Classes\GameObject.h" />
     <ClInclude Include="..\Classes\GameScene.h" />
     <ClInclude Include="..\Classes\GameWorld.h" />
     <ClInclude Include="..\Classes\GB2ShapeCache-x.h" />
     <ClInclude Include="..\Classes\GlassBox.h" />
     <ClInclude Include="..\Classes\Globals.h" />
+    <ClInclude Include="..\Classes\HUD.h" />
     <ClInclude Include="..\Classes\Projectile.h" />
     <ClInclude Include="..\Classes\Ship.h" />
     <ClInclude Include="..\Classes\StartMenu.h" />
@@ -170,20 +170,20 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\Bar.cpp" />
-    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatButton.cpp" />
-    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatLabel.cpp" />
-    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\HUD.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\b2DebugDraw.cpp" />
+    <ClCompile Include="..\Classes\Bar.cpp" />
     <ClCompile Include="..\Classes\BouyancyContactListener.cpp" />
     <ClCompile Include="..\Classes\Camera.cpp" />
+    <ClCompile Include="..\Classes\DatButton.cpp" />
+    <ClCompile Include="..\Classes\DatLabel.cpp" />
     <ClCompile Include="..\Classes\GameObject.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\GameWorld.cpp" />
     <ClCompile Include="..\Classes\GB2ShapeCache-x.cpp" />
     <ClCompile Include="..\Classes\GlassBox.cpp" />
     <ClCompile Include="..\Classes\Globals.cpp" />
+    <ClCompile Include="..\Classes\HUD.cpp" />
     <ClCompile Include="..\Classes\Projectile.cpp" />
     <ClCompile Include="..\Classes\Ship.cpp" />
     <ClCompile Include="..\Classes\StartMenu.cpp" />

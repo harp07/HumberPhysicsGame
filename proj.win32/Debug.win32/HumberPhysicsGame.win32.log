@@ -1,12 +1,14 @@
-﻿Build started 4/18/2013 9:21:28 AM.
+﻿Build started 4/18/2013 9:30:13 AM.
      1>Project "C:\cocos2d-2.1beta3-x-2.1.1\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug.win32\HumberPhysicsGame.win32.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I. /I..\Classes /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\include" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\kazmath\include" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\win32" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32\OGLES" /I"C:\cocos2d-2.1beta3-x-2.1.1\external" /I"C:\cocos2d-2.1beta3-x-2.1.1\CocosDenshion\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D STRICT /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS_DEBUG /D COCOS2D_DEBUG=1 /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc100.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\GameWorld.cpp
-         GameWorld.cpp
-     1>c:\cocos2d-2.1beta3-x-2.1.1\humberphysicsgame\classes\gameworld.cpp(36): warning C4996: 'cocos2d::CCFileUtils::fullPathFromRelativePath': was declared deprecated
-                 c:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\ccfileutils.h(103) : see declaration of 'cocos2d::CCFileUtils::fullPathFromRelativePath'
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I. /I..\Classes /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\include" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\kazmath\include" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\win32" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32" /I"C:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32\OGLES" /I"C:\cocos2d-2.1beta3-x-2.1.1\external" /I"C:\cocos2d-2.1beta3-x-2.1.1\CocosDenshion\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D STRICT /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS_DEBUG /D COCOS2D_DEBUG=1 /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc100.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\Bar.cpp ..\Classes\DatButton.cpp ..\Classes\DatLabel.cpp ..\Classes\HUD.cpp
+         HUD.cpp
+         DatLabel.cpp
+         DatButton.cpp
+         Bar.cpp
+         Generating Code...
        ResourceCompile:
          All outputs are up-to-date.
        ManifestResourceCompile:
@@ -14,20 +16,20 @@
        Link:
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\\" libcocos2d.lib opengl32.lib glew32.lib libBox2d.lib libCocosDenshion.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug.win32\HumberPhysicsGame.win32.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.lib" /MACHINE:X86 Debug.win32\HumberPhysicsGame.res
          Debug.win32\HumberPhysicsGame.win32.exe.embed.manifest.res
-         Debug.win32\Bar.obj
-         Debug.win32\DatButton.obj
-         Debug.win32\DatLabel.obj
-         Debug.win32\HUD.obj
          Debug.win32\AppDelegate.obj
          Debug.win32\b2DebugDraw.obj
+         Debug.win32\Bar.obj
          Debug.win32\BouyancyContactListener.obj
          Debug.win32\Camera.obj
+         Debug.win32\DatButton.obj
+         Debug.win32\DatLabel.obj
          Debug.win32\GameObject.obj
          Debug.win32\GameScene.obj
          Debug.win32\GameWorld.obj
          "Debug.win32\GB2ShapeCache-x.obj"
          Debug.win32\GlassBox.obj
          Debug.win32\Globals.obj
+         Debug.win32\HUD.obj
          Debug.win32\Projectile.obj
          Debug.win32\Ship.obj
          Debug.win32\StartMenu.obj
@@ -45,4 +47,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.60
+Time Elapsed 00:00:09.85

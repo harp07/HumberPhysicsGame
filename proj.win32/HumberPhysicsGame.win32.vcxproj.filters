@@ -130,16 +130,16 @@
     <ClInclude Include="..\Classes\GlassBox.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\Bar.h">
+    <ClInclude Include="..\Classes\DatLabel.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatButton.h">
+    <ClInclude Include="..\Classes\HUD.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatLabel.h">
+    <ClInclude Include="..\Classes\Bar.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\HUD.h">
+    <ClInclude Include="..\Classes\DatButton.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -186,16 +186,16 @@
     <ClCompile Include="..\Classes\GlassBox.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\Bar.cpp">
+    <ClCompile Include="..\Classes\HUD.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatButton.cpp">
+    <ClCompile Include="..\Classes\Bar.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatLabel.cpp">
+    <ClCompile Include="..\Classes\DatButton.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\HUD.cpp">
+    <ClCompile Include="..\Classes\DatLabel.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
