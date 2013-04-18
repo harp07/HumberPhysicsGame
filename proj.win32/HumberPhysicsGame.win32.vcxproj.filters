@@ -27,6 +27,18 @@
     <None Include="..\Resources\HelloWorld.png">
       <Filter>resource</Filter>
     </None>
+    <None Include="..\Resources\start.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\instructions.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\credits.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\options.png">
+      <Filter>resource</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="HumberPhysicsGame.rc">
@@ -76,6 +88,9 @@
     <ClInclude Include="Projectile.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\StartMenu.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -112,6 +127,9 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="Projectile.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StartMenu.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

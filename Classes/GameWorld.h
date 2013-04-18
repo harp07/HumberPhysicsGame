@@ -15,7 +15,10 @@ using namespace cocos2d;
 class GameWorld
 {
 private:
+
+	/*Default Constructor*/
 	GameWorld();
+	
 	static GameWorld* m_singleton;
 	b2World* m_world;
 	b2DebugDraw *m_DebugDraw;

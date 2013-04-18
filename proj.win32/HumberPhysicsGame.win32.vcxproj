@@ -125,7 +125,11 @@
   <ItemGroup>
     <None Include="..\Resources\CloseNormal.png" />
     <None Include="..\Resources\CloseSelected.png" />
+    <None Include="..\Resources\credits.png" />
     <None Include="..\Resources\HelloWorld.png" />
+    <None Include="..\Resources\instructions.png" />
+    <None Include="..\Resources\options.png" />
+    <None Include="..\Resources\start.png" />
     <None Include="res\HumberPhysicsGame.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +146,7 @@
     <ClInclude Include="..\Classes\GameWorld.h" />
     <ClInclude Include="..\Classes\GB2ShapeCache-x.h" />
     <ClInclude Include="..\Classes\Globals.h" />
+    <ClInclude Include="..\Classes\StartMenu.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="resource.h" />
@@ -157,6 +162,7 @@
     <ClCompile Include="..\Classes\GameWorld.cpp" />
     <ClCompile Include="..\Classes\GB2ShapeCache-x.cpp" />
     <ClCompile Include="..\Classes\Globals.cpp" />
+    <ClCompile Include="..\Classes\StartMenu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Ship.cpp" />
