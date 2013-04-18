@@ -44,6 +44,12 @@ bool StartMenu::init(){
 
 		CCSize winSize = CCDirector::sharedDirector()->getWinSize();
 
+		CCSprite *bg_menu = CCSprite::create("bg.png");
+		bg_menu->setPosition(ccp(winSize.width/2,winSize.height/2));
+		bg_menu->setScaleX(winSize.width/bg_menu->getContentSize().width);
+		bg_menu->setScaleY(winSize.height/bg_menu->getContentSize().height);
+		this->addChild(bg_menu);
+
 		        // Create a "close" menu igtem with close icon, it's an auto release object.
         CCMenuItemImage *menu_Start = CCMenuItemImage::create(
             "start.png",
@@ -92,6 +98,9 @@ bool StartMenu::init(){
 
         // Add the menu to HelloWorld layer as a child layer.
         this->addChild(menu, 1);
+
+		  
+
 
 		bRet = true;
 	}while(0);

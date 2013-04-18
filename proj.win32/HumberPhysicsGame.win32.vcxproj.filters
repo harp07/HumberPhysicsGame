@@ -27,6 +27,9 @@
     <None Include="..\Resources\HelloWorld.png">
       <Filter>resource</Filter>
     </None>
+    <None Include="C:\Users\Devon\Desktop\bg.png">
+      <Filter>resource</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="HumberPhysicsGame.rc">
