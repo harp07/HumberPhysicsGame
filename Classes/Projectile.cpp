@@ -11,6 +11,7 @@ Projectile::Projectile(projectileType projType,b2Vec2 position, CCLayer *layer, 
 		obj->objBody->ApplyForceToCenter(b2Vec2((10000.0f*(sign))/PTM_RATIO,(2000.0f)/PTM_RATIO));
 		sprite = obj->objSprite;
 		body = obj->objBody;
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Cannon.wav", false);
 	} else if (projType == PROJ_TORPEDO && sign == 1){
 		obj = new GameObject("TorpedoFlipped",(position.x+10),position.y,1.0f);
 		obj->spriteInit(layer, GameObject::MIDDLEGROUND);
@@ -19,6 +20,7 @@ Projectile::Projectile(projectileType projType,b2Vec2 position, CCLayer *layer, 
 		obj->objBody->ApplyForceToCenter(b2Vec2((25000.0f*(sign))/PTM_RATIO,(0.0f)/PTM_RATIO));
 		sprite = obj->objSprite;
 		body = obj->objBody;
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("torpedo_launch.wav", false);
 	} else if (projType == PROJ_TORPEDO && sign == -1){
 		obj = new GameObject("Torpedo",(position.x-10),position.y,1.0f);
 		obj->spriteInit(layer, GameObject::MIDDLEGROUND);
@@ -27,6 +29,7 @@ Projectile::Projectile(projectileType projType,b2Vec2 position, CCLayer *layer, 
 		obj->objBody->ApplyForceToCenter(b2Vec2((25000.0f*(sign))/PTM_RATIO,(0.0f)/PTM_RATIO));
 		sprite = obj->objSprite;
 		body = obj->objBody;
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("torpedo_launch.wav", false);
 	}
 }
 

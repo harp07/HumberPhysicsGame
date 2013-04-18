@@ -1,31 +1,19 @@
-﻿Build started 4/18/2013 3:40:50 AM.
-     1>Project "H:\Users\Gregory Lord\Desktop\GitHub\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" on node 2 (build target(s)).
+﻿Build started 4/18/2013 7:33:22 AM.
+     1>Project "D:\cocos2d-2.1beta3-x-2.1.1\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Touching "Debug.win32\HumberPhysicsGame.win32.unsuccessfulbuild".
        ClCompile:
-         H:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I. /I..\Classes /I"H:\cocos2d-2.1beta3-x-2.1.1\cocos2dx" /I"H:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\include" /I"H:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\kazmath\include" /I"H:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\win32" /I"H:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32" /I"H:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32\OGLES" /I"H:\cocos2d-2.1beta3-x-2.1.1\external" /I"H:\cocos2d-2.1beta3-x-2.1.1\CocosDenshion\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D STRICT /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS_DEBUG /D COCOS2D_DEBUG=1 /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc100.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\AppDelegate.cpp ..\Classes\GameScene.cpp ..\Classes\GameWorld.cpp ..\Classes\GlassBox.cpp ..\Classes\StartMenu.cpp
-         GlassBox.cpp
-     1>h:\users\gregory lord\desktop\github\humberphysicsgame\classes\glassbox.cpp(27): warning C4482: nonstandard extension used: enum 'GlassBox::State' used in qualified name
-     1>h:\users\gregory lord\desktop\github\humberphysicsgame\classes\glassbox.cpp(32): warning C4482: nonstandard extension used: enum 'GlassBox::State' used in qualified name
-     1>h:\users\gregory lord\desktop\github\humberphysicsgame\classes\glassbox.cpp(34): warning C4482: nonstandard extension used: enum 'GlassBox::State' used in qualified name
-     1>h:\users\gregory lord\desktop\github\humberphysicsgame\classes\glassbox.cpp(36): warning C4482: nonstandard extension used: enum 'GlassBox::State' used in qualified name
-     1>h:\users\gregory lord\desktop\github\humberphysicsgame\classes\glassbox.cpp(41): warning C4482: nonstandard extension used: enum 'GlassBox::State' used in qualified name
-     1>h:\users\gregory lord\desktop\github\humberphysicsgame\classes\glassbox.cpp(46): warning C4482: nonstandard extension used: enum 'GlassBox::State' used in qualified name
-     1>h:\users\gregory lord\desktop\github\humberphysicsgame\classes\glassbox.cpp(49): warning C4482: nonstandard extension used: enum 'GlassBox::State' used in qualified name
-     1>h:\users\gregory lord\desktop\github\humberphysicsgame\classes\glassbox.cpp(56): warning C4482: nonstandard extension used: enum 'GlassBox::State' used in qualified name
-     1>h:\users\gregory lord\desktop\github\humberphysicsgame\classes\glassbox.cpp(60): warning C4482: nonstandard extension used: enum 'GlassBox::State' used in qualified name
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I. /I..\Classes /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx" /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\include" /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\kazmath\include" /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\win32" /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32" /I"D:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\third_party\win32\OGLES" /I"D:\cocos2d-2.1beta3-x-2.1.1\external" /I"D:\cocos2d-2.1beta3-x-2.1.1\CocosDenshion\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D STRICT /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS_DEBUG /D COCOS2D_DEBUG=1 /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc100.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\GameWorld.cpp
          GameWorld.cpp
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         StartMenu.cpp
-         GameScene.cpp
-         AppDelegate.cpp
+     1>d:\cocos2d-2.1beta3-x-2.1.1\humberphysicsgame\classes\gameworld.cpp(33): warning C4996: 'cocos2d::CCFileUtils::fullPathFromRelativePath': was declared deprecated
+                 d:\cocos2d-2.1beta3-x-2.1.1\cocos2dx\platform\ccfileutils.h(103) : see declaration of 'cocos2d::CCFileUtils::fullPathFromRelativePath'
+     1>cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
        ResourceCompile:
          All outputs are up-to-date.
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
-         H:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"H:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.exe" /INCREMENTAL /NOLOGO /LIBPATH:"H:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\\" libcocos2d.lib opengl32.lib glew32.lib libBox2d.lib libCocosDenshion.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug.win32\HumberPhysicsGame.win32.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"H:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.lib" /MACHINE:X86 Debug.win32\HumberPhysicsGame.res
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\\" libcocos2d.lib opengl32.lib glew32.lib libBox2d.lib libCocosDenshion.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug.win32\HumberPhysicsGame.win32.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.lib" /MACHINE:X86 Debug.win32\HumberPhysicsGame.res
          Debug.win32\HumberPhysicsGame.win32.exe.embed.manifest.res
          Debug.win32\AppDelegate.obj
          Debug.win32\b2DebugDraw.obj
@@ -42,16 +30,16 @@
          Debug.win32\StartMenu.obj
          Debug.win32\main.obj
        Manifest:
-         H:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug.win32\HumberPhysicsGame.win32.exe.embed.manifest" /manifest Debug.win32\HumberPhysicsGame.win32.exe.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug.win32\HumberPhysicsGame.win32.exe.embed.manifest" /manifest Debug.win32\HumberPhysicsGame.win32.exe.intermediate.manifest
          All outputs are up-to-date.
        LinkEmbedManifest:
          All outputs are up-to-date.
-         HumberPhysicsGame.win32.vcxproj -> H:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.exe
+         HumberPhysicsGame.win32.vcxproj -> D:\cocos2d-2.1beta3-x-2.1.1\Debug.win32\HumberPhysicsGame.win32.exe
        FinalizeBuildStatus:
          Deleting file "Debug.win32\HumberPhysicsGame.win32.unsuccessfulbuild".
          Touching "Debug.win32\HumberPhysicsGame.win32.lastbuildstate".
-     1>Done Building Project "H:\Users\Gregory Lord\Desktop\GitHub\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" (build target(s)).
+     1>Done Building Project "D:\cocos2d-2.1beta3-x-2.1.1\HumberPhysicsGame\proj.win32\HumberPhysicsGame.win32.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.60
+Time Elapsed 00:00:02.10

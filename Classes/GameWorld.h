@@ -10,6 +10,7 @@
 #include "GameObject.h"
 #include "Ship.h"
 #include "Projectile.h"
+#include "SimpleAudioEngine.h"
 
 using namespace cocos2d;
 class GameWorld

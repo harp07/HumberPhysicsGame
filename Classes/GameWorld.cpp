@@ -29,6 +29,8 @@ GameWorld::GameWorld(){
 	srand(time(0));
 	Globals::globalsInstance()->setWorld(m_world);
 	Globals::globalsInstance()->setWaterheight(Globals::globalsInstance()->screenSize().height/3);
+	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("DissonantWaltz.ogg", true);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(std::string(CCFileUtils::sharedFileUtils()->fullPathFromRelativePath("DissonantWaltz.ogg")).c_str(), true);
 }
 
 GameWorld* GameWorld::worldInstance(){
@@ -122,7 +124,7 @@ b2Body* GameWorld::getPlayer(){
 void GameWorld::addObjects(){
 	addArt();
 	player = new Ship(Ship::SHIP, Ship::PLAYER, WATERHEIGHT, mainLayer, m_world);
-	enemy = new Ship(Ship::SHIP, Ship::ENEMY, WATERHEIGHT, mainLayer, m_world);
+	enemy = new Ship(Ship::SUBMARINE, Ship::ENEMY, WATERHEIGHT, mainLayer, m_world);
 }
 
 void GameWorld::shootAI()
@@ -135,6 +137,7 @@ void GameWorld::shootAI()
 			proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(enemy->getWeaponBody(Ship::ENEMY)->GetPosition().x*32,enemy->getWeaponBody(Ship::ENEMY)->GetPosition().y*32)
 				,mainLayer,m_world, -1,enemy->getWeaponBody(Ship::ENEMY)->GetAngle() * rand());
 			enemy->enemyBody->ApplyForceToCenter(b2Vec2(5,-25));
+			
 		} else if (enemy->getEnemyType() == Ship::SUBMARINE){
 			//proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(enemy->enemySprite->getPositionX(),enemy->enemySprite->getPositionY()),mainLayer,m_world, -1,enemy->enemyBody->GetAngle());
 			proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(enemy->getWeaponBody(Ship::ENEMY)->GetPosition().x*32,enemy->getWeaponBody(Ship::ENEMY)->GetPosition().y*32)
@@ -159,6 +162,7 @@ void GameWorld::shoot(){
 			proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(player->getWeaponBody(Ship::PLAYER)->GetPosition().x*32,player->getWeaponBody(Ship::PLAYER)->GetPosition().y*32)
 				,mainLayer,m_world, 1,player->getWeaponBody(Ship::PLAYER)->GetAngle());
 			player->playerBody->ApplyForceToCenter(b2Vec2(-15,0));
+			
 		}
 		//player->getWeaponBody(Ship::PLAYER)->SetTransform(player->playerBody->GetPosition(),player->playerBody->GetAngle());
 		Globals::globalsInstance()->setUnitTurn(false);

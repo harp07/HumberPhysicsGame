@@ -3,6 +3,7 @@
 
 #include "GameObject.h"
 #include "Globals.h"
+#include "SimpleAudioEngine.h"
 
 class Projectile{
 public:

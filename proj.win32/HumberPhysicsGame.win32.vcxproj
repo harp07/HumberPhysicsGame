@@ -128,8 +128,10 @@
     <None Include="..\Resources\DissonantWaltz.ogg" />
     <None Include="..\Resources\Cannon.wav" />
     <None Include="..\Resources\HelloWorld.png" />
+    <None Include="..\Resources\torpedo_launch.wav" />
     <None Include="..\Resources\Wind.wav" />
     <None Include="C:\Users\Devon\Desktop\bg.png" />
+    <None Include="C:\Users\Devon\Downloads\torpedo-1.wmv" />
     <None Include="res\HumberPhysicsGame.ico" />
   </ItemGroup>
   <ItemGroup>
