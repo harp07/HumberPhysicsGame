@@ -38,6 +38,7 @@ bool GameScene::init()
 		Camera::cameraInstance()->setLayer(this);
 		Globals::globalsInstance()->setLayer(this);
 		this->setTouchEnabled(true);
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("DissonantWaltz.ogg", true);
         bRet = true;
     } while (0);
 

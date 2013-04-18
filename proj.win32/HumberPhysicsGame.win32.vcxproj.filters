@@ -39,6 +39,24 @@
     <None Include="..\Resources\options.png">
       <Filter>resource</Filter>
     </None>
+    <None Include="..\Resources\piratebay.jpeg">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\bg.jpg">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\bg.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\DissonantWaltz.ogg">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\boom.wav">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\Wind.wav">
+      <Filter>resource</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="HumberPhysicsGame.rc">

@@ -123,13 +123,19 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="..\Resources\bg.jpg" />
+    <None Include="..\Resources\bg.png" />
     <None Include="..\Resources\CloseNormal.png" />
     <None Include="..\Resources\CloseSelected.png" />
     <None Include="..\Resources\credits.png" />
+    <None Include="..\Resources\DissonantWaltz.ogg" />
+    <None Include="..\Resources\boom.wav" />
     <None Include="..\Resources\HelloWorld.png" />
     <None Include="..\Resources\instructions.png" />
     <None Include="..\Resources\options.png" />
+    <None Include="..\Resources\piratebay.jpeg" />
     <None Include="..\Resources\start.png" />
+    <None Include="..\Resources\Wind.wav" />
     <None Include="res\HumberPhysicsGame.ico" />
   </ItemGroup>
   <ItemGroup>
