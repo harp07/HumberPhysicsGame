@@ -2,36 +2,63 @@
 
 using namespace cocos2d;
 
-Projectile::Projectile(projectileType projType,b2Vec2 position, CCLayer *layer, b2World *m_world, float sign,float angle){
+Projectile::Projectile(float px, float py, projectileType projType,b2Vec2 position, CCLayer *layer, b2World *m_world, float sign,float angle){
 	if(projType == PROJ_CANNONBALL){
+		SetPowerX(px);
+		SetPowerY(py);
 		obj = new GameObject("CannonBall",position.x+(10*sign),(position.y),1.0f);
 		obj->spriteInit(layer, GameObject::MIDDLEGROUND);
 		obj->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Projectiles.plist");
 		//obj->objBody->SetTransform(obj->objBody->GetPosition(),angle*(sign));
-		obj->objBody->ApplyForceToCenter(b2Vec2((10000.0f*(sign))/PTM_RATIO,(2000.0f)/PTM_RATIO));
+		obj->objBody->ApplyForceToCenter(b2Vec2((powerx*(sign))/PTM_RATIO,(powery)/PTM_RATIO));
 		sprite = obj->objSprite;
 		body = obj->objBody;
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("Cannon.wav", false);
 	} else if (projType == PROJ_TORPEDO && sign == 1){
+		SetPowerX(px);
+		SetPowerY(py);
 		obj = new GameObject("TorpedoFlipped",(position.x+10),position.y,1.0f);
 		obj->spriteInit(layer, GameObject::MIDDLEGROUND);
 		obj->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Projectiles.plist");
 		obj->objBody->SetTransform(obj->objBody->GetPosition(),angle);
-		obj->objBody->ApplyForceToCenter(b2Vec2((25000.0f*(sign))/PTM_RATIO,(0.0f)/PTM_RATIO));
+		obj->objBody->ApplyForceToCenter(b2Vec2((powerx*(sign))/PTM_RATIO,(powery)/PTM_RATIO));
 		sprite = obj->objSprite;
 		body = obj->objBody;
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("torpedo_launch.wav", false);
 	} else if (projType == PROJ_TORPEDO && sign == -1){
+		SetPowerX(px);
+		SetPowerY(py);
 		obj = new GameObject("Torpedo",(position.x-10),position.y,1.0f);
 		obj->spriteInit(layer, GameObject::MIDDLEGROUND);
 		obj->physicsInit(m_world,GameObject::SHAPE_PLIST,GameObject::BODY_DYNAMIC,"Projectiles.plist");
 		obj->objBody->SetTransform(obj->objBody->GetPosition(),angle);
-		obj->objBody->ApplyForceToCenter(b2Vec2((25000.0f*(sign))/PTM_RATIO,(0.0f)/PTM_RATIO));
+		obj->objBody->ApplyForceToCenter(b2Vec2((powerx*(sign))/PTM_RATIO,(powery)/PTM_RATIO));
 		sprite = obj->objSprite;
 		body = obj->objBody;
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("torpedo_launch.wav", false);
 	}
 }
+
+void Projectile::SetPowerX(float px)
+{
+	powerx = px;
+}
+
+void Projectile::SetPowerY(float py)
+{
+	powery = py;
+}
+
+float Projectile::GetPowerX()
+{
+	return powerx;
+}
+
+float Projectile::GetPowerY()
+{
+	return powery;
+}
+
 
 Projectile::~Projectile(){
 	Globals::globalsInstance()->getLayer()->removeChild(sprite,true);

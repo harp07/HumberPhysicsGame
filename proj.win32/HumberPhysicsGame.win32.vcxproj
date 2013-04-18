@@ -123,6 +123,16 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\angledown.png" />
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\angleup.png" />
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\bar.png" />
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\fire.png" />
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\left.png" />
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\right.png" />
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\xpowdown.png" />
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\xpowup.png" />
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\ypowdown.png" />
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\ypowup.png" />
     <None Include="..\Resources\CloseNormal.png" />
     <None Include="..\Resources\CloseSelected.png" />
     <None Include="..\Resources\DissonantWaltz.ogg" />
@@ -138,6 +148,10 @@
     <ResourceCompile Include="HumberPhysicsGame.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\Bar.h" />
+    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatButton.h" />
+    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatLabel.h" />
+    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\HUD.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\b2DebugDraw.h" />
     <ClInclude Include="..\Classes\BouyancyContactListener.h" />
@@ -156,6 +170,10 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\Bar.cpp" />
+    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatButton.cpp" />
+    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatLabel.cpp" />
+    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\HUD.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\b2DebugDraw.cpp" />
     <ClCompile Include="..\Classes\BouyancyContactListener.cpp" />

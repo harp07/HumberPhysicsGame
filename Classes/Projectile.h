@@ -10,7 +10,7 @@ public:
 	GameObject *obj;
 	enum projectileType {PROJ_NULL = 0, PROJ_TORPEDO, PROJ_CANNONBALL};
 
-	Projectile(projectileType projType,b2Vec2 position, CCLayer *layer, b2World *m_world, float sign, float angle);
+	Projectile(float px, float py, projectileType projType,b2Vec2 position, CCLayer *layer, b2World *m_world, float sign, float angle);
 	~Projectile();
 
 	void startContact(b2Body* proj,b2Vec2 location);
@@ -20,9 +20,16 @@ public:
 	cocos2d::CCParticleSystem *m_emitter;
 	void initBubbles(CCPoint location);
 	std::list<b2Body*> projectilesScheduledForRemoval;
+
+	void SetPowerX(float px);
+	void SetPowerY(float py);
+
+	float GetPowerX();
+	float GetPowerY();
 private:
 	CCSprite* sprite;
 	b2Body* body;
+	float powerx, powery;
 };
 
 #endif

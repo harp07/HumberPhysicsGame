@@ -45,6 +45,36 @@
     <None Include="..\Resources\torpedo_launch.wav">
       <Filter>resource</Filter>
     </None>
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\xpowdown.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\xpowup.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\ypowdown.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\ypowup.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\angledown.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\angleup.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\bar.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\fire.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\left.png">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Resources\right.png">
+      <Filter>resource</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="HumberPhysicsGame.rc">
@@ -100,6 +130,18 @@
     <ClInclude Include="..\Classes\GlassBox.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\Bar.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatButton.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatLabel.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\HUD.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -142,6 +184,18 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GlassBox.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\Bar.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatButton.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\DatLabel.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Users\Devon\Desktop\HumberPhysicsGame\Classes\HUD.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

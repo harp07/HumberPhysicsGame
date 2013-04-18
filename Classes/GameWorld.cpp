@@ -6,6 +6,9 @@
 GameWorld* GameWorld::m_singleton = NULL;
 
 GameWorld::GameWorld(){
+
+	currentpowerx = 10000.0f;
+	currentpowery = 2500.0f;
 	debugDrawBool = false;
 	Globals::globalsInstance()->setUnitTurn(true);
 	projectileFired = false;
@@ -125,6 +128,7 @@ void GameWorld::addObjects(){
 	addArt();
 	player = new Ship(Ship::SHIP, Ship::PLAYER, WATERHEIGHT, mainLayer, m_world);
 	enemy = new Ship(Ship::SUBMARINE, Ship::ENEMY, WATERHEIGHT, mainLayer, m_world);
+	createHUD();
 }
 
 void GameWorld::shootAI()
@@ -134,13 +138,13 @@ void GameWorld::shootAI()
 	if (!Globals::globalsInstance()->getUnitTurn()){
 		if(enemy->getEnemyType() == Ship::SHIP){
 			//proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(enemy->enemySprite->getPositionX(),enemy->enemySprite->getPositionY()),mainLayer,m_world, -1,enemy->enemyBody->GetAngle());
-			proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(enemy->getWeaponBody(Ship::ENEMY)->GetPosition().x*32,enemy->getWeaponBody(Ship::ENEMY)->GetPosition().y*32)
+			proj = new Projectile(currentpowerx, currentpowery,Projectile::PROJ_CANNONBALL,b2Vec2(enemy->getWeaponBody(Ship::ENEMY)->GetPosition().x*32,enemy->getWeaponBody(Ship::ENEMY)->GetPosition().y*32)
 				,mainLayer,m_world, -1,enemy->getWeaponBody(Ship::ENEMY)->GetAngle() * rand());
 			enemy->enemyBody->ApplyForceToCenter(b2Vec2(5,-25));
 			
 		} else if (enemy->getEnemyType() == Ship::SUBMARINE){
 			//proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(enemy->enemySprite->getPositionX(),enemy->enemySprite->getPositionY()),mainLayer,m_world, -1,enemy->enemyBody->GetAngle());
-			proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(enemy->getWeaponBody(Ship::ENEMY)->GetPosition().x*32,enemy->getWeaponBody(Ship::ENEMY)->GetPosition().y*32)
+			proj = new Projectile(currentpowerx, currentpowery,Projectile::PROJ_TORPEDO,b2Vec2(enemy->getWeaponBody(Ship::ENEMY)->GetPosition().x*32,enemy->getWeaponBody(Ship::ENEMY)->GetPosition().y*32)
 				,mainLayer,m_world, -1,enemy->getWeaponBody(Ship::ENEMY)->GetAngle() * rand());
 			enemy->enemyBody->ApplyForceToCenter(b2Vec2(15,0));
 		}
@@ -154,12 +158,12 @@ void GameWorld::shoot(){
 	if(Globals::globalsInstance()->getUnitTurn()){
 		if(player->getPlayerType() == Ship::SHIP){
 			//proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(player->playerSprite->getPositionX(),player->playerSprite->getPositionY()),mainLayer,m_world, 1,player->playerBody->GetAngle());
-			proj = new Projectile(Projectile::PROJ_CANNONBALL,b2Vec2(player->getWeaponBody(Ship::PLAYER)->GetPosition().x*32,player->getWeaponBody(Ship::PLAYER)->GetPosition().y*32)
+			proj = new Projectile(currentpowerx, currentpowery,Projectile::PROJ_CANNONBALL,b2Vec2(player->getWeaponBody(Ship::PLAYER)->GetPosition().x*32,player->getWeaponBody(Ship::PLAYER)->GetPosition().y*32)
 				,mainLayer,m_world, 1,player->getWeaponBody(Ship::PLAYER)->GetAngle());
 			player->playerBody->ApplyForceToCenter(b2Vec2(-5,-25));
 		} else if (player->getPlayerType() == Ship::SUBMARINE){
 			//proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(player->playerSprite->getPositionX(),player->playerSprite->getPositionY()),mainLayer,m_world, 1,player->playerBody->GetAngle());
-			proj = new Projectile(Projectile::PROJ_TORPEDO,b2Vec2(player->getWeaponBody(Ship::PLAYER)->GetPosition().x*32,player->getWeaponBody(Ship::PLAYER)->GetPosition().y*32)
+			proj = new Projectile(currentpowerx, currentpowery,Projectile::PROJ_TORPEDO,b2Vec2(player->getWeaponBody(Ship::PLAYER)->GetPosition().x*32,player->getWeaponBody(Ship::PLAYER)->GetPosition().y*32)
 				,mainLayer,m_world, 1,player->getWeaponBody(Ship::PLAYER)->GetAngle());
 			player->playerBody->ApplyForceToCenter(b2Vec2(-15,0));
 			
@@ -169,21 +173,27 @@ void GameWorld::shoot(){
 	}
 }
 
-void GameWorld::moveShip(){
+void GameWorld::moveShip(bool direction){
 	moving = true;
+	float sign = 0;
+	if(direction){
+		sign = 1;
+	} else {
+		sign = -1;
+	}
 	if(Globals::globalsInstance()->getUnitTurn()){
 		if(player->getPlayerType() == Ship::SHIP){
-			player->playerBody->ApplyForceToCenter(b2Vec2(25.0,0.0));
+			player->playerBody->ApplyForceToCenter(b2Vec2(25.0*sign,0.0));
 		} else if (player->getPlayerType() == Ship::SUBMARINE){
-			player->playerBody->ApplyForceToCenter(b2Vec2(50.0,0.0));
+			player->playerBody->ApplyForceToCenter(b2Vec2(50.0*sign,0.0));
 			player->playerBody->SetFixedRotation(moving);
 		}
 		Globals::globalsInstance()->setUnitTurn(false);
 	} else if (!Globals::globalsInstance()->getUnitTurn()){
 		if(enemy->getEnemyType() == Ship::SHIP){
-			enemy->enemyBody->ApplyForceToCenter(b2Vec2(-25.0,0.0));
+			enemy->enemyBody->ApplyForceToCenter(b2Vec2(-25.0*sign,0.0));
 		} else if (enemy->getEnemyType() == Ship::SUBMARINE){
-			enemy->enemyBody->ApplyForceToCenter(b2Vec2(-50.0,0.0));
+			enemy->enemyBody->ApplyForceToCenter(b2Vec2(-50.0*sign,0.0));
 			player->playerBody->SetFixedRotation(moving);
 		}
 		Globals::globalsInstance()->setUnitTurn(true);
@@ -231,4 +241,100 @@ void GameWorld::addArt(){
 	hudTop->_setZOrder(GameObject::HUD);
 	hudTop->setFlipY(true);
 	mainLayer->addChild(hudTop);
+}
+
+void GameWorld::createHUD()
+{
+	left = new Button("left.png", mainLayer, menu_selector(GameWorld::leftbutton));
+	left->SetPosition(-400, -320);
+	
+	right = new Button("right.png", mainLayer, menu_selector(GameWorld::rightbutton));
+	right->SetPosition(-300, -320);
+	
+	fire = new Button("fire.png", mainLayer, menu_selector(GameWorld::firebutton));
+	fire->SetPosition(-350, -240);
+
+	xpowup = new Button("xpowup.png", mainLayer, menu_selector(GameWorld::XPOWUP));
+	xpowup->SetPosition(-170, -240);
+
+	xpowdown = new Button("xpowdown.png", mainLayer, menu_selector(GameWorld::XPOWDOWN));
+	xpowdown->SetPosition(-70, -240);
+
+	ypowup = new Button("ypowup.png", mainLayer, menu_selector(GameWorld::YPOWUP));
+	ypowup->SetPosition(70, -240);
+
+	ypowdown = new Button("ypowdown.png", mainLayer, menu_selector(GameWorld::YPOWDOWN));
+	ypowdown->SetPosition(170, -240);
+
+	angleup = new Button("angleup.png", mainLayer, menu_selector(GameWorld::ANGLEUP));
+	angleup->SetPosition(300, -240);
+
+	angledown = new Button("angledown.png", mainLayer, menu_selector(GameWorld::ANGLEDOWN));
+	angledown->SetPosition(400, -240);
+
+	playerhp = new Bar("bar.png", mainLayer, 0, 0);
+	playerhp->SetPosition(-600, 250);
+
+	enemyhp = new Bar("bar.png", mainLayer, 0, 0);
+	enemyhp->SetPosition(100, 250);
+	
+	HUD::getInstance()->addButton(left);
+	HUD::getInstance()->addButton(right);
+	HUD::getInstance()->addButton(fire);
+	HUD::getInstance()->addButton(xpowup);
+	HUD::getInstance()->addButton(xpowdown);
+	HUD::getInstance()->addButton(ypowup);
+	HUD::getInstance()->addButton(ypowdown);
+	HUD::getInstance()->addButton(angleup);
+	HUD::getInstance()->addButton(angledown);
+
+	HUD::getInstance()->addBar(playerhp);
+	HUD::getInstance()->addBar(enemyhp);
+		
+	mainLayer->addChild(HUD::getInstance()->GetHUD());
+}
+
+
+/*
+	button code
+*/
+void GameWorld::leftbutton(CCObject * sender)
+{
+	if(Globals::globalsInstance()->getUnitTurn()){
+		GameWorld::worldInstance()->moveShip(false);
+	}
+}
+void GameWorld::rightbutton(CCObject * sender)
+{
+	if(Globals::globalsInstance()->getUnitTurn()){
+		GameWorld::worldInstance()->moveShip(true);
+	}
+}
+void GameWorld::firebutton(CCObject * sender)
+{
+	GameWorld::worldInstance()->shoot();
+}
+void GameWorld::XPOWUP(CCObject * sender)
+{
+	currentpowerx += 1000;
+}
+void GameWorld::XPOWDOWN(CCObject * sender)
+{
+	currentpowerx -= 1000;
+}
+void GameWorld::YPOWUP(CCObject * sender)
+{
+	currentpowery += 1000;
+}
+void GameWorld::YPOWDOWN(CCObject * sender)
+{
+	currentpowery -= 1000;
+}
+void GameWorld::ANGLEUP(CCObject * sender)
+{
+	currentangle += 1;
+}
+void GameWorld::ANGLEDOWN(CCObject * sender)
+{
+	currentangle -= 1;
 }

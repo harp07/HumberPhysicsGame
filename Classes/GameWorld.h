@@ -10,6 +10,7 @@
 #include "GameObject.h"
 #include "Ship.h"
 #include "Projectile.h"
+#include "HUD.h"
 #include "SimpleAudioEngine.h"
 
 using namespace cocos2d;
@@ -38,7 +39,7 @@ public:
 	void shootAI();
 	void debugVisuals();
 	void addArt();
-	void moveShip();
+	void moveShip(bool direction);
 	b2Body* getPlayer();
 	void addObjects();
 	BouyancyContactListener myListener;
@@ -54,6 +55,37 @@ public:
 	Ship* player;
 	Ship* enemy;
 	Projectile* proj;
+
+	//Buttons
+	Button * left, * right, * fire;
+	Button * xpowup, * xpowdown, 
+		   * ypowup, * ypowdown, 
+		   * angleup, * angledown;
+	
+	//Labels
+	Label * xPowstr, * yPowstr, * angleStr, * playerName, * enemyName;
+
+	//bars
+	Bar * playerhp, * enemyhp;
+
+	void leftbutton(CCObject * sender);
+	void rightbutton(CCObject * sender);
+	void firebutton(CCObject * sender);
+	void XPOWUP(CCObject * sender);
+	void XPOWDOWN(CCObject * sender);
+	void YPOWUP(CCObject * sender);
+	void YPOWDOWN(CCObject * sender);
+	void ANGLEUP(CCObject * sender);
+	void ANGLEDOWN(CCObject * sender);
+
+
+	float currentpowerx;
+	float currentpowery;
+
+	float currentangle;
+
+	void createHUD();
+
 };
 
 #endif  // __GAME_WORLD__
