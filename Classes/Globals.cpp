@@ -20,7 +20,7 @@ CCSize Globals::screenSize(){
 void Globals::Output(float szFormat){
 	std::wostringstream _os;
 	_os << szFormat << "\n";
-	OutputDebugStringW(_os.str().c_str());
+	//OutputDebugStringW(_os.str().c_str());
 	/*char szBuff[1024];
 	va_list arg;
 	va_start(arg,szFormat);

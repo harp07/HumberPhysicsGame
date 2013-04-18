@@ -1,8 +1,8 @@
 #ifndef __CAMERA_H__
 #define __CAMERA_H__
 
-#include "cocos2d.h"
-#include "Box2D\Box2D.h"
+#include <cocos2d.h>
+#include <Box2D/Box2D.h>
 #include "Globals.h"
 
 using namespace cocos2d;

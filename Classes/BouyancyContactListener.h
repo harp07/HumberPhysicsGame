@@ -1,7 +1,7 @@
 #ifndef __BOUYANCY_CONTACT_LISTENER_H__
 #define __BOUYANCY_CONTACT_LISTENER_H__
 
-#include "Box2D\Box2D.h"
+#include <Box2D/Box2D.h>
 
 #include "Globals.h"
 #include "Ship.h"

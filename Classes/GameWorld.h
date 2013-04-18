@@ -1,9 +1,9 @@
 #ifndef __GAME_WORLD_H__
 #define __GAME_WORLD_H__
 
-#include "cocos2d.h"
+#include <cocos2d.h>
 
-#include "Box2D/Box2D.h"
+#include <Box2D/Box2D.h>
 #include "b2DebugDraw.h"
 #include "BouyancyContactListener.h"
 #include "Globals.h"

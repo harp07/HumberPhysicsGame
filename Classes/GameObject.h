@@ -14,8 +14,8 @@
 #ifndef __GAME_OBJECT_H__
 #define __GAME_OBJECT_H__
 
-#include "cocos2d.h"
-#include "Box2D\Box2D.h"
+#include <cocos2d.h>
+#include <Box2D\Box2D.h>
 #include "GB2ShapeCache-x.h"
 
 #define PTM_RATIO 32.0

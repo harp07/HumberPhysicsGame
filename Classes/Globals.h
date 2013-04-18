@@ -1,8 +1,8 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#include "cocos2d.h"
-#include "Box2D\Box2D.h"
+#include <cocos2d.h>
+#include <Box2D/Box2D.h>
 
 #define PTM_RATIO 32.0
 

@@ -1,9 +1,9 @@
 #ifndef __GAME_SCENE_H__
 #define __GAME_SCENE_H__
 
-#include "cocos2d.h"
+#include <cocos2d.h>
 
-#include "Box2D/Box2D.h"
+#include <Box2D/Box2D.h>
 #include "b2DebugDraw.h"
 #include "Camera.h"
 #include "GameWorld.h"
