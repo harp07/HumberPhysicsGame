@@ -70,10 +70,13 @@
     <ClInclude Include="..\Classes\GameScene.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Ship.h">
+    <ClInclude Include="..\Classes\StartMenu.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Projectile.h">
+    <ClInclude Include="..\Classes\Projectile.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Ship.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -108,10 +111,13 @@
     <ClCompile Include="..\Classes\GameScene.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="Ship.cpp">
+    <ClCompile Include="..\Classes\StartMenu.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="Projectile.cpp">
+    <ClCompile Include="..\Classes\Projectile.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Ship.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,7 +1,7 @@
 #include "cocos2d.h"
 #include "CCEGLView.h"
 #include "AppDelegate.h"
-#include "GameScene.h"
+#include "StartMenu.h"
 #include "SimpleAudioEngine.h"
 
 using namespace CocosDenshion;
@@ -24,13 +24,13 @@ bool AppDelegate::applicationDidFinishLaunching()
     pDirector->setOpenGLView(CCEGLView::sharedOpenGLView());
 
     // turn on display FPS
-    pDirector->setDisplayStats(true);
+    pDirector->setDisplayStats(false);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     pDirector->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    CCScene *pScene = GameScene::scene();
+    CCScene *pScene = StartMenu::scene();
 
     // run
     pDirector->runWithScene(pScene);

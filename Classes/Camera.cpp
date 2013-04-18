@@ -22,11 +22,18 @@ void Camera::setLayer(CCLayer* layer){
 void Camera::moveCamera(CCPoint location){
 	float touchLocation = location.x - currentTouchLocation.x;
 	//Globals::globalsInstance()->Output(touchLocation);
-	if(touchLocation < 0){
-		mainLayer->setPosition(mainLayer->getPosition().x-(location.x/(PTM_RATIO/12)),0.0f);
-	} else if (touchLocation > 0){
-		mainLayer->setPosition(mainLayer->getPosition().x+(location.x/(PTM_RATIO/12)),0.0f);
-	} 
+	
+	if(mainLayer->getPositionX() > (Globals::globalsInstance()->screenSize().width/2.1)){
+		mainLayer->setPositionX(mainLayer->getPositionX() - 1);
+	} else if (mainLayer->getPositionX() < (-Globals::globalsInstance()->screenSize().width/2.1)){
+		mainLayer->setPositionX(mainLayer->getPositionX() + 1);
+	} else {
+		if(touchLocation < 0){
+			mainLayer->setPosition(mainLayer->getPosition().x-(location.x/(PTM_RATIO/12)),0.0f);
+		} else if (touchLocation > 0){
+			mainLayer->setPosition(mainLayer->getPosition().x+(location.x/(PTM_RATIO/12)),0.0f);
+		} 
+	}
 	setLocation(location);
 }
 
